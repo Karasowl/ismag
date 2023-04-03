@@ -13,9 +13,14 @@ function ButtonsContainer() {
 
     function handleTouchMove(e) {
       const firstTouch = e.touches[0];
-      const xAxis = (window.innerWidth / 2 - firstTouch.pageX) / 45;
-      const yAxis = (window.innerHeight / 2 - firstTouch.pageY) / 45;
+      const xAxis = (window.innerWidth / 2 - firstTouch.pageX) / 15;
+      const yAxis = (window.innerHeight / 2 - firstTouch.pageY) / 15;
       container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    }
+
+    function handleScroll() {
+      const yAxis = window.scrollY / 25;
+      container.style.transform = `rotateY(0deg) rotateX(${yAxis}deg)`;
     }
 
     container.addEventListener("mousemove", handleMouseMove);
@@ -27,6 +32,8 @@ function ButtonsContainer() {
     container.addEventListener("touchend", () => {
       container.style.transform = "none";
     });
+
+    window.addEventListener("scroll", handleScroll);
   }, []);
 
   return (
