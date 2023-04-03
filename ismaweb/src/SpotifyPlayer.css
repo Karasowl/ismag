@@ -1,0 +1,41 @@
+.spotify-player {
+    min-width: 35vw;
+  }
+  
+  .spotify-player h2 {
+    /* background: linear-gradient( 135deg, #ff9cac 10%, #F0F0F0 100%) ; */
+    padding: 1%;
+    color: #b94747;
+    text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 4px;
+    text-align: center;
+    font-size: medium;
+  }
+  
+  .spotify-player iframe {
+    width: 100%;
+    height: 152px;
+    border: none;
+  }
+
+  /* !RESPONSIVE */
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 575px) {
+    /* Estilos para dispositivos móviles */
+  
+    .spotify-player iframe {
+      position: relative;
+      max-width: 300px;
+      max-height: 100px;
+    }
+  
+    .spotify-player h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  
+    .container {
+      margin-top: 0px;
+    }
+  }
