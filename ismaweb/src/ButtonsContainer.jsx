@@ -29,7 +29,7 @@ function ButtonsContainer() {
         </button>
       </a>
       <a
-        href="https://www.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA"
+        href="https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd"
         target="_blank"
       >
         <button type="button" className="btn-link important-blue">
