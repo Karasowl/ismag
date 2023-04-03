@@ -44,7 +44,7 @@ function Profile() {
   return (
     <div className="profile">
       <img
-        id="profile-image"
+        id="profile-image" loading="lazy"
         src={profileImage}
         alt="Foto de perfil"
         className="fade-in"
