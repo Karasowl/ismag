@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import "./ButtonsContainer.css";
+import ButtonLink from "./ButtonLink";
+
 
 function ButtonsContainer() {
   useEffect(() => {
@@ -36,54 +38,53 @@ function ButtonsContainer() {
     window.addEventListener("scroll", handleScroll); */
   }, []);
 
-  return (
-    <div className="container">
-      <a
-        href="https://www.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA"
-        target="_blank"
-      >
-        <button type="button" className="btn-link important-blue">
-          <i className="fab fa-youtube"></i> YouTube
-        </button>
-      </a>
-      <a
-        href="https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd"
-        target="_blank"
-      >
-        <button type="button" className="btn-link important-blue">
-          <i className="fab fa-spotify"></i> Spotify
-        </button>
-      </a>
-      <a
-        href="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178"
-        target="_blank"
-      >
-        <button type="button" className="btn-link">
-          <i className="fab fa-apple"></i> Apple Music
-        </button>
-      </a>
-      <a href="https://www.facebook.com/ismaguimarais" target="_blank">
-        <button type="button" className="btn-link">
-          <i className="fab fa-facebook"></i> Facebook
-        </button>
-      </a>
-      <a href="https://www.instagram.com/ismaguimarais/" target="_blank">
-        <button type="button" className="btn-link">
-          <i className="fab fa-instagram"></i> Instagram
-        </button>
-      </a>
-      <a href="https://www.twitter.com/ismaguimarais" target="_blank">
-        <button type="button" className="btn-link">
-          <i className="fab fa-twitter"></i> Twitter
-        </button>
-      </a>
-      <a href="https://t.me/ismaguimarais" target="_blank">
-        <button type="button" className="btn-link">
-          <i className="fab fa-telegram"></i> Telegram
-        </button>
-      </a>
-    </div>
-  );
+ return (
+  <div className="container">
+    <ButtonLink 
+      link="https://www.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA" 
+      fabicon="youtube" 
+      nameButton="YouTube" 
+      moreClasses="important-blue"
+    />
+    <ButtonLink 
+      link="https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd" 
+      fabicon="spotify" 
+      nameButton="Spotify" 
+      moreClasses="important-blue"
+    />
+    <ButtonLink 
+      link="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178" 
+      fabicon="apple" 
+      nameButton="Apple Music" 
+      moreClasses=""
+    />
+    <ButtonLink 
+      link="https://www.facebook.com/ismaguimarais" 
+      fabicon="facebook" 
+      nameButton="Facebook" 
+      moreClasses=""
+    />
+    <ButtonLink 
+      link="https://www.instagram.com/ismaguimarais/" 
+      fabicon="instagram" 
+      nameButton="Instagram" 
+      moreClasses=""
+    />
+    <ButtonLink 
+      link="https://www.twitter.com/ismaguimarais" 
+      fabicon="twitter" 
+      nameButton="Twitter" 
+      moreClasses=""
+    />
+    <ButtonLink 
+      link="https://t.me/ismaguimarais" 
+      fabicon="telegram" 
+      nameButton="Telegram" 
+      moreClasses=""
+    />
+  </div>
+);
+
 }
 
 export default ButtonsContainer;
