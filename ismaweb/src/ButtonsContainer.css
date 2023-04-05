@@ -89,12 +89,15 @@
   .btn-link:hover {
     background-color: #00aaff;
     animation: none;
+    transform: scale(1.03);
+    transition: all 0.1s ease-in-out;
   }
   
   .btn-link:active {
     background-color: #005d8b;
     animation: none;
-    transform: scale(0.9);
+    transform: scale(1);
+    transition: all 0..8s ease-in-out;
   }
   
   a {
