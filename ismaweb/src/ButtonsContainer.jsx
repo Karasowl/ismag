@@ -8,8 +8,8 @@ function ButtonsContainer() {
     const container = document.querySelector(".container");
 
     function handleMouseMove(e) {
-      const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
-      const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 95;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 95;
       container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     }
 

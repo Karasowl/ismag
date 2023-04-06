@@ -1,3 +1,5 @@
+import './ButtonLink.css';
+
 function ButtonLink ({link, fabicon, nameButton, moreClasses}) {
     const classes = `btn-link ${moreClasses}`;
   
