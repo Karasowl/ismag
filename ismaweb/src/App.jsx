@@ -6,6 +6,7 @@ import ButtonsContainer from './ButtonsContainer'
 import Mailchimp from './Mailchimp'
 import Popup from './Popup'
 import TestApiMongo from './TestApiMongo'
+import YoutubeVideo from './YoutubeVideo'
 
 
 
