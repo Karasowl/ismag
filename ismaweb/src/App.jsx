@@ -13,10 +13,12 @@ function App() {
 
   return (
     <main>
+      <div className="overlay">
       <div className="main-card">
       <Profile />
       <SpotifyPlayer/>
       <ButtonsContainer/>
+      </div>
       </div>
     </main>
 

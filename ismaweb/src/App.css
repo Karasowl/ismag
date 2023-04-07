@@ -1,13 +1,33 @@
+.overlay {
+  width: 100%;
+  height: 100%;
+  padding: 1% 0;
+  animation: gradient 2s linear infinite;
+  background: linear-gradient(to bottom, rgba(103, 118, 255, 0.5) 0%, rgba(190, 17, 152, 0.432) 50%, rgba(224, 90, 173, 0.5) 100%);
+  animation: gradient 1s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
 .main-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #eee8ffe0 10%, #e4cefd81 100%);
+  background: linear-gradient(135deg, #b8a1f88a 10%, #e4cefd94 100%);
   width: 90%;
   height: 90%;
   margin: 5%;
   border-radius: 10px;
+  background-clip: padding-box;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.158);
 }
 
 h1 {
@@ -22,6 +42,21 @@ footer {
   font-size: 12px;
   color: #999;
   text-align: center;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 575px) {
+  /* Estilos para dispositivos móviles */
+  main-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #cf87cb8a 10%, #e4cefd94 100%);
+    width: 90%;
+    height: 90%;
+  }
+
 }
 
 /* Small Devices, Tablets */
