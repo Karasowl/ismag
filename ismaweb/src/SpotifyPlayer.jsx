@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./SpotifyPlayer.css";
 
 function SpotifyPlayer() {
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
   const [isUserFromCuba, setIsUserFromCuba] = useState(false);
+
 
   useEffect(() => {
     fetch("https://ipapi.co/json/")
@@ -16,19 +19,39 @@ function SpotifyPlayer() {
       });
   }, []);
 
+  const handleIframeLoad = () => {
+    setIframeLoaded(true);
+  };
+
+  const handleIframeError = () => {
+    setIframeError(true);
+  };
+
   return (
-    <div className="spotify-player">
-      {!isUserFromCuba && (
-        <>
-          <h2 className="">Escucha mi más reciente canción en Spotify:</h2>
-          <iframe
-            src="https://open.spotify.com/embed/track/3cWkIYNstZUq6vmzZbnUXo?utm_source=generator"
-            frameBorder="0"
-            allowFullScreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
-        </>
+    <div>
+      {!isUserFromCuba && !iframeLoaded && (
+        <div className="loading">
+          <p>Cargando...</p>
+          <div className="dots">
+            <span className="dot"></span>
+            <span className="dot"></span>
+            <span className="dot"></span>
+          </div>
+        </div>
+      ) }
+      {!isUserFromCuba &&!iframeError && (
+      <div className="spotify-player">
+      <h2 className="">Escucha mi más reciente canción en Spotify:</h2>
+      <iframe
+        src="https://open.spotify.com/embed/track/3cWkIYNstZUq6vmzZbnUXo?utm_source=generator"
+        allowFullScreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        onLoad={handleIframeLoad}
+        onError={handleIframeError}
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation"
+      ></iframe>
+      </div>
       )}
     </div>
   );

@@ -1,14 +1,11 @@
 
 .container {
   transition: 0.1s all linear;
-    margin-top: 25px;
     margin-bottom: 65px;
-    overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
     padding: 20px;
     background-color: #ffffff71;
     min-width: 45vw;
@@ -27,7 +24,6 @@
     /* Estilos para dispositivos móviles */
  
     .container {
-      margin-top: 0px;
       min-width: 35vw;
       margin-bottom: 25px;
     }
