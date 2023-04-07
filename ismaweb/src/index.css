@@ -9,14 +9,16 @@
 }
 
 body {
-  background: linear-gradient(135deg, #ffffff 10%, #c7b2ff00 100%);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333;
   width: 100%;
   height: 100%;
-      background-image: url("assets/profile.webp");
+      /* make background-image gradient  neumorphism with the url of "assets/profile.webp  */
+    background-image: url("assets/profile.webp"), linear-gradient(135deg, #0063d4 10%, #9679c4 100%);
+
+      background-blend-mode: overlay;
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

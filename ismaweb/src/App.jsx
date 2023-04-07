@@ -10,18 +10,19 @@ import YoutubeVideo from './YoutubeVideo'
 
 
 function App() {
-
   return (
     <main>
+      <video autoPlay muted loop id="bg-video">
+        <source src="../public/video amor princesa background web ismael guimarais music.mp4" type="video/mp4"/>
+      </video>
       <div className="overlay">
-      <div className="main-card">
-      <Profile />
-      <SpotifyPlayer/>
-      <ButtonsContainer/>
-      </div>
+        <div className="main-card">
+          <Profile />
+          <SpotifyPlayer/>
+          <ButtonsContainer/>
+        </div>
       </div>
     </main>
-
   )
 }
 
