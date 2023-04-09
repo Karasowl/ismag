@@ -13,30 +13,23 @@ function ButtonsContainer() {
       container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     }
 
-    /* function handleTouchMove(e) {
-      const firstTouch = e.touches[0];
-      const xAxis = (window.innerWidth / 2 - firstTouch.pageX) / 15;
-      const yAxis = (window.innerHeight / 2 - firstTouch.pageY) / 15;
-      container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    }
-
-    function handleScroll() {
-      const yAxis = window.scrollY / 25;
-      container.style.transform = `rotateY(0deg) rotateX(${yAxis}deg)`;
-    } */
-
+   
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", () => {
       container.style.transform = "none";
     });
 
-    /* container.addEventListener("touchmove", handleTouchMove);
-    container.addEventListener("touchend", () => {
-      container.style.transform = "none";
-    });
-
-    window.addEventListener("scroll", handleScroll); */
+    
   }, []);
+
+  function handleButtonClick(event, buttonName) {
+    // Agregar evento de seguimiento a Google Analytics
+    window.gtag('event', 'boton_click', {
+      'event_category': 'botones',
+      'event_label': buttonName,
+      'transport_type': 'beacon'
+    });
+  }
 
  return (
   <div className="container">
@@ -45,42 +38,49 @@ function ButtonsContainer() {
       fabicon="youtube" 
       nameButton="YouTube" 
       moreClasses="important-blue"
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd" 
       fabicon="spotify" 
       nameButton="Spotify" 
       moreClasses="important-blue"
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178" 
       fabicon="apple" 
       nameButton="Apple Music" 
       moreClasses=""
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.facebook.com/ismaguimarais" 
       fabicon="facebook" 
       nameButton="Facebook" 
       moreClasses=""
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.instagram.com/ismaguimarais/" 
       fabicon="instagram" 
       nameButton="Instagram" 
       moreClasses=""
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.twitter.com/ismaguimarais" 
       fabicon="twitter" 
       nameButton="Twitter" 
       moreClasses=""
+      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://t.me/ismaguimarais" 
       fabicon="telegram" 
       nameButton="Telegram" 
       moreClasses=""
+      inOnclick = {handleButtonClick}
     />
   </div>
 );
