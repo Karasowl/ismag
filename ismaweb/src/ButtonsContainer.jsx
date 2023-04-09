@@ -22,15 +22,6 @@ function ButtonsContainer() {
     
   }, []);
 
-  function handleButtonClick(event, buttonName) {
-    // Agregar evento de seguimiento a Google Analytics
-    window.gtag('event', 'boton_click', {
-      'event_category': 'botones',
-      'event_label': buttonName,
-      'transport_type': 'beacon'
-    });
-  }
-
  return (
   <div className="container">
     <ButtonLink 
