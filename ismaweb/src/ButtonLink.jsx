@@ -1,7 +1,7 @@
 import './ButtonLink.css';
 
-function ButtonLink ({link, fabicon, nameButton, moreClasses, inOnclick}) {
-    const classes = `btn-link ${moreClasses}`;
+function ButtonLink ({link, fabicon, nameButton, moreClasses}) {
+    const classes = `btn-link ${moreClasses} ${fabicon}`;
   
     return (
       <a 
@@ -9,7 +9,6 @@ function ButtonLink ({link, fabicon, nameButton, moreClasses, inOnclick}) {
         <button 
         type="button" 
         className={classes}
-        onClick={(event) => inOnclick(event, nameButton)}
         >
           <i className={`fab fa-${fabicon}`}></i> {nameButton}
         </button>

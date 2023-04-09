@@ -38,49 +38,42 @@ function ButtonsContainer() {
       fabicon="youtube" 
       nameButton="YouTube" 
       moreClasses="important-blue"
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd" 
       fabicon="spotify" 
       nameButton="Spotify" 
       moreClasses="important-blue"
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178" 
       fabicon="apple" 
       nameButton="Apple Music" 
       moreClasses=""
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.facebook.com/ismaguimarais" 
       fabicon="facebook" 
       nameButton="Facebook" 
       moreClasses=""
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.instagram.com/ismaguimarais/" 
       fabicon="instagram" 
       nameButton="Instagram" 
       moreClasses=""
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://www.twitter.com/ismaguimarais" 
       fabicon="twitter" 
       nameButton="Twitter" 
       moreClasses=""
-      inOnclick = {handleButtonClick}
     />
     <ButtonLink 
       link="https://t.me/ismaguimarais" 
       fabicon="telegram" 
       nameButton="Telegram" 
       moreClasses=""
-      inOnclick = {handleButtonClick}
     />
   </div>
 );
