@@ -9,6 +9,7 @@ function ButtonLink ({link, fabicon, nameButton, moreClasses}) {
         <button 
         type="button" 
         className={classes}
+        id={`${fabicon}_ButtonLink`}
         >
           <i className={`fab fa-${fabicon}`}></i> {nameButton}
         </button>
