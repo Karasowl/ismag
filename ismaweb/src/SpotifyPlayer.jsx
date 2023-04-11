@@ -5,10 +5,11 @@ function SpotifyPlayer() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
   const [isUserFromCuba, setIsUserFromCuba] = useState(false);
+  const api_Key = "9cc4ed0ac1e34a74a948bf5a0a7c2a0c";
 
 
   useEffect(() => {
-    fetch("https://ipapi.co/json/")
+    fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${api_Key}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.country_name === "Cuba") {
