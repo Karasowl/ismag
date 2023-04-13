@@ -3,9 +3,8 @@ import "./SpotifyPlayer.css";
 
 function SpotifyPlayer() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [iframeError, setIframeError] = useState(false);
   const [isUserFromCuba, setIsUserFromCuba] = useState(false);
-  const api_Key = "9cc4ed0ac1e34a74a948bf5a0a7c2a0c";
+  const api_Key = "9cc4ed0ac1e34a74a948bf5a0a7c2a0c"; // This is a free API key, it has a limit of 1000 requests per day. In the future I will use GeoJS probably.
 
 
   useEffect(() => {
@@ -17,15 +16,11 @@ function SpotifyPlayer() {
         } else {
           setIsUserFromCuba(false);
         }
-      });
+      }).catch(err => console.log(err))
   }, []);
 
   const handleIframeLoad = () => {
     setIframeLoaded(true);
-  };
-
-  const handleIframeError = () => {
-    setIframeError(true);
   };
 
   return (
@@ -40,7 +35,7 @@ function SpotifyPlayer() {
           </div>
         </div>
       ) }
-      {!isUserFromCuba &&!iframeError && (
+      {!isUserFromCuba && (
       <div className="spotify-player">
       <h2 className="">Escucha mi más reciente canción en Spotify:</h2>
       <iframe
@@ -49,7 +44,6 @@ function SpotifyPlayer() {
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
         onLoad={handleIframeLoad}
-        onError={handleIframeError}
         sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation"
       ></iframe>
       </div>
