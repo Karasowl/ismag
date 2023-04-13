@@ -5,7 +5,50 @@ import profileImg3 from "./assets/27_n.webp";
 import profileImg4 from "./assets/112_n.webp";
 import profileImg5 from "./assets/295_n.webp";
 import profileImg6 from "./assets/612_n.webp";
-import "./Profile.css";
+import styled from 'styled-components';
+
+const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: .75rem;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 0;
+  }
+`;
+
+const ProfileImage = styled.img`
+  width: 115px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  transition: opacity 0.5s ease-in-out;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px #0003;
+
+  &.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+
+  &.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+`;
 
 function Profile() {
   const [profileImage, setProfileImage] = useState(profileImg1);
@@ -42,9 +85,10 @@ function Profile() {
   }, [imageIndex]);
 
   return (
-    <div className="profile">
-      <img
-        id="profile-image" loading="lazy"
+    <ProfileContainer>
+      <ProfileImage
+        id="profile-image"
+        loading="lazy"
         src={profileImage}
         alt="Foto de perfil"
         className="fade-in"
@@ -55,7 +99,7 @@ function Profile() {
         <br />
         🙃 ¿Me acompañas?
       </p>
-    </div>
+    </ProfileContainer>
   );
 }
 

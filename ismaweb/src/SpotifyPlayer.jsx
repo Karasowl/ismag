@@ -1,5 +1,129 @@
 import { useEffect, useState } from "react";
-import "./SpotifyPlayer.css";
+import styled from 'styled-components';
+
+const SpotifyPlayerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  margin-bottom: -4vw;
+  min-width: 23vw;
+  max-height: 180px;
+
+  h2 {
+    padding: 1%;
+    color: #b94747;
+    text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 4px;
+    text-align: center;
+    font-size: medium;
+    margin: 0;
+  }
+
+  iframe {
+    width: 100%;
+    border: none;
+  }
+
+  .loading {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .loading p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .loading .dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .loading .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #1db954;
+    margin: 0 4px;
+    animation: jump 0.5s ease-in-out infinite;
+  }
+
+  .loading .dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .loading .dot:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .loading .dot:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    max-height: 110px;
+    margin-bottom: -9vw;
+
+    h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    max-height: 130px;
+    margin-bottom: -9vw;
+
+    h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    margin-bottom: -3.5vw;
+
+    h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    margin-bottom: -3.5vw;
+
+    h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    margin-bottom: -2vw;
+
+    h2 {
+      font-size: 13.7px;
+      margin-bottom: 10px;
+    }
+  }
+`;
+
 
 function SpotifyPlayer() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -24,7 +148,7 @@ function SpotifyPlayer() {
   };
 
   return (
-    <div>
+    <SpotifyPlayerContainer>
       {!isUserFromCuba && !iframeLoaded && (
         <div className="loading">
           <p>Cargando...</p>
@@ -48,7 +172,7 @@ function SpotifyPlayer() {
       ></iframe>
       </div>
       )}
-    </div>
+    </SpotifyPlayerContainer>
   );
 }
 
