@@ -2,13 +2,6 @@ import { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const SpotifyPlayerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: space-between;
-  justify-content: space-between;
-  margin-bottom: -4vw;
-  min-width: 23vw;
-  max-height: 180px;
 
   h2 {
     padding: 1%;
@@ -22,7 +15,12 @@ const SpotifyPlayerContainer = styled.div`
 
   iframe {
     width: 100%;
-    border: none;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  border: none;
   }
 
   .loading {
@@ -78,17 +76,16 @@ const SpotifyPlayerContainer = styled.div`
 
   @media only screen and (max-width: 575px) {
     max-height: 110px;
-    margin-bottom: -9vw;
+    margin-bottom: 40px;
 
     h2 {
       font-size: 13.7px;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
     }
   }
 
   @media only screen and (min-width: 576px) and (max-width: 767px) {
     max-height: 130px;
-    margin-bottom: -9vw;
 
     h2 {
       font-size: 13.7px;
@@ -97,7 +94,6 @@ const SpotifyPlayerContainer = styled.div`
   }
 
   @media only screen and (min-width: 768px) and (max-width: 991px) {
-    margin-bottom: -3.5vw;
 
     h2 {
       font-size: 13.7px;
@@ -106,7 +102,6 @@ const SpotifyPlayerContainer = styled.div`
   }
 
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    margin-bottom: -3.5vw;
 
     h2 {
       font-size: 13.7px;
@@ -115,7 +110,6 @@ const SpotifyPlayerContainer = styled.div`
   }
 
   @media only screen and (min-width: 1200px) {
-    margin-bottom: -2vw;
 
     h2 {
       font-size: 13.7px;

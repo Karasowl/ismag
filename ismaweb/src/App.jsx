@@ -26,7 +26,6 @@ const MainCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #dcd0fc8a 10%, #e4cefde0 100%);
   width: 90%;
   height: 90%;
   margin: 5%;
@@ -41,15 +40,7 @@ const MainCard = styled.div`
     height: 100%;
     margin: 0;
     border-radius: 0;
-    background: linear-gradient(135deg, #cf87cb8a 10%, #e4cefd94 100%);
   }
-`;
-
-const H1 = styled.h1`
-  font-size: 24px;
-  font-weight: 200;
-  line-height: 1.2;
-  margin: 10px 0;
 `;
 
 const AppContainer = styled.main`
