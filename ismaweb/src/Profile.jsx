@@ -12,7 +12,8 @@ const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
+  margin: 2rem 1rem 0 1rem;
+  z-index: 1;
 
   h2 {
     font-size: 1rem;
@@ -30,8 +31,8 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 115px;
-  height: 115px;
+  width: 110px;
+  height: 110px;
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 1rem;
@@ -102,5 +103,6 @@ function Profile() {
     </ProfileContainer>
   );
 }
+
 
 export default Profile;

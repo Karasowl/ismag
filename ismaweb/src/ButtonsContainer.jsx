@@ -10,16 +10,15 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #ffffff71;
-  min-width: 45vw;
+  width: 90%;
+  max-width: 600px;
   border-radius: 10px;
 
   &:hover {
-    background-color: #ffffffb7;
+
   }
 
   @media only screen and (max-width: 575px) {
-    min-width: 35vw;
     margin-bottom: 25px;
   }
 `;

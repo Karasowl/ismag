@@ -5,7 +5,16 @@
   transition: all 0.1s ease-in-out;
 }
 
+/* Ocultar el indicador de scroll en todos los navegadores */
+body::-webkit-scrollbar {
+  display: none; /* Safari y Chrome */
+}
+
+
 body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-y: scroll; /* necesario para ocultar el indicador de scroll en Edge */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -30,7 +39,7 @@ body {
 
 @keyframes color-change-blue {
   0% {
-    background-color: #0084b4;
+    background-color: #0068b5;
   }
 
   25% {
@@ -38,7 +47,7 @@ body {
   }
 
   50% {
-    background-color: #0084b4;
+    background-color: #0068b5;
   }
 
   75% {
@@ -46,7 +55,7 @@ body {
   }
 
   100% {
-    background-color: #0084b4;
+    background-color: #0068b5;
   }
 }
 

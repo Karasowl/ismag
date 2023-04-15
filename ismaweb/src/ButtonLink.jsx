@@ -2,9 +2,9 @@ import styled, { keyframes } from 'styled-components';
 
 const ButtonLinkStyled = styled.a`
   transition: all 0.07s ease-in-out;
-  background-color: #0084b4;
+  background-color: #0068b5;
   color: #fff;
-  min-width: 400px;
+  width: 100%;
   padding: 15px;
   margin: 10px;
   font-size: 14px;
@@ -15,13 +15,13 @@ const ButtonLinkStyled = styled.a`
   border: 1px solid transparent;
   border-radius: 4px;
   user-select: none;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
   &:hover {
     background-color: #00aaff;
     animation: none;
     transform: scale(1.03);
     transition: all 0.1s ease-in-out;
+    border: solid white 1.5px;
   }
 
   &:active {
@@ -38,7 +38,6 @@ const ButtonLinkStyled = styled.a`
   @media only screen and (max-width: 575px) {
     /* Estilos para dispositivos móviles */
 
-    min-width: 200px;
     padding: 10px;
     font-size: 16px;
     font-weight: 200;

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Controller, Scene } from 'react-scrollmagic';
 import Profile from './Profile.jsx';
 import SpotifyPlayer from './SpotifyPlayer';
 import ButtonsContainer from './ButtonsContainer';
 import YoutubeLast from './YoutubeLast';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const BackgroundVideo = styled.video`
   position: fixed;
@@ -14,11 +15,26 @@ const BackgroundVideo = styled.video`
   transform: scale(1.1);
 `;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+`;
+
 const Overlay = styled.div`
+  position: fixed;
   width: 100%;
-  height: 100%;
-  padding: 1% 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.479) 0%, rgba(186, 90, 224, 0.5) 100%);
+  height: 100vh;
+  background: linear-gradient(to bottom right, #3a86ff, #fbd3e9);
+  opacity: 0;
+  animation-name: ${fadeIn};
+  animation-duration: .5s;
+  animation-delay: .25s;
+  animation-fill-mode: forwards;
+  z-index: -1;
 `;
 
 const MainCard = styled.div`
@@ -26,13 +42,13 @@ const MainCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  height: 90%;
-  margin: 5%;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   background-clip: padding-box;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.158);
   gap: 1vw;
+  position: relative;
 
   @media only screen and (max-width: 575px) {
     /* Estilos para dispositivos móviles */
@@ -44,32 +60,21 @@ const MainCard = styled.div`
 `;
 
 const AppContainer = styled.main`
+  position: relative;
+  width: 100%;
+  height: 100%;
+
   ${BackgroundVideo} {
-    display: ${({ isVideoLoaded }) => (isVideoLoaded ? 'block' : 'none')};
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    transform: scale(1.1);
   }
 
   ${Overlay} {
-    position: relative;
-  }
-
-  ${MainCard} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #dcd0fc8a  10%, #e4cefde0 100%);
-    width: 90%;
-    height: 90%;
-    margin: 5%;
-
-    @media only screen and (max-width: 575px) {
-      /* Estilos para dispositivos móviles */
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border-radius: 0;
-      background: linear-gradient(135deg, #cf87cb8a 10%, #e4cefd94 100%);
-    }
+    z-index: -1;
   }
 
   @media only screen and (max-width: 575px) {
@@ -82,7 +87,7 @@ const AppContainer = styled.main`
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
+      z-index: -2;
       transform: scale(1.6);
     }
   }
@@ -102,18 +107,15 @@ function App() {
       <BackgroundVideo autoPlay muted loop id="bg-video">
         <source src="/video amor princesa background web ismael guimarais music.mp4" type="video/mp4" />
       </BackgroundVideo>
-      <Overlay>
-        <MainCard>
-          <Profile />
-          <SpotifyPlayer />
-          {/* <YoutubeLast/> */}
-          <ButtonsContainer />
-        </MainCard>
-      </Overlay>
+      <Overlay />
+      <MainCard>
+      <Profile />
+        <SpotifyPlayer />
+        {/* <YoutubeLast/> */}
+        <ButtonsContainer />
+      </MainCard>
     </AppContainer>
   );
 }
 
 export default App;
-
-
