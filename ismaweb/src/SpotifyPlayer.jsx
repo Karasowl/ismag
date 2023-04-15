@@ -3,19 +3,20 @@ import styled from 'styled-components';
 
 const SpotifyPlayerContainer = styled.div`
 
+max-height: 135px;
+
   h2 {
     padding: 1%;
-    color: #b94747;
+    color: #962525;
     text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     border-radius: 4px;
     text-align: center;
     font-size: medium;
-    margin: 0;
   }
 
   iframe {
     width: 100%;
-  height: 80px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
