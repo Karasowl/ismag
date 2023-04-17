@@ -66,30 +66,3 @@ body {
 }
 
 /*! Formulario Newsletter mautic */
-
-.nombre-formulario-newsletter input {
-  width: 100% !important;
-  padding: 10px !important;
-  border: 1px solid #ccc !important;
-  border-radius: 5px !important;
-}
-
-.correo-formulario-newsletter input {
-  width: 100% !important;
-  padding: 10px !important;
-  border: 1px solid #ccc !important;
-  border-radius: 5px !important;
-}
-
-.celular-formulario-newsletter input {
-  width: 100% !important;
-  padding: 10px !important;
-  border: 1px solid #ccc !important;
-  border-radius: 5px !important;
-}
-
-.nombre-formulario-newsletter {
-  font-weight: bold !important;
-  font-size: 16px !important;
-  margin-bottom: 5px !important;
-}
