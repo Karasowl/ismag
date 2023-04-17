@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const SpotifyPlayerContainer = styled.div`
 
-max-height: 135px;
+max-height: 90px;
+margin-bottom: 5px;
 
   h2 {
     padding: 1%;
@@ -75,7 +76,11 @@ max-height: 135px;
     }
   }
 
-  @media only screen and (max-width: 575px) {
+  @media only screen and (max-width: 280px) {
+    max-height: 170px;
+  }
+
+  @media only screen and (min-width: 281px) and (max-width: 575px) {
     max-height: 110px;
     margin-bottom: 40px;
 
@@ -95,7 +100,7 @@ max-height: 135px;
   }
 
   @media only screen and (min-width: 768px) and (max-width: 991px) {
-
+    margin-bottom: 25px;
     h2 {
       font-size: 13.7px;
       margin-bottom: 10px;
@@ -103,7 +108,7 @@ max-height: 135px;
   }
 
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
-
+    margin-bottom: 25px;
     h2 {
       font-size: 13.7px;
       margin-bottom: 10px;
@@ -111,7 +116,7 @@ max-height: 135px;
   }
 
   @media only screen and (min-width: 1200px) {
-
+    margin-bottom: 25px;
     h2 {
       font-size: 13.7px;
       margin-bottom: 10px;
