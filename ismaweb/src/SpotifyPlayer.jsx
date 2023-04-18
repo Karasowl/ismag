@@ -126,22 +126,30 @@ margin-bottom: 5px;
 
 
 function SpotifyPlayer() {
+  const [urlSpotify, setUrlSpotify ] = useState("3cWkIYNstZUq6vmzZbnUXo");
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isUserFromCuba, setIsUserFromCuba] = useState(false);
-  const api_Key = "9cc4ed0ac1e34a74a948bf5a0a7c2a0c"; // This is a free API key, it has a limit of 1000 requests per day. In the future I will use GeoJS probably.
+  const api_Key = "9cc4ed0ac1e34a74a948bf5a0a7c2a0c"; // API Key from ipgeolocation.io
 
 
+  async function fetchUserLocation() {
+    try {
+      const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${api_Key}`);
+      const data = await response.json();
+      if (data.country_name === "Cuba") {
+        setIsUserFromCuba(true);
+      } else {
+        setIsUserFromCuba(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   useEffect(() => {
-    fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${api_Key}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.country_name === "Cuba") {
-          setIsUserFromCuba(true);
-        } else {
-          setIsUserFromCuba(false);
-        }
-      }).catch(err => console.log(err))
+    fetchUserLocation();
   }, []);
+
 
   const handleIframeLoad = () => {
     setIframeLoaded(true);
@@ -163,7 +171,7 @@ function SpotifyPlayer() {
       <div className="spotify-player">
       <h2 className="">Escucha mi más reciente canción en Spotify:</h2>
       <iframe
-        src="https://open.spotify.com/embed/track/3cWkIYNstZUq6vmzZbnUXo?utm_source=generator"
+        src={`https://open.spotify.com/embed/track/${urlSpotify}?utm_source=generator`}
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
