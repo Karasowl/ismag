@@ -55,6 +55,12 @@ const buttonsData = [
     moreClasses: ""
   },
   {
+    fabicon: "tiktok",
+    link: "https://www.tiktok.com/@ismaelguimarais/",
+    nameButton: "TikTok",
+    moreClasses: ""
+  },
+  {
     fabicon: "twitter",
     link: "https://www.twitter.com/ismaguimarais",
     nameButton: "Twitter",
