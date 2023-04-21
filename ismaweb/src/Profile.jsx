@@ -5,6 +5,7 @@ import profileImg3 from "./assets/27_n.webp";
 import profileImg4 from "./assets/112_n.webp";
 import profileImg5 from "./assets/295_n.webp";
 import profileImg6 from "./assets/612_n.webp";
+import Typed from 'react-typed';
 import styled from 'styled-components';
 
 const ProfileContainer = styled.div`
@@ -95,14 +96,19 @@ function Profile() {
         className="fade-in"
       />
       <h2>ISMAEL GUIMARAIS</h2>
-      <p>
-        || 🎤Cantautor || canto sobre: ❤️ El amor/ ✝️ La Adoración/ 🧠 La vida
-        <br />
-        🙃 ¿Me acompañas?
-      </p>
+      <Typed
+        strings={[
+          'Cantautor, canto sobre: ❤️ El amor',
+          'Cantautor, canto sobre: ✝️ La Adoración',
+          'Cantautor, canto sobre: 🧠 La vida',
+          '🙃 ¿Me acompañas?'
+        ]}
+        typeSpeed={50}
+        backSpeed={50}
+        loop
+      />
     </ProfileContainer>
   );
 }
-
 
 export default Profile;
