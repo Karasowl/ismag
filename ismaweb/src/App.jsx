@@ -3,6 +3,7 @@ import { Controller, Scene } from 'react-scrollmagic';
 import Profile from './Profile.jsx';
 import SpotifyPlayer from './SpotifyPlayer';
 import ButtonsContainer from './ButtonsContainer';
+import PreSave from './PreSave.jsx';
 import YoutubeLast from './YoutubeLast';
 import styled, { keyframes } from 'styled-components';
 
@@ -110,7 +111,8 @@ function App() {
       <Overlay />
       <MainCard>
       <Profile />
-        <SpotifyPlayer />
+        {/* <SpotifyPlayer /> */}
+        <PreSave />
         {/* <YoutubeLast/> */}
         <ButtonsContainer />
       </MainCard>

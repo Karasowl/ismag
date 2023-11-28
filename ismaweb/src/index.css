@@ -66,3 +66,58 @@ body {
 }
 
 /*! Formulario Newsletter mautic */
+
+/*! PreSave */
+.preSave {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #e1f5fe71;
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  margin: auto; 
+}
+
+.preSave p {
+  color: rgb(2, 36, 16);
+  margin-bottom: 15px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.preSave img {
+  margin-bottom: 15px; 
+}
+
+.preSave button {
+  background-color: #188ABC; 
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  outline: none;
+}
+
+.preSave button:hover {
+  background-color: #019ee6;
+  transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.preSave button:active {
+  transform: translateY(1px); 
+}
+
+.preSave button a {
+  text-decoration: none;
+  color: white;
+  display: block; 
+}
+
