@@ -111,8 +111,8 @@ function App() {
       <Overlay />
       <MainCard>
       <Profile />
-        <SpotifyPlayer />
-        {/* <PreSave /> */}
+        {/* <SpotifyPlayer /> */}
+        <PreSave />
         {/* <YoutubeLast/> */}
         <ButtonsContainer />
       </MainCard>

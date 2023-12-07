@@ -6,8 +6,8 @@ const PreSave = () => {
     <img src={coverImg}></img>
       <p>¡Mil Mares llega este viernes!</p>
       <button>
-        <a href="https://found.ee/ismaelguimarais-milmares" target="_blank" rel="noopener noreferrer">
-          PRE SALVAR AHORA
+        <a href="https://youtu.be/r3jAJTQENBw?si=EyeYwkR6jo8zPfoh" target="_blank" rel="noopener noreferrer">
+          VER VIDEOCLIP AHORA
         </a>
       </button>
     </div>
