@@ -4,7 +4,7 @@ const PreSave = () => {
   return (
     <div className='preSave'>
     <img src={coverImg}></img>
-      <p>¡Mil Mares llega este viernes!</p>
+      <p>¡Mil Mares está aquí!</p>
       <button>
         <a href="https://youtu.be/r3jAJTQENBw?si=EyeYwkR6jo8zPfoh" target="_blank" rel="noopener noreferrer">
           VER VIDEOCLIP AHORA
