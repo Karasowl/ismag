@@ -164,7 +164,7 @@ object-assign
     opacity: 0;
     transition: opacity 0.5s;
   }
-`;function Pg(){const[e,t]=J.useState(Ou),[n,r]=J.useState(0);return J.useEffect(()=>{const o=setInterval(()=>{r(i=>(i+1)%6)},5e3);return()=>clearInterval(o)},[]),J.useEffect(()=>{const i=[Ou,xm,dd,km,Cm,pd][n],l=document.getElementById("profile-image");l.classList.remove("fade-in"),l.classList.add("fade-out"),setTimeout(()=>{t(i),l.classList.remove("fade-out"),l.classList.add("fade-in")},500)},[n]),Pt(Cg,{children:[te(Eg,{id:"profile-image",loading:"lazy",src:e,alt:"Foto de perfil",className:"fade-in"}),te("h2",{children:"ISMAEL GUIMARAIS"}),te(Pm,{className:"sentence",strings:["Cantautor, canto sobre: ❤️ El amor","Cantautor, canto sobre: ✝️ La Adoración","Cantautor, canto sobre: 🧠 La vida","🙃 ¿Me acompañas?"],typeSpeed:50,backSpeed:50,loop:!0})]})}be.div`
+`;function Pg(){const[e,t]=J.useState(Ou),[n,r]=J.useState(0);return J.useEffect(()=>{const o=setInterval(()=>{r(i=>(i+1)%6)},5e3);return()=>clearInterval(o)},[]),J.useEffect(()=>{const i=[Ou,xm,dd,km,Cm,pd][n],l=document.getElementById("profile-image");l.classList.remove("fade-in"),l.classList.add("fade-out"),setTimeout(()=>{t(i),l.classList.remove("fade-out"),l.classList.add("fade-in")},500)},[n]),Pt(Cg,{children:[te(Eg,{id:"profile-image",loading:"lazy",src:e,alt:"Foto de perfil",className:"fade-in"}),te("h2",{children:"ISMAEL GUIMARAIS"}),te(Pm,{className:"sentence",strings:["Cantautor, canto sobre: ❤️ El amor","Cantautor, canto sobre: ✝️ La Adoración","Cantautor, canto sobre: 🧠 La vida","¿Me acompañas?"],typeSpeed:50,backSpeed:50,loop:!0})]})}be.div`
 
 max-height: 90px;
 margin-bottom: 5px;

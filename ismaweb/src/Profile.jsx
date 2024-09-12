@@ -103,7 +103,7 @@ function Profile() {
           'Cantautor, canto sobre: ❤️ El amor',
           'Cantautor, canto sobre: ✝️ La Adoración',
           'Cantautor, canto sobre: 🧠 La vida',
-          '🙃 ¿Me acompañas?'
+          '¿Me acompañas?'
         ]}
         typeSpeed={50}
         backSpeed={50}
