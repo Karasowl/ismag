@@ -34,7 +34,7 @@ const buttonsData = [
     fabicon: "spotify",
     link: "https://open.spotify.com/artist/6FBiAmYUgClucZddGctkwd",
     nameButton: "Spotify",
-    moreClasses: "important-blue"
+    moreClasses: ""
   },
   {
     fabicon: "apple",

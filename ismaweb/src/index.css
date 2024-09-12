@@ -43,7 +43,7 @@ body {
   }
 
   25% {
-    background-color: #00aaff;
+    background-color: #ff3300;
   }
 
   50% {
@@ -51,7 +51,7 @@ body {
   }
 
   75% {
-    background-color: #00aaff;
+    background-color: #ff3300;
   }
 
   100% {
@@ -82,14 +82,17 @@ body {
 }
 
 .preSave p {
-  color: rgb(2, 36, 16);
+  color: rgb(255, 255, 255);
   margin-bottom: 15px;
   font-size: larger;
-  font-weight: bold;
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
 }
 
 .preSave img {
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
+  max-width: 240px; 
 }
 
 .preSave button {

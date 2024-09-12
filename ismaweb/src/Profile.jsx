@@ -21,13 +21,15 @@ const ProfileContainer = styled.div`
     font-weight: 400;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    color: white;
   }
 
-  p {
-    font-size: .75rem;
+  .sentence {
+    font-size: 0.90rem;
     font-weight: 300;
     text-align: center;
     margin-top: 0;
+    color: white;
   }
 `;
 
@@ -96,7 +98,7 @@ function Profile() {
         className="fade-in"
       />
       <h2>ISMAEL GUIMARAIS</h2>
-      <Typed
+      <Typed className="sentence"
         strings={[
           'Cantautor, canto sobre: ❤️ El amor',
           'Cantautor, canto sobre: ✝️ La Adoración',

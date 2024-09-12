@@ -1,0 +1,125 @@
+{
+    "PersonalidadMarca": {
+      "Descripcion": "Apasionada, reflexiva, orientada a valores",
+      "EstiloMusical": "Pop con letras poéticas y bíblicas",
+      "Compromiso": "Cristianismo y transmisión de buenos valores"
+    },
+    "Comunicacion": {
+      "Estilo": "Coloquial, transparente, juvenil, astuto",
+      "Elementos": "Palabras clave, frases clave, símbolos cristianos como crucifijos de madera"
+    },
+    "PublicoObjetivo": {
+      "Demografia": "Hombres y mujeres de 25 a 34 años",
+      "Intereses": "Música reflexiva con valores, letras poéticas",
+      "PlataformasComunicacion": "Redes sociales, canal de YouTube"
+    },
+    "MetodosFinanciamiento": {
+      "Metodos": [
+        "Ofrendas y donaciones",
+        "Venta de entradas para conciertos",
+        "Micromecenazgo",
+        "Crowdfunding",
+        "Patrocinio",
+        "Venta de mercancías",
+        "Regalías musicales"
+      ]
+    },
+    "Resumen": {
+      "IdentidadMarca": "Cantante cristiano comprometido, mensaje de reflexión y bendición",
+      "ComunicacionPublico": "Abierta y auténtica",
+      "PlataformasMetodosFinanciamiento": "Diversas plataformas, métodos de financiamiento variados"
+    },
+    "Biografia": {
+        "Origen": "Cuba",
+        "InicioCarrera": "Edad temprana, influenciado por la cultura local y la fe cristiana",
+        "Desarrollo": "Crecimiento artístico y personal a través de la música y la fe",
+        "Logros": [
+          "Álbumes reconocidos",
+          "Conciertos nacionales e internacionales",
+          "Colaboraciones con otros artistas"
+        ]
+      },
+      "Autobiografia": {
+        "NarrativaPersonal": "Historia de superación, fe y esperanza",
+        "Influencias": "Cultura cubana, cristianismo, experiencias personales",
+        "Mensaje": "Inspirar y transmitir valores a través de la música"
+      },
+      "Identidad": {
+        "Valores": "Fe, esperanza, amor, superación",
+        "Inspiracion": "Vivencias personales, enseñanzas cristianas",
+        "Meta": "Inspirar y conectar emocionalmente con la audiencia"
+      },
+      "TonoDeVoz": {
+        "General": "Inspirador, emotivo, reflexivo",
+        "EnMusica": "Melodías suaves, letras profundas y significativas",
+        "EnComunicacion": "Directo, sincero, motivador"
+      },
+      "PalabrasClave": [
+        "Fe",
+        "Esperanza",
+        "Amor",
+        "Superación",
+        "Reflexión",
+        "Inspiración"
+      ],
+      "PostsRedesSociales": [
+        {
+          "Contenido": "🎤Cantautor canto sobre: ❤️ El amor/ ✝️ La Adoración/ 🧠 La vida",
+          "Comentario": "🙃 ¿Me acompañas?"
+        },
+        {
+          "Contenido": "🧡 Sobre mi (parte 1):",
+          "Detalles": [
+            "🎶 Mi primera #canción la compuse en la primaria y se titulaba 'Dayana'. Así se llamaba la niña que se sentaba delante de mí. Casi no la conocía, pero me gustaba como sonaba su nombre. Aún recuerdo la melodía y la letra.",
+            "🎸 Aunque no soy buen guitarrista la guitarra me acompaña en la soledad para ayudarme a #componer mis melodías. Para cantar casi siempre me rodeo de buenos músicos y amigos.",
+            "✍️ Disfruto las #canciones que me hacen pensar. No tienen que ser lentas, no tienen que ser de un género en particular. Disfruto casi todo tipo de música si logra mover no sólo mis emociones con el ritmo sino también mi espíritu con la letra.",
+            "🎭 Soy graduado de artes dramáticas, pero desde la escuela ya mis compañeros de aula y yo nos reuníamos después de clases para montar y #cantar los temas que componía. En ese tiempo me apodaban “el cuervo” por una de aquellas canciones. Recuerdo cantarlas también con mi viejo y musicalizar sus poemas o los de Rubén Darío.",
+            "👫Paré mi recorrido musical en mi juventud y me dediqué a mi desarrollo #espiritual y matrimonial. Aprendí mucho de otras aristas del arte más allá de la dramaturgia y la música. Entre escaladas, rodeos, baches y saltos creo que he aprovechado mi tiempo porque siempre he vivido con la convicción de que se puede y se debe hacer más.",
+            "🎹🎙️Cuando me decidí a retomar la #música quería hacerlo más como un reto personal. No grabaría con músicos ni sacaría mis temas al mundo. Mi amigo y productor @reygomezmusic felizmente me convenció de lo contrario y mi bella madre @elaineguimarais me apoyó para darle la calidad requerida a las primeras canciones.",
+            "😉 (continuará)"
+          ]
+        }
+      ],
+      "songLyrics": {
+          "AmorPrincesa": {
+            "original": [
+              "El mundo hizo silencio",
+              "Y en la esquina de una calle",
+              "El tráfico se sintió eterno y mi respiración",
+              "Se detuvo en el detalle",
+              "De mi dedo sobre tu boca de flor",
+              "Tenía tantas frases tiernas para describirte",
+              "Tenía tanta gratitud atada al corazón",
+              "Y en la esquina de una calle",
+              "Sin que el destino supiera",
+              "Te hablé como si fuera nuestra última ocasión",
+              "Amor, princesa",
+              "Has alegrado tanto el viaje que el tiempo voló",
+              "Amor, princesa",
+              "Amarme ha sido un reto, amarte una bendición",
+              "Todo lo que me has dado no cabe en una canción",
+              "Si yo no estoy, no llores, y vive por los dos."
+            ],
+            "englishTranslation": [
+              "The world fell silent",
+              "And on a street corner",
+              "The traffic seemed eternal, and my breath",
+              "Caught on the detail",
+              "Of my finger on your flowery lips",
+              "I had so many tender phrases to describe you",
+              "So much gratitude tied to my heart",
+              "And on that street corner",
+              "Without fate knowing",
+              "I spoke to you as if it were our last chance",
+              "Love, princess",
+              "You've made the journey so enjoyable, that time has flown by",
+              "Love, princess",
+              "Loving me has been a challenge, but loving you has been a blessing",
+              "Everything you've given me can't be contained in a song",
+              "If I'm not there, don't cry, and live for the both of us."
+            ]
+          }
+      }
+      
+  }
+  

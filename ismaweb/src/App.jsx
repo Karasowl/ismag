@@ -29,7 +29,7 @@ const Overlay = styled.div`
   position: fixed;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom right, #3a86ff, #fbd3e9);
+  background: linear-gradient(to bottom right, #fe391e, #000);
   opacity: 0;
   animation-name: ${fadeIn};
   animation-duration: .5s;

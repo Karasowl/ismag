@@ -1,12 +1,12 @@
-import coverImg from "./assets/MIL MARES COVER (1) [Ancho Máximo 320 Altura Máxima 240].webp";
+import coverImg from "./assets/Muy Civilizado cover.webp";
 
 const PreSave = () => {
   return (
     <div className='preSave'>
     <img src={coverImg}></img>
-      <p>¡Mil Mares está aquí!</p>
+      <p>"Un ateo, un bohemio, un intelectual, un tipo muy civilizado, un tipo que llora solo, un tipo que NECESITA ENCONTRARSE CON DIOS."</p>
       <button>
-        <a href="https://youtu.be/r3jAJTQENBw?si=EyeYwkR6jo8zPfoh" target="_blank" rel="noopener noreferrer">
+        <a href="https://youtu.be/eJ4tCKzUQ6I" target="_blank" rel="noopener noreferrer">
           VER VIDEOCLIP AHORA
         </a>
       </button>
