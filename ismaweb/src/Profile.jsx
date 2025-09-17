@@ -5,7 +5,7 @@ import profileImg3 from "./assets/27_n.webp";
 import profileImg4 from "./assets/112_n.webp";
 import profileImg5 from "./assets/295_n.webp";
 import profileImg6 from "./assets/612_n.webp";
-import Typed from 'react-typed';
+import { ReactTyped } from 'react-typed';
 import styled from 'styled-components';
 
 const ProfileContainer = styled.div`
@@ -98,7 +98,7 @@ function Profile() {
         className="fade-in"
       />
       <h2>ISMAEL GUIMARAIS</h2>
-      <Typed className="sentence"
+      <ReactTyped className="sentence"
         strings={[
           'Cantautor, canto sobre: ❤️ El amor',
           'Cantautor, canto sobre: ✝️ La Adoración',

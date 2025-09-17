@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Controller, Scene } from 'react-scrollmagic';
 import Profile from './Profile.jsx';
 import SpotifyPlayer from './SpotifyPlayer';
 import ButtonsContainer from './ButtonsContainer';
