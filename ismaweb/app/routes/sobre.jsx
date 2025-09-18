@@ -1,16 +1,20 @@
 import { json } from "@remix-run/node";
 
-const SITE = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
-const OG_IMAGE = `${SITE}/og-default.jpg`;
+const DEFAULT_SITE = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE = `${DEFAULT_SITE}/og-default.jpg`;
 
-export const loader = () => json({ site: SITE, ogImage: OG_IMAGE });
+export const loader = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE;
+  const ogImage = `${site}/og-default.jpg`;
+  return json({ site, ogImage });
+};
 
 export const meta = ({ data, location }) => {
-  const site = data?.site ?? SITE;
+  const site = data?.site ?? DEFAULT_SITE;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Sobre Ismael Guimarais";
   const description = "Biografía, convicciones y recorrido artístico de Ismael Guimarais.";
-  const ogImage = data?.ogImage ?? OG_IMAGE;
+  const ogImage = data?.ogImage ?? DEFAULT_OG_IMAGE;
 
   return [
     { title },

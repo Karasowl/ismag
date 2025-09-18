@@ -1,32 +1,48 @@
 import { RemixServer } from "@remix-run/react";
-import { Response } from "@remix-run/node";
-import isbot from "isbot";
-import { renderToReadableStream } from "react-dom/server";
+import { isbot } from "isbot";
+import { PassThrough } from "node:stream";
+import { renderToPipeableStream } from "react-dom/server";
 
-export default async function handleRequest(
+export default function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
   remixContext
 ) {
-  const body = await renderToReadableStream(
-    <RemixServer context={remixContext} url={request.url} />,
-    {
-      signal: request.signal,
-      onError(error) {
-        console.error(error);
-        responseStatusCode = 500;
+  return new Promise((resolve, reject) => {
+    let didError = false;
+
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        onAllReady() {
+          const body = new PassThrough();
+          responseHeaders.set("Content-Type", "text/html");
+          resolve(
+            new Response(body, {
+              headers: responseHeaders,
+              status: didError ? 500 : responseStatusCode
+            })
+          );
+          pipe(body);
+        },
+        onShellError(error) {
+          reject(error);
+        },
+        onError(error) {
+          didError = true;
+          console.error(error);
+        }
       }
+    );
+
+    // If it's a bot, wait for the full content before streaming
+    if (isbot(request.headers.get("user-agent"))) {
+      // give it extra time to get the full shell
+      setTimeout(abort, 10000);
+    } else {
+      // timeout to avoid hanging connections
+      setTimeout(abort, 5000);
     }
-  );
-
-  if (isbot(request.headers.get("user-agent"))) {
-    await body.allReady;
-  }
-
-  responseHeaders.set("Content-Type", "text/html");
-  return new Response(body, {
-    headers: responseHeaders,
-    status: responseStatusCode
   });
 }

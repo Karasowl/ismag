@@ -1,17 +1,21 @@
 import { json } from "@remix-run/node";
 
-const SITE = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
-const OG_IMAGE = `${SITE}/og-default.jpg`;
+const DEFAULT_SITE = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE = `${DEFAULT_SITE}/og-default.jpg`;
 const TRACK_URL = "https://youtu.be/eJ4tCKzUQ6I";
 
-export const loader = () => json({ site: SITE, ogImage: OG_IMAGE });
+export const loader = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE;
+  const ogImage = `${site}/og-default.jpg`;
+  return json({ site, ogImage });
+};
 
 export const meta = ({ data, location }) => {
-  const site = data?.site ?? SITE;
+  const site = data?.site ?? DEFAULT_SITE;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Música y lanzamientos";
   const description = "Escucha \"Muy Civilizado\" y descubre nuevas canciones y colaboraciones de Ismael Guimarais.";
-  const ogImage = data?.ogImage ?? OG_IMAGE;
+  const ogImage = data?.ogImage ?? DEFAULT_OG_IMAGE;
 
   return [
     { title },
@@ -32,20 +36,9 @@ export const meta = ({ data, location }) => {
         "@type": "MusicRecording",
         "name": "Muy Civilizado",
         "url": TRACK_URL,
-        "inAlbum": {
-          "@type": "MusicAlbum",
-          "name": "Muy Civilizado"
-        },
-        "byArtist": {
-          "@type": "Person",
-          "name": "Ismael Guimarais"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": TRACK_URL,
-          "price": "0",
-          "priceCurrency": "USD"
-        }
+        "inAlbum": { "@type": "MusicAlbum", "name": "Muy Civilizado" },
+        "byArtist": { "@type": "Person", "name": "Ismael Guimarais" },
+        "offers": { "@type": "Offer", "url": TRACK_URL, "price": "0", "priceCurrency": "USD" }
       }
     }
   ];

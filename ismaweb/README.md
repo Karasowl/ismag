@@ -1,46 +1,87 @@
-# Ismaweb
+# Ismaweb (Remix SSR)
 
-Aplicacion Vite + React para la presencia digital de Ismael Guimarais.
+Migrado a Remix v2 con Vite para renderizado en servidor, SEO por ruta y despliegue "zero-config" en Vercel.
 
 ## Scripts
 
-- `npm run dev` inicia el entorno de desarrollo.
-- `npm run build` genera la version optimizada, dispara el prerender y crea el sitemap.
-- `npm run preview` sirve la carpeta `dist/` para verificacion local.
-- `npm run test` ejecuta la suite de pruebas con Vitest.
+- `npm run dev` Inicia el servidor de desarrollo (Remix + Vite).
+- `npm run build` Genera `build/client` y `build/server` (SSR listo).
+- `npm start` Arranca el servidor SSR local con `remix-serve`.
+- `npm test` (deshabilitado por ahora).
 
-## SEO & Prerender
+## Estructura
 
-La aplicacion usa React Router v6, react-helmet-async y react-snap para producir HTML prerenderizado de las rutas clave.
+- `app/root.jsx` Documento raíz (`<Meta/>`, `<Links/>`, `<Outlet/>`).
+- `app/routes/` Rutas SSR:
+  - `_index.jsx` Home con meta por-ruta + JSON-LD + canonical.
+  - `sobre.jsx`, `music.jsx`, `newsletter.confirmacion.jsx`, `newsletter.gracias.jsx`, `404.jsx`.
+  - `sitemap[.]xml.js` y `robots[.]txt.js` como resource routes.
+- `app/components/` `HeroVideo.jsx`, `SocialLinks.jsx`.
+- `app/styles/global.css` Estilos globales.
+- `public/` `og-default.jpg` (1200×630), `hero-background.mp4` (video), assets estáticos.
 
-Pasos para agregar una nueva pagina indexable:
+## SEO por ruta (API `meta` de Remix)
 
-1. Crear el componente en `src/pages/` y agregarlo al `App.jsx` con su ruta.
-2. En el componente, usar `<SEO />` con `title`, `description` y, si aplica, JSON-LD.
-3. Anadir la ruta a `package.json` dentro de `reactSnap.include`.
-4. (Opcional) Actualizar `scripts/generate-sitemap.mjs` si la nueva ruta debe aparecer en el sitemap.
-5. Ejecutar `npm run build` para generar `dist/` con los HTML prerenderizados, `sitemap.xml(.gz)` y `robots.txt`.
+Cada archivo en `app/routes/*.jsx` exporta `meta()` con:
 
-Los archivos `dist/*.html` resultan de `react-snap`; comprueba su contenido con `npm run preview`. El sitemap se genera leyendo las rutas incluidas y omite `/404`.
+- `title`, `description`.
+- OpenGraph / Twitter (`og:*`, `twitter:*`).
+- Canonical: `{ tagName: "link", rel: "canonical", href }`.
+- JSON-LD nativo: `{ "script:ld+json": { ... } }`.
+
+Ejemplo: ver `app/routes/_index.jsx`.
+
+## Sitemap y robots
+
+- `GET /sitemap.xml` → `app/routes/sitemap[.]xml.js`
+- `GET /robots.txt` → `app/routes/robots[.]txt.js`
+
+Se generan en runtime usando `PUBLIC_SITE_URL`.
 
 ## Variables de entorno
 
-Configurar un archivo `.env` en la raiz con:
+Crear `.env` (o configurar en Vercel):
 
 ```
-VITE_SITE_URL=https://tu-dominio.com
-VITE_SITE_NAME=TuMarca
-VITE_TWITTER_HANDLE=@tuusuario
-VITE_YOUTUBE_API_KEY=
-VITE_YOUTUBE_CHANNEL_ID=UCX-0vZliN8aUFGyr_WGxndA
+PUBLIC_SITE_URL=https://tu-dominio.com
+YOUTUBE_API_KEY=xxxx
+YOUTUBE_CHANNEL_ID=UCxxxxx
+SPOTIFY_TRACK_ID=xxxxxxxxxxxxxxx
+CONVERTKIT_API_KEY=xxxx
+CONVERTKIT_FORM_ID=123456
+MAILCHIMP_API_KEY=xxxx-us21
+MAILCHIMP_AUDIENCE_ID=xxxxxxxx
 ```
 
-`VITE_YOUTUBE_API_KEY` es opcional; sin valor la pagina de YouTube mostrara el contenido de respaldo prerenderizado.
+## Desarrollo
 
-### TODO: Migracion a SSR
+```
+npm install
+npm run dev
+```
 
-- Evaluar `vite-plugin-ssr` para servir HTML dinamico cuando se necesiten rutas con datos frescos.
-- Compartir las rutas de `App.jsx` en un archivo comun para usarlas en `vite-plugin-ssr` + `PageShell`.
-- Habilitar `npm run build:ssr` que ejecute `vite build --ssr` y renderice en el servidor.
-- Sustituir `react-snap` por `vite-plugin-ssr` y mover la generacion de sitemap a la salida del build SSR.
+## Build local SSR
+
+```
+npm run build
+npm start
+```
+
+## Despliegue en Vercel
+
+1) Conecta el repo en Vercel.
+2) Vercel detecta Remix automáticamente; si pide comando, usa `remix vite:build`.
+3) Define `PUBLIC_SITE_URL` en Project Settings → Environment Variables.
+4) Deploy (preview/prod).
+
+## Añadir una nueva ruta
+
+1) Crea `app/routes/mi-ruta.jsx` exportando `meta()` y un componente.
+2) Si la ruta debe indexarse, añade su URL en `sitemap[.]xml.js`.
+3) Usa JSON-LD según corresponda (Article, VideoObject, MusicRecording, etc.).
+
+## Contenido pendiente
+
+- Banner OG final (reemplazar `public/og-default.jpg` si lo deseas).
+- Actualizar `sameAs` en JSON-LD con tus handles definitivos.
 
