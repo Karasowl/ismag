@@ -177,6 +177,7 @@ export const meta = ({ data, location }) => {
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+
   useEffect(() => {
     const revealables = Array.from(document.querySelectorAll('[data-reveal]'));
     const observer = new IntersectionObserver(
@@ -283,29 +284,31 @@ export default function Index() {
         <div className="scroll-indicator" aria-hidden />
       </section>
 
-      <section className="section card split" id="intro" data-reveal>
-        <div>
-          <h2>Hola, soy Ismael</h2>
-          <p>
-            Nací en Cuba y entendí pronto que la libertad de pensamiento no es un lujo, es un derecho. Hoy, desde México,
-            combino análisis cultural con música para explorar qué nos hace humanos. Creo que la razón bien usada fortalece
-            la fe y que podemos tener conversaciones profundas sin perder la esperanza.
-          </p>
-          <p>
-            Mi trabajo conecta tres mundos: el rigor de un gestor de proyectos, la sensibilidad de un músico y la búsqueda
-            honesta de alguien que ha vivido ambos lados de la historia.
-          </p>
-          <div className="stats" aria-label="Datos destacados de Ismael">
-            {STATS.map((item) => (
-              <div key={item.label} className="stat-card">
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
-              </div>
-            ))}
+      <section className="section" id="intro" data-reveal>
+        <div className="card split">
+          <div>
+            <h2>Hola, soy Ismael</h2>
+            <p>
+              Nací en Cuba y entendí pronto que la libertad de pensamiento no es un lujo, es un derecho. Hoy, desde México,
+              combino análisis cultural con música para explorar qué nos hace humanos. Creo que la razón bien usada fortalece
+              la fe y que podemos tener conversaciones profundas sin perder la esperanza.
+            </p>
+            <p>
+              Mi trabajo conecta tres mundos: el rigor de un gestor de proyectos, la sensibilidad de un músico y la búsqueda
+              honesta de alguien que ha vivido ambos lados de la historia.
+            </p>
+            <div className="stats" aria-label="Datos destacados de Ismael">
+              {STATS.map((item) => (
+                <div key={item.label} className="stat-card">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <img src="/og-default.webp" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
+          <div>
+            <img src="/og-default.webp" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
+          </div>
         </div>
       </section>
 
