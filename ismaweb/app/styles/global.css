@@ -10,18 +10,18 @@
 }
 
 :root {
-  /* Modern Color Palette */
-  --primary: #5B21B6;
-  --primary-light: #7C3AED;
-  --primary-dark: #4C1D95;
-  --secondary: #06B6D4;
-  --secondary-light: #22D3EE;
-  --secondary-dark: #0891B2;
+  /* Modern Color Palette - Red Brand */
+  --primary: #DC2626;
+  --primary-light: #EF4444;
+  --primary-dark: #991B1B;
+  --secondary: #F97316;
+  --secondary-light: #FB923C;
+  --secondary-dark: #EA580C;
   --accent: #F59E0B;
-  --accent-light: #FB923C;
-  --gradient-1: linear-gradient(135deg, #5B21B6 0%, #06B6D4 100%);
-  --gradient-2: linear-gradient(135deg, #7C3AED 0%, #22D3EE 100%);
-  --gradient-3: linear-gradient(135deg, #4C1D95 0%, #0891B2 100%);
+  --accent-light: #FCD34D;
+  --gradient-1: linear-gradient(135deg, #DC2626 0%, #F97316 100%);
+  --gradient-2: linear-gradient(135deg, #EF4444 0%, #FB923C 100%);
+  --gradient-3: linear-gradient(135deg, #991B1B 0%, #EA580C 100%);
   --gradient-text: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   
   /* Neutrals */
@@ -365,7 +365,7 @@ img {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: var(--gradient-1);
 }
 
 .hero__video {
@@ -387,8 +387,8 @@ img {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(91, 33, 182, 0.9) 0%,
-    rgba(6, 182, 212, 0.7) 100%
+    rgba(220, 38, 38, 0.9) 0%,
+    rgba(249, 115, 22, 0.7) 100%
   );
   z-index: 1;
 }
@@ -396,8 +396,8 @@ img {
 [data-theme="dark"] .hero__overlay {
   background: linear-gradient(
     135deg,
-    rgba(17, 24, 39, 0.95) 0%,
-    rgba(31, 41, 55, 0.9) 100%
+    rgba(153, 27, 27, 0.95) 0%,
+    rgba(234, 88, 12, 0.9) 100%
   );
 }
 
@@ -1210,6 +1210,11 @@ img {
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
 }
 
+.new-badge .featured-badge,
+.featured-badge.new-badge {
+  background: var(--gradient-1);
+}
+
 /* ========================================
    SOCIAL LINKTREE
    ======================================== */
@@ -1466,7 +1471,7 @@ img {
 
 .success-message {
   padding: var(--space-4);
-  background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+  background: var(--gradient-1);
   color: var(--white);
   border-radius: var(--radius-xl);
   margin-top: var(--space-4);
