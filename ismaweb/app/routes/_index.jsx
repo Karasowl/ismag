@@ -1,8 +1,7 @@
 import { json } from "@remix-run/node";
 import { useEffect, useState } from "react";
 import { useLoaderData, Form, useNavigation } from "@remix-run/react";
-import SocialLinks from "../components/SocialLinks.jsx";
-import ThemeToggle from "../components/ThemeToggle.jsx";
+import ContentGrid from "../components/ContentGrid.jsx";
 
 // Nota: estas constantes se usan en el cliente también; no deben leer process.env
 const DEFAULT_SITE = "https://ismaelguimarais.com";
@@ -20,33 +19,38 @@ const NAV_LINKS = [
 
 const FEATURED_ITEMS = [
   {
-    badge: "Más visto",
-    title: "¿Por qué buscamos significado?",
-    meta: "El video que inició todo",
-    href: "https://www.youtube.com/watch?v=ZyQjr1YL0zg",
-    analytics: "featured_most_viewed"
-  },
-  {
     badge: "Nuevo",
     badgeTone: "new-badge",
     title: "Muy Civilizado",
     meta: "La canción del mes",
-    href: "/music",
+    href: "https://youtu.be/eJ4tCKzUQ6I",
+    thumbnail: "https://i.ytimg.com/vi/eJ4tCKzUQ6I/maxresdefault.jpg",
     analytics: "featured_latest_song"
   },
   {
-    badge: "Lectura",
-    title: "La paradoja de la libertad moderna",
-    meta: "Para pensar despacio",
-    href: "https://ismaelguimarais.com/newsletter",
-    analytics: "featured_article"
+    badge: "Blog",
+    title: "El Mensaje de Jesús",
+    meta: "Cómo Juan resumió tres años de ministerio en una sola frase",
+    href: "/blog",
+    thumbnail: "/blog-mensaje-jesus.png",
+    analytics: "featured_blog"
   },
   {
     badge: "Serie",
     title: "Reacciones Canserbero",
     meta: "Análisis sin poses",
-    href: "https://www.youtube.com/playlist?list=PL",
+    href: "https://youtube.com/playlist?list=PLskI-KkSm7QfKZQgU4ZBiS0eR5WQM-QCf",
+    thumbnail: "https://i.ytimg.com/vi/fJH2MpPkGr0/maxresdefault.jpg",
     analytics: "featured_series"
+  },
+  {
+    badge: "Comunidad",
+    badgeTone: "community-badge",
+    title: "Únete al grupo privado",
+    meta: "Conviértete en miembro de YouTube o Patreon y accede al grupo exclusivo de WhatsApp",
+    href: "https://www.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA/join",
+    analytics: "featured_membership",
+    icon: "whatsapp"
   }
 ];
 
@@ -66,7 +70,6 @@ const FAQ_ITEMS = [
 export async function loader() {
   const YT_KEY = process.env.YOUTUBE_API_KEY;
   const YT_CHANNEL = process.env.YOUTUBE_CHANNEL_ID;
-  const SPOTIFY_TRACK_ID = process.env.SPOTIFY_TRACK_ID || "";
   const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE;
   const ogImage = `${site}/og-default.jpg`;
 
@@ -131,7 +134,7 @@ export async function loader() {
 
 
   return json(
-    { site, ogImage, latestVideo: latest, spotifyTrackId: SPOTIFY_TRACK_ID, youtubeStats: channelStats },
+    { site, ogImage, latestVideo: latest, youtubeStats: channelStats },
     { headers: { "Cache-Control": "public, max-age=60" } }
   );
 }
@@ -192,7 +195,6 @@ export const meta = ({ data, location }) => {
 };
 
 export default function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const loaderData = useLoaderData();
   const youtubeStats = loaderData.youtubeStats ?? null;
   const subscriberCount = youtubeStats?.subscriberCount ?? 0;
@@ -259,35 +261,6 @@ export default function Index() {
 
   return (
     <main>
-      <ThemeToggle />
-
-      <nav className={`mobile-nav ${menuOpen ? 'mobile-nav--open' : ''}`}>
-        <button
-          className="mobile-nav__toggle"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-label="Abrir menú"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-        {menuOpen && (
-          <div className="mobile-nav__menu">
-            {NAV_LINKS.map(({ label, href, external }) => (
-              <a
-                key={label}
-                href={href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                onClick={() => setMenuOpen(false)}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-        )}
-      </nav>
-
       <section className="hero" aria-labelledby="hero-heading">
         <video
           className="hero__video"
@@ -303,39 +276,60 @@ export default function Index() {
         </video>
         <div className="hero__overlay" aria-hidden />
         <div className="hero__content">
-          <h1 id="hero-heading" className="hero__title">Siente bien, piensa bien, vive bien</h1>
-          <div className="hero__narrative" aria-label="Manifiesto de Ismael">
-            <p className="hero__paragraph hero__paragraph--identity">
-              Soy Ismael Guimarais. Analizo cultura, política y sociedad desde una perspectiva cristiana. Cuando las palabras no alcanzan, hago canciones.
-            </p>
-            <p className="hero__paragraph hero__paragraph--principles">
-              Creo en la libertad individual, la meritocracia y la capacidad del ser humano para abrirse camino en un mundo hostil. Creo en hacer el bien mediante el sacrificio voluntario, nunca impuesto por un aparato represivo.
-            </p>
-            <p className="hero__paragraph hero__paragraph--faith">
-              <span>Pero sobre todas las cosas,</span>
-              <strong>creo en Dios.</strong>
-            </p>
-          </div>
-          <div className="hero__metrics" aria-label="Métricas principales">
-            {STATS.map((item) => (
-              <div key={item.label} className="stat-card">
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
-              </div>
-            ))}
-          </div>
+          <h1 id="hero-heading" className="hero__title">
+            Contenido gratuito para pensar mejor
+          </h1>
+          <p className="hero__subtitle">
+            Videoensayos, música y reflexiones. Sígueme en redes y únete a la conversación.
+          </p>
 
-          <div className="hero__cta-row">
-            <a className="button button--primary" href="#contenido" data-analytics="cta_hero_explorar">
+          <div className="hero__cta-group">
+            <a
+              className="button button--primary button--large"
+              href="https://youtube.com/@IsmaelGuimarais"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics="cta_hero_youtube"
+            >
+              <svg style={{ width: '24px', height: '24px', marginRight: '8px' }} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Suscríbete en YouTube
+            </a>
+            <a
+              className="button button--secondary button--large"
+              href="#content-grid"
+              data-analytics="cta_hero_explorar"
+            >
               Explorar contenido
             </a>
-            <a className="button button--secondary" href="/sobre" data-analytics="cta_hero_sobre">
-              Sobre mí
-            </a>
+          </div>
+
+          <div className="hero__stats-compact">
+            <div className="stat-item-inline">
+              <strong>{formattedSubscriberCount}</strong>
+              <span>suscriptores</span>
+            </div>
+            <div className="stat-item-inline">
+              <strong>{formattedVideoCount}</strong>
+              <span>videos</span>
+            </div>
+            <div className="stat-item-inline">
+              <strong>100%</strong>
+              <span>independiente</span>
+            </div>
           </div>
         </div>
         <div className="scroll-indicator" aria-hidden />
       </section>
+
+      {/* Nuevo grid visual de contenido - prioridad #1 */}
+      <div id="content-grid">
+        <ContentGrid
+          latestVideo={loaderData.latestVideo}
+          youtubeStats={loaderData.youtubeStats}
+        />
+      </div>
 
       <section className="section" id="intro" data-reveal>
         <div className="card split">
@@ -346,13 +340,9 @@ export default function Index() {
               combino análisis cultural con música para explorar qué nos hace humanos. Creo que la razón bien usada fortalece
               la fe y que podemos tener conversaciones profundas sin perder la esperanza.
             </p>
-            <p>
-              Mi trabajo conecta tres mundos: el rigor de un gestor de proyectos, la sensibilidad de un músico y la búsqueda
-              honesta de alguien que ha vivido ambos lados de la historia.
-            </p>
           </div>
           <div>
-            <img src="/og-default.webp" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
+            <img src="/ismael-professional.jpg" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
           </div>
         </div>
       </section>
@@ -365,7 +355,6 @@ export default function Index() {
             <p>
               Análisis semanales sobre transformaciones políticas, culturales y espirituales. Conecto los puntos entre economía y ética, política y principios. Sin filtros partidistas, solo búsqueda honesta de la verdad.
             </p>
-            <LatestVideo />
             <a
               className="link-arrow"
               href="https://www.youtube.com/@IsmaelGuimarais"
@@ -382,9 +371,40 @@ export default function Index() {
             <p>
               Canciones que nacen cuando el análisis no basta. Cada mes, una composición original sobre la búsqueda de propósito en tiempos de cambio.
             </p>
-            <SpotifyEmbed />
+            <div className="music-platforms-compact">
+              <p style={{ fontSize: 'var(--text-sm)', color: 'var(--gray-600)', marginBottom: 'var(--space-3)' }}>
+                Disponible en:
+              </p>
+              <div className="platform-icons-row">
+                <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener noreferrer" title="Spotify" className="platform-icon-link spotify">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                  </svg>
+                </a>
+                <a href="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178" target="_blank" rel="noopener noreferrer" title="Apple Music" className="platform-icon-link apple">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043C21.003.517 20.373.285 19.7.164c-.517-.093-1.038-.135-1.564-.15-.04-.003-.083-.01-.124-.013H5.988c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.055 1.114.091 1.673.1h11.717c.2-.007.4-.01.597-.02.772-.035 1.537-.106 2.265-.34 1.452-.468 2.52-1.4 3.118-2.854.192-.469.286-.96.335-1.457.048-.5.077-1.003.077-1.507.002-4.168 0-8.336 0-12.504zm-4.653 6.457l-.003 4.29c0 1.474-1.057 2.642-2.495 2.76-1.017.083-1.956-.328-2.37-1.19-.374-.78-.148-1.507.528-2.095.497-.432 1.097-.635 1.738-.69.15-.013.302-.015.453-.013.208 0 .414.01.623.026v-3.912l-5.968 1.222v5.207c0 1.483-1.053 2.655-2.5 2.776-1.02.086-1.965-.324-2.382-1.187-.374-.774-.148-1.498.526-2.083.495-.43 1.093-.632 1.732-.687.15-.013.3-.015.45-.013.21 0 .418.01.628.026v-7.108l10.04-2.053v4.524z"/>
+                  </svg>
+                </a>
+                <a href="https://music.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA" target="_blank" rel="noopener noreferrer" title="YouTube Music" className="platform-icon-link youtube">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/>
+                  </svg>
+                </a>
+                <a href="https://www.deezer.com/search/Ismael%20Guimarais" target="_blank" rel="noopener noreferrer" title="Deezer" className="platform-icon-link deezer">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.81 1.234h5.19v2.994h-5.19V1.234zm0 4.29h5.19v2.994h-5.19V5.524zm0 4.288h5.19v2.996h-5.19V9.812zm0 4.29h5.19v2.995h-5.19v-2.996zm0 4.288h5.19v2.996h-5.19v-2.996zM12.405 9.812h5.19v2.996h-5.19V9.812zm0 4.29h5.19v2.995h-5.19v-2.996zm0 4.288h5.19v2.996h-5.19v-2.996zM6 14.1h5.19v2.995H6V14.1zm0 4.288h5.19v2.996H6v-2.996zM0 18.39h5.19v2.996H0v-2.996z"/>
+                  </svg>
+                </a>
+                <a href="https://music.amazon.com/search/Ismael%20Guimarais" target="_blank" rel="noopener noreferrer" title="Amazon Music" className="platform-icon-link amazon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.333 14.235c0-3.897 1.955-6.948 5.53-6.948 2.289 0 3.491 1.357 3.491 1.357V1.191h3.874v15.52c0 .464.189.68.681.68h.244v3.298c-.464.042-.927.085-1.347.127-1.37.127-2.027-.34-2.448-1.399 0 0-1.283 1.655-4.226 1.655C5.415 21.072 3.333 18.9 3.333 14.234zm8.979-.042V11.32c0-.636-.464-1.103-1.103-1.103-1.582 0-2.575 1.442-2.575 4.06 0 2.703.993 4.06 2.575 4.06 1.158 0 1.103-1.358 1.103-1.91v-2.233zm9.282 4.86c-.888 1.358-2.065 2.234-3.787 2.234-2.277 0-3.32-1.442-3.32-3.617V7.356h3.916v9.915c0 .764.255 1.018.764 1.018.721 0 1.485-.721 1.485-1.23V7.356h3.916v10.102c0 .467.127.683.676.683h.296v3.319c-.508.04-.97.085-1.4.127-.845.08-1.59-.178-2.107-1.23l-.439-.628z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
             <a className="link-arrow" href="/music" data-analytics="cta_escuchar_mas">
-              Escuchar más
+              Escuchar en todas las plataformas
             </a>
           </article>
 
@@ -404,7 +424,7 @@ export default function Index() {
       <section className="section featured-section" data-reveal>
         <h2>Contenido seleccionado</h2>
         <div className="grid-2x2">
-          {FEATURED_ITEMS.map(({ badge, badgeTone, title, meta, href, analytics }) => {
+          {FEATURED_ITEMS.map(({ badge, badgeTone, title, meta, href, analytics, thumbnail, icon }) => {
             const className = ["card", "featured-card", badgeTone].filter(Boolean).join(" ");
             const badgeClass = ["featured-badge", badgeTone].filter(Boolean).join(" ");
             const isExternal = href.startsWith("http");
@@ -417,60 +437,26 @@ export default function Index() {
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 data-analytics={analytics}
               >
-                <span className={badgeClass}>{badge}</span>
-                <strong>{title}</strong>
-                <div className="featured-meta">{meta}</div>
+                {thumbnail && (
+                  <div className="featured-thumbnail">
+                    <img src={thumbnail} alt={title} loading="lazy" />
+                  </div>
+                )}
+                <div className="featured-content">
+                  <span className={badgeClass}>{badge}</span>
+                  <strong>{title}</strong>
+                  <div className="featured-meta">
+                    {icon === "whatsapp" && (
+                      <svg style={{ width: '18px', height: '18px', marginRight: '6px', verticalAlign: 'middle' }} viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                      </svg>
+                    )}
+                    {meta}
+                  </div>
+                </div>
               </a>
             );
           })}
-        </div>
-      </section>
-
-      <section className="section card" data-reveal>
-        <p className="quote">“La razón bien usada lleva a la fe, no la contradice”</p>
-        <p>
-          No busco consensos vacíos ni confirmar prejuicios. Busco la verdad, aunque incomode. Este espacio es para quienes entienden que se puede ser firme en los principios sin dejar de pensar, conservador sin ser cavernícola, cristiano sin ser fundamentalista.
-        </p>
-        <p>
-          Aquí no hay respuestas prefabricadas. Solo preguntas honestas y búsquedas sinceras.
-        </p>
-        <ul className="list">
-          {VALUES.map((value) => (
-            <li key={value}>{value}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section card" data-reveal>
-        <h2>Únete a la conversación</h2>
-        <p>
-          No es un club de fans. Es una conversación entre personas que piensan. Si tienes algo que aportar, bienvenido. Si solo buscas pelear, hay otros lugares para eso.
-        </p>
-        <SocialLinks />
-      </section>
-
-      <section className="section card split" data-reveal>
-        <div>
-          <h2>Trabajemos juntos</h2>
-          <p>
-            Disponible para podcasts donde se permita pensar en voz alta, eventos que busquen perspectivas diferentes, y proyectos que valoren la honestidad intelectual sobre la corrección política.
-          </p>
-          <p>
-            No prometo estar de acuerdo con todo, pero prometo ser sincero.
-          </p>
-          <a className="button button--primary" href="mailto:hola@ismaelguimarais.com" data-analytics="cta_contacto">
-            Enviar propuesta
-          </a>
-        </div>
-        <div>
-          <h3>FAQ rápido</h3>
-          <ul className="list">
-            {FAQ_ITEMS.map((item) => (
-              <li key={item.question}>
-                <strong>{item.question}</strong> {item.answer}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -502,23 +488,6 @@ function LatestVideo() {
   );
 }
 
-function SpotifyEmbed() {
-  const { spotifyTrackId } = useLoaderData();
-  if (!spotifyTrackId) {
-    return <div className="spotify-placeholder">Configura SPOTIFY_TRACK_ID para mostrar el reproductor.</div>;
-  }
-
-  const src = `https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=generator&theme=0`;
-  return (
-    <iframe
-      title="Reproductor de Spotify"
-      className="spotify-embed"
-      src={src}
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-    />
-  );
-}
 
 function NewsletterForm() {
   const nav = useNavigation();

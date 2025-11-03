@@ -1,5 +1,6 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError, isRouteErrorResponse } from "@remix-run/react";
 import globalStyles from "./styles/global.css?url";
+import Navigation from "./components/Navigation";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,6 +33,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <Navigation />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
