@@ -7,7 +7,6 @@ export default defineConfig(({ mode }) => ({
     mode === "test"
       ? react()
       : remix({
-          // Vercel deployment configuration
           ignoredRouteFiles: ["**/.*"],
         })
   ],
@@ -15,5 +14,8 @@ export default defineConfig(({ mode }) => ({
     environment: "jsdom",
     env: loadEnv("test", process.cwd(), ""),
     setupFiles: "./vitest.setup.ts"
+  },
+  ssr: {
+    noExternal: ["@remix-run/vercel"]
   }
 }));
