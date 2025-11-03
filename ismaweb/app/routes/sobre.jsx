@@ -60,11 +60,6 @@ export default function Sobre() {
         Además de la música, produzco newsletters y podcasts donde analizo cultura, biblia y sociedad desde una perspectiva
         honesta. Creo en la búsqueda intelectual como camino hacia la esperanza.
       </p>
-      <ul className="list">
-        <li>500K+ reproducciones en plataformas digitales.</li>
-        <li>Conciertos íntimos y encuentros formativos en Argentina, Chile, República Dominicana y Cuba.</li>
-        <li>Mentor de equipos creativos y líderes juveniles.</li>
-      </ul>
     </main>
   );
 }
