@@ -49,17 +49,46 @@ export const meta = ({ data, location }) => {
 
 export default function Sobre() {
   return (
-    <main className="section card">
-      <h1>Sobre Ismael Guimarais</h1>
-      <p>
-        Nací en Cuba y crecí entre acordes, lecturas y conversaciones sobre fe. Mis canciones mezclan pop alternativo
-        con letras que invitan a pensar y sanar. He compartido escenarios en América Latina, colaborado con líderes
-        comunitarios y facilitado espacios donde la duda se convierte en diálogo.
-      </p>
-      <p>
-        Además de la música, produzco newsletters y podcasts donde analizo cultura, biblia y sociedad desde una perspectiva
-        honesta. Creo en la búsqueda intelectual como camino hacia la esperanza.
-      </p>
+    <main className="section">
+      <div className="sobre-header">
+        <h1 className="page-title">Sobre Ismael Guimarais</h1>
+      </div>
+
+      <div className="sobre-content card">
+        <div className="sobre-image-section">
+          <img
+            src="/ismael-professional.jpg"
+            alt="Ismael Guimarais"
+            className="sobre-image"
+          />
+        </div>
+
+        <div className="sobre-text-section">
+          <p className="sobre-intro">
+            Nací en Cuba y crecí entre libros, música y conversaciones sobre el sentido de la vida. Hoy extraigo "hacks del buen vivir" analizando música, filosofía, historia y cultura para una audiencia hispana que busca profundidad sin rollos.
+          </p>
+          <p className="sobre-paragraph">
+            Creo videos semanales en YouTube donde convierto letras de canciones, eventos históricos e ideas filosóficas en lecciones prácticas para la vida cotidiana.
+          </p>
+
+          <div className="sobre-cta">
+            <a
+              href="https://youtube.com/@IsmaelGuimarais"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--primary"
+            >
+              <svg style={{ width: '20px', height: '20px', marginRight: '8px' }} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Ver mi canal de YouTube
+            </a>
+            <a href="/#content-grid" className="button button--secondary">
+              Explorar contenido
+            </a>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
