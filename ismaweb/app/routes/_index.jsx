@@ -8,6 +8,8 @@ import ThemeToggle from "../components/ThemeToggle.jsx";
 const DEFAULT_SITE = "https://ismaelguimarais.com";
 const DEFAULT_OG_IMAGE = `${DEFAULT_SITE}/og-default.jpg`;
 
+const NUMBER_FORMATTER = new Intl.NumberFormat("es-ES");
+
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Sobre mí", href: "/sobre" },
@@ -16,18 +18,11 @@ const NAV_LINKS = [
   { label: "Newsletter", href: "#newsletter" }
 ];
 
-const STATS = [
-  { value: "4.6K+", label: "Suscriptores" },
-  { value: "167", label: "Videos" },
-  { value: "50K+", label: "Horas vistas" },
-  { value: "1", label: "Misión clara" }
-];
-
 const FEATURED_ITEMS = [
   {
     badge: "Más visto",
     title: "¿Por qué buscamos significado?",
-    meta: "15 min · 12K vistas · YouTube",
+    meta: "El video que inició todo",
     href: "https://www.youtube.com/watch?v=ZyQjr1YL0zg",
     analytics: "featured_most_viewed"
   },
@@ -35,21 +30,21 @@ const FEATURED_ITEMS = [
     badge: "Nuevo",
     badgeTone: "new-badge",
     title: "Muy Civilizado",
-    meta: "3:45 · Disponible en todas las plataformas",
+    meta: "La canción del mes",
     href: "/music",
     analytics: "featured_latest_song"
   },
   {
     badge: "Lectura",
     title: "La paradoja de la libertad moderna",
-    meta: "5 min de lectura · Ensayo",
+    meta: "Para pensar despacio",
     href: "https://ismaelguimarais.com/newsletter",
     analytics: "featured_article"
   },
   {
     badge: "Serie",
     title: "Reacciones Canserbero",
-    meta: "10 episodios · Conversaciones honestas",
+    meta: "Análisis sin poses",
     href: "https://www.youtube.com/playlist?list=PL",
     analytics: "featured_series"
   }
@@ -63,9 +58,9 @@ const VALUES = [
 ];
 
 const FAQ_ITEMS = [
-  { question: "¿Cada cuánto publicas?", answer: "Videos semanales, música mensual." },
-  { question: "¿Dónde puedo ver todo?", answer: "YouTube es mi plataforma principal." },
-  { question: "¿Cómo apoyo tu trabajo?", answer: "Suscríbete, comparte y comenta." }
+  { question: "¿Cada cuánto publicas?", answer: "Videos semanales, música mensual, newsletter semanal." },
+  { question: "¿Dónde puedo ver todo?", answer: "YouTube para videos, Spotify para música." },
+  { question: "¿Cómo apoyo tu trabajo?", answer: "Comparte lo que resuene contigo. Las mejores ideas merecen ser discutidas." }
 ];
 
 export async function loader() {
@@ -76,7 +71,28 @@ export async function loader() {
   const ogImage = `${site}/og-default.jpg`;
 
   let latest = null;
+  let channelStats = null;
+
   if (YT_KEY && YT_CHANNEL) {
+    try {
+      const channelUrl = new URL("https://www.googleapis.com/youtube/v3/channels");
+      channelUrl.searchParams.set("key", YT_KEY);
+      channelUrl.searchParams.set("id", YT_CHANNEL);
+      channelUrl.searchParams.set("part", "statistics");
+      const cres = await fetch(channelUrl, { headers: { Accept: "application/json" } });
+      const cdata = await cres.json();
+      const stats = cdata?.items?.[0]?.statistics;
+      if (stats) {
+        channelStats = {
+          subscriberCount: Number(stats.subscriberCount ?? 0),
+          videoCount: Number(stats.videoCount ?? 0),
+          viewCount: Number(stats.viewCount ?? 0)
+        };
+      }
+    } catch (error) {
+      console.warn("YouTube channel stats error", error);
+    }
+
     try {
       const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
       searchUrl.searchParams.set("key", YT_KEY);
@@ -113,8 +129,9 @@ export async function loader() {
     }
   }
 
+
   return json(
-    { site, ogImage, latestVideo: latest, spotifyTrackId: SPOTIFY_TRACK_ID },
+    { site, ogImage, latestVideo: latest, spotifyTrackId: SPOTIFY_TRACK_ID, youtubeStats: channelStats },
     { headers: { "Cache-Control": "public, max-age=60" } }
   );
 }
@@ -176,6 +193,22 @@ export const meta = ({ data, location }) => {
 
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const loaderData = useLoaderData();
+  const youtubeStats = loaderData.youtubeStats ?? null;
+  const subscriberCount = youtubeStats?.subscriberCount ?? 0;
+  const videoCount = youtubeStats?.videoCount ?? 0;
+  const viewCount = youtubeStats?.viewCount ?? 0;
+  const formattedSubscriberCount = subscriberCount ? `${NUMBER_FORMATTER.format(subscriberCount)}+` : "—";
+  const formattedVideoCount = videoCount ? NUMBER_FORMATTER.format(videoCount) : "—";
+  const hoursShared = viewCount ? Math.floor(viewCount / 1000) : 0;
+  const formattedHoursShared = hoursShared ? `${hoursShared}K+` : "—";
+  const STATS = [
+    { value: formattedSubscriberCount, label: "Personas en esta conversación" },
+    { value: formattedVideoCount, label: "Videos publicados" },
+    { value: formattedHoursShared, label: "Horas compartidas" },
+    { value: "100%", label: "Independiente" }
+  ];
+
 
 
   useEffect(() => {
@@ -271,7 +304,27 @@ export default function Index() {
         <div className="hero__overlay" aria-hidden />
         <div className="hero__content">
           <h1 id="hero-heading" className="hero__title">Siente bien, piensa bien, vive bien</h1>
-          <p className="hero__subtitle">Analista cultural · Músico · Pensador</p>
+          <div className="hero__narrative" aria-label="Manifiesto de Ismael">
+            <p className="hero__paragraph hero__paragraph--identity">
+              Soy Ismael Guimarais. Analizo cultura, política y sociedad desde una perspectiva cristiana. Cuando las palabras no alcanzan, hago canciones.
+            </p>
+            <p className="hero__paragraph hero__paragraph--principles">
+              Creo en la libertad individual, la meritocracia y la capacidad del ser humano para abrirse camino en un mundo hostil. Creo en hacer el bien mediante el sacrificio voluntario, nunca impuesto por un aparato represivo.
+            </p>
+            <p className="hero__paragraph hero__paragraph--faith">
+              <span>Pero sobre todas las cosas,</span>
+              <strong>creo en Dios.</strong>
+            </p>
+          </div>
+          <div className="hero__metrics" aria-label="Métricas principales">
+            {STATS.map((item) => (
+              <div key={item.label} className="stat-card">
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="hero__cta-row">
             <a className="button button--primary" href="#contenido" data-analytics="cta_hero_explorar">
               Explorar contenido
@@ -297,14 +350,6 @@ export default function Index() {
               Mi trabajo conecta tres mundos: el rigor de un gestor de proyectos, la sensibilidad de un músico y la búsqueda
               honesta de alguien que ha vivido ambos lados de la historia.
             </p>
-            <div className="stats" aria-label="Datos destacados de Ismael">
-              {STATS.map((item) => (
-                <div key={item.label} className="stat-card">
-                  <strong>{item.value}</strong>
-                  <span>{item.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
           <div>
             <img src="/og-default.webp" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
@@ -318,7 +363,7 @@ export default function Index() {
           <article className="card">
             <h3>Videoensayos</h3>
             <p>
-              Ideas que importan, cada semana. Análisis cultural, filosofía práctica y fe pensada, sin sermones ni extremos.
+              Análisis semanales sobre transformaciones políticas, culturales y espirituales. Conecto los puntos entre economía y ética, política y principios. Sin filtros partidistas, solo búsqueda honesta de la verdad.
             </p>
             <LatestVideo />
             <a
@@ -335,7 +380,7 @@ export default function Index() {
           <article className="card">
             <h3>Música</h3>
             <p>
-              Canciones con sustancia, cada mes. Letras que piensan y melodías que conectan con algo más profundo.
+              Canciones que nacen cuando el análisis no basta. Cada mes, una composición original sobre la búsqueda de propósito en tiempos de cambio.
             </p>
             <SpotifyEmbed />
             <a className="link-arrow" href="/music" data-analytics="cta_escuchar_mas">
@@ -346,7 +391,7 @@ export default function Index() {
           <article className="card" id="newsletter">
             <h3>Newsletter</h3>
             <p>
-              Reflexiones que solo envío por correo. Sin spam, sin ventas agresivas; solo ideas que ayudan a pensar y sentir.
+              Reflexiones directas cada semana. Para más de 500 lectores que prefieren pensar por sí mismos. Sin ventas, sin spam. Solo ideas que importan.
             </p>
             <NewsletterForm />
             <p className="newsletter-info">
@@ -382,11 +427,12 @@ export default function Index() {
       </section>
 
       <section className="section card" data-reveal>
-        <p className="quote">“La razón bien usada lleva a la fe”</p>
+        <p className="quote">“La razón bien usada lleva a la fe, no la contradice”</p>
         <p>
-          No creo en respuestas fáciles ni en verdades impuestas. Creo en la búsqueda honesta, en cuestionar con respeto y
-          en construir puentes donde otros levantan muros. Este espacio es para quienes desean profundidad sin perder la
-          esperanza.
+          No busco consensos vacíos ni confirmar prejuicios. Busco la verdad, aunque incomode. Este espacio es para quienes entienden que se puede ser firme en los principios sin dejar de pensar, conservador sin ser cavernícola, cristiano sin ser fundamentalista.
+        </p>
+        <p>
+          Aquí no hay respuestas prefabricadas. Solo preguntas honestas y búsquedas sinceras.
         </p>
         <ul className="list">
           {VALUES.map((value) => (
@@ -397,6 +443,9 @@ export default function Index() {
 
       <section className="section card" data-reveal>
         <h2>Únete a la conversación</h2>
+        <p>
+          No es un club de fans. Es una conversación entre personas que piensan. Si tienes algo que aportar, bienvenido. Si solo buscas pelear, hay otros lugares para eso.
+        </p>
         <SocialLinks />
       </section>
 
@@ -404,8 +453,10 @@ export default function Index() {
         <div>
           <h2>Trabajemos juntos</h2>
           <p>
-            Abierto a podcasts, entrevistas, colaboraciones creativas, charlas y proyectos con propósito. Si buscas una voz
-            que conecte fe, cultura y música, hablemos.
+            Disponible para podcasts donde se permita pensar en voz alta, eventos que busquen perspectivas diferentes, y proyectos que valoren la honestidad intelectual sobre la corrección política.
+          </p>
+          <p>
+            No prometo estar de acuerdo con todo, pero prometo ser sincero.
           </p>
           <a className="button button--primary" href="mailto:hola@ismaelguimarais.com" data-analytics="cta_contacto">
             Enviar propuesta
@@ -425,7 +476,8 @@ export default function Index() {
 
       <section className="section" aria-label="Redes y footer">
         <footer>
-          &copy; {new Date().getFullYear()} Ismael Guimarais · Cuba 🇨🇺 → México 🇲🇽
+          <p>"El camino angosto sigue siendo el correcto."<br />— Ismael Guimarais</p>
+          <p>&copy; {new Date().getFullYear()} Ismael Guimarais · Cuba 🇨🇺 → México 🇲🇽</p>
         </footer>
       </section>
     </main>

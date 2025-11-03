@@ -37,15 +37,43 @@ const links = [
   }
 ];
 
-export default function SocialLinks() {
+const toneById = {
+  youtube: "link-card--youtube",
+  x: "link-card--x",
+  instagram: "link-card--instagram",
+  tiktok: "link-card--tiktok",
+  threads: "link-card--threads",
+  facebook: "link-card--facebook"
+};
+
+export default function SocialLinks({ className = "" }) {
+  const classes = ["linktree", className].filter(Boolean).join(" ");
+
   return (
-    <div className="links-grid" aria-label="Redes sociales de Ismael Guimarais">
-      {links.map((link) => (
-        <a key={link.id} className="social-link" href={link.href} target="_blank" rel="noopener noreferrer">
-          <span>{link.label}</span>
-          <span>{link.handle}</span>
-        </a>
-      ))}
+    <div className={classes} aria-label="Redes sociales de Ismael Guimarais">
+      {links.map((link) => {
+        const tone = toneById[link.id] || "";
+        return (
+          <a
+            key={link.id}
+            className={`link-card ${tone}`.trim()}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="link-card__icon" aria-hidden="true">
+              {link.label.charAt(0)}
+            </span>
+            <span className="link-card__body">
+              <span className="link-card__label">{link.label}</span>
+              <span className="link-card__handle">{link.handle}</span>
+            </span>
+            <span className="link-card__arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+        );
+      })}
     </div>
   );
 }
