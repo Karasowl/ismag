@@ -1,0 +1,273 @@
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+  text-align: center;
+  white-space: nowrap;
+  min-height: 44px;
+  gap: var(--space-2);
+  text-decoration: none;
+}
+
+.button--primary {
+  background: var(--white);
+  color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  background: var(--gray-50);
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.button--large {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* CTA Buttons */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  background: var(--gradient-1);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: transform var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
+  box-shadow: var(--shadow);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-button .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.youtube-cta {
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+}
+
+.spotify-cta {
+  background: linear-gradient(135deg, #1DB954 0%, #1AA34A 100%);
+}
+
+/* Newsletter Button */
+.newsletter-button {
+  flex-shrink: 0;
+  min-width: 100px;
+  background: var(--primary) !important;
+  color: var(--white) !important;
+}
+
+.newsletter-button:hover {
+  background: var(--primary-dark) !important;
+  transform: translateY(-2px);
+}
+
+/* Music Platform Buttons */
+.music-platform-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+  background: var(--gray-100);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: var(--gray-900);
+  font-weight: 600;
+  font-size: var(--text-base);
+  transition: all var(--duration-base) var(--ease-out);
+  border: 2px solid transparent;
+  min-height: 120px;
+}
+
+[data-theme="dark"] .music-platform-button {
+  background: var(--gray-700);
+  color: var(--white);
+}
+
+.music-platform-button:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.platform-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.music-platform-button:hover .platform-icon {
+  transform: scale(1.15);
+}
+
+/* Platform-specific colors for music */
+.music-platform-button.spotify-btn:hover {
+  background: #1DB954;
+  color: var(--white);
+  border-color: #1DB954;
+}
+
+.music-platform-button.apple-music-btn:hover {
+  background: linear-gradient(135deg, #FA243C 0%, #FF5C5C 100%);
+  color: var(--white);
+}
+
+.music-platform-button.youtube-music-btn:hover {
+  background: #FF0000;
+  color: var(--white);
+  border-color: #FF0000;
+}
+
+.music-platform-button.deezer-btn:hover {
+  background: #00C7F2;
+  color: var(--white);
+  border-color: #00C7F2;
+}
+
+.music-platform-button.amazon-music-btn:hover {
+  background: linear-gradient(135deg, #00A8E1 0%, #0073CF 100%);
+  color: var(--white);
+}
+
+/* Social Buttons */
+.social-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--gray-100);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: var(--gray-900);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: all var(--duration-base) var(--ease-out);
+  border: 2px solid transparent;
+}
+
+[data-theme="dark"] .social-button {
+  background: var(--gray-700);
+  color: var(--white);
+}
+
+.social-button:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.social-button:hover .social-icon {
+  transform: scale(1.1);
+}
+
+/* Platform-specific colors */
+.social-button.youtube:hover {
+  background: #FF0000;
+  color: var(--white);
+  border-color: #FF0000;
+}
+
+.social-button.instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: var(--white);
+}
+
+.social-button.tiktok:hover {
+  background: #000000;
+  color: var(--white);
+  border-color: #00f2ea;
+}
+
+.social-button.x:hover {
+  background: #000000;
+  color: var(--white);
+  border-color: #1DA1F2;
+}
+
+.social-button.threads:hover {
+  background: #000000;
+  color: var(--white);
+}
+
+.social-button.facebook:hover {
+  background: #1877F2;
+  color: var(--white);
+  border-color: #1877F2;
+}
+
+.social-button.telegram:hover {
+  background: #0088cc;
+  color: var(--white);
+  border-color: #0088cc;
+}
+
+/* Responsive Button Styles */
+@media (max-width: 640px) {
+  .button {
+    width: 100%;
+  }
+
+  .newsletter-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .newsletter-button {
+    width: 100%;
+  }
+}

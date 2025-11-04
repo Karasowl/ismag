@@ -1,0 +1,40 @@
+/* ========================================
+   DARK MODE THEME
+   ======================================== */
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --primary: #7C3AED;
+  --primary-light: #8B5CF6;
+  --primary-dark: #6D28D9;
+  --secondary: #22D3EE;
+  --secondary-light: #67E8F9;
+  --secondary-dark: #06B6D4;
+  --gradient-1: linear-gradient(135deg, #7C3AED 0%, #22D3EE 100%);
+  --gradient-2: linear-gradient(135deg, #8B5CF6 0%, #67E8F9 100%);
+  --gradient-3: linear-gradient(135deg, #6D28D9 0%, #06B6D4 100%);
+}
+
+/* Body */
+[data-theme="dark"] body {
+  color: var(--gray-100);
+  background: var(--gray-950);
+}
+
+/* Typography */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] p {
+  color: var(--gray-400);
+}
+
+/* Note: Component-specific dark mode styles are co-located with their
+   respective components for better maintainability. This file contains
+   only the global dark theme variable overrides and base element styles. */

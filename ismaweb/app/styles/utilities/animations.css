@@ -1,0 +1,84 @@
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Hero Animations */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Indicator Animation */
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+
+/* Menu Slide Animation */
+@keyframes menuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s var(--ease-out);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation only on larger screens to avoid issues */
+@media (min-width: 768px) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

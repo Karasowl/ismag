@@ -1,0 +1,134 @@
+/* ========================================
+   LAYOUTS - CONTAINERS & SECTIONS
+   ======================================== */
+
+/* Section Layouts */
+.section {
+  padding: var(--space-16) var(--space-6);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-8) var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--space-20) var(--space-8);
+  }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  color: var(--gray-500);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--gray-200);
+  margin-top: var(--space-16);
+}
+
+[data-theme="dark"] footer {
+  border-color: var(--gray-800);
+  color: var(--gray-500);
+}
+
+/* Sobre Page Styles */
+.sobre-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.sobre-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sobre-image-section {
+  position: sticky;
+  top: var(--space-8);
+}
+
+.sobre-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sobre-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sobre-intro {
+  font-size: var(--text-xl);
+  line-height: 1.7;
+  color: var(--gray-800);
+  font-weight: 500;
+}
+
+.sobre-paragraph {
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  color: var(--gray-700);
+}
+
+.sobre-cta {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.sobre-cta .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .sobre-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .sobre-image-section {
+    position: relative;
+    top: 0;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .sobre-intro {
+    font-size: var(--text-lg);
+  }
+
+  .sobre-paragraph {
+    font-size: var(--text-base);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .theme-toggle,
+  .mobile-nav,
+  footer {
+    display: none;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid var(--gray-300);
+    page-break-inside: avoid;
+  }
+}

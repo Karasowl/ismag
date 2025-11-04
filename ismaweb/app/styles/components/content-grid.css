@@ -1,0 +1,417 @@
+/* ========================================
+   CONTENT GRID - NEW VISUAL LAYOUT
+   ======================================== */
+
+.content-grid-section {
+  padding: var(--space-20) var(--space-4);
+  background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+}
+
+[data-theme="dark"] .content-grid-section {
+  background: linear-gradient(180deg, var(--gray-900) 0%, var(--gray-950) 100%);
+}
+
+.content-grid-section .container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--space-4);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: var(--text-lg);
+  text-align: center;
+  color: var(--gray-600);
+  margin-bottom: var(--space-16);
+}
+
+[data-theme="dark"] .section-subtitle {
+  color: var(--gray-400);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+}
+
+/* Featured Video Card */
+.featured-video {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .featured-video {
+    grid-column: span 1;
+  }
+}
+
+.video-thumbnail-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.thumbnail-wrapper {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+  aspect-ratio: 16 / 9;
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.video-thumbnail-link:hover .video-thumbnail {
+  transform: scale(1.05);
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background var(--duration-base) var(--ease-out);
+}
+
+.video-thumbnail-link:hover .play-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-icon {
+  width: 80px;
+  height: 80px;
+  color: var(--white);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.video-thumbnail-link:hover .play-icon {
+  transform: scale(1.1);
+}
+
+.video-info {
+  margin-bottom: var(--space-6);
+}
+
+.video-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--gray-900);
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .video-title {
+  color: var(--white);
+}
+
+.video-views {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .video-views {
+  color: var(--gray-400);
+}
+
+/* Music Platforms Card */
+.music-platforms-card {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .music-platforms-card {
+    grid-column: span 1;
+  }
+}
+
+.music-platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Social Buttons Grid */
+.social-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  opacity: 0.9;
+}
+
+/* Music Platforms Compact (for "Lo que hago" section) */
+.music-platforms-compact {
+  padding: var(--space-6) 0;
+}
+
+.platform-icons-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.platform-icon-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-100);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-base) var(--ease-out);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .platform-icon-link {
+  background: var(--gray-700);
+  color: var(--gray-300);
+}
+
+.platform-icon-link:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.platform-icon-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Platform-specific colors for compact icons */
+.platform-icon-link.spotify:hover {
+  background: #1DB954;
+  color: var(--white);
+}
+
+.platform-icon-link.apple:hover {
+  background: #FA243C;
+  color: var(--white);
+}
+
+.platform-icon-link.youtube:hover {
+  background: #FF0000;
+  color: var(--white);
+}
+
+.platform-icon-link.deezer:hover {
+  background: #00C7F2;
+  color: var(--white);
+}
+
+.platform-icon-link.amazon:hover {
+  background: #00A8E1;
+  color: var(--white);
+}
+
+/* Link Arrow */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--primary);
+  font-weight: 600;
+  transition: gap var(--duration-fast) var(--ease-out);
+  margin-top: var(--space-4);
+}
+
+.link-arrow::after {
+  content: '→';
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.link-arrow:hover {
+  gap: var(--space-3);
+}
+
+.link-arrow:hover::after {
+  transform: translateX(4px);
+}
+
+/* Intro Section Elements - Removed duplicate styles, see layouts/grid.css */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* Featured Section */
+.featured-section {
+  background: var(--gray-50);
+  border-radius: var(--radius-3xl);
+  padding: var(--space-16) var(--space-8);
+  margin: var(--space-16) auto;
+  max-width: var(--max-width);
+}
+
+[data-theme="dark"] .featured-section {
+  background: var(--gray-900);
+}
+
+/* Social Linktree */
+.linktree {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* Quotes & Values */
+.quote {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--primary);
+  text-align: center;
+  margin: var(--space-8) 0;
+  line-height: 1.4;
+  position: relative;
+  padding: var(--space-4);
+}
+
+.quote::before {
+  content: '"';
+  position: absolute;
+  left: -0.5em;
+  top: -0.25em;
+  font-size: 2em;
+  opacity: 0.2;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+}
+
+.list li {
+  padding: var(--space-4) 0;
+  padding-left: var(--space-8);
+  position: relative;
+  color: var(--gray-700);
+  font-size: var(--text-base);
+}
+
+[data-theme="dark"] .list li {
+  color: var(--gray-300);
+}
+
+.list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: var(--space-4);
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--secondary);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .content-grid-section {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+  }
+
+  .social-buttons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .platform-icons-row {
+    gap: var(--space-3);
+  }
+
+  .platform-icon-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .platform-icon-link svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .linktree {
+    gap: var(--space-2);
+  }
+
+  .stats {
+    gap: var(--space-2);
+  }
+
+  .featured-section {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .intro-image {
+    margin-top: var(--space-6);
+  }
+}
