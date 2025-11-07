@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { label: "Sobre mí", href: "/sobre" },
   { label: "Música", href: "/music" },
   { label: "Blog", href: "/blog" },
+  { label: "Apóyame", href: "/apoyame" },
   { label: "Videos", href: "https://www.youtube.com/@IsmaelGuimarais", external: true }
 ];
 

@@ -20,6 +20,7 @@
 @import "./components/content-grid.css";
 @import "./components/blog.css";
 @import "./components/newsletter.css";
+@import "./components/apoyame.css";
 
 /* Themes */
 @import "./themes/dark-mode.css";
