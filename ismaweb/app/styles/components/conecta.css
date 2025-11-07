@@ -1,0 +1,417 @@
+/* ============================================
+   CONECTA PAGE
+   ============================================ */
+
+.conecta-page {
+  min-height: 100vh;
+  padding-bottom: var(--space-16);
+}
+
+/* Hero Section */
+.conecta-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  padding: var(--space-20) 0 var(--space-16);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.conecta-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.conecta-title {
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  color: white;
+  margin: 0 0 var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+.conecta-subtitle {
+  font-size: var(--text-xl);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Container */
+.conecta-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Primary Action (Email) */
+.conecta-primary-action {
+  margin: calc(var(--space-16) * -1) auto var(--space-16);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.conecta-email-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  background: white;
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-2xl);
+  transition: all var(--duration-base) var(--ease-out);
+  text-decoration: none;
+}
+
+.conecta-email-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    var(--shadow-2xl),
+    0 0 0 4px #DC262619;
+  color: var(--primary-dark);
+}
+
+.conecta-email-button svg {
+  flex-shrink: 0;
+}
+
+/* Section Titles */
+.conecta-section-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin: 0 0 var(--space-8);
+  text-align: center;
+  color: var(--gray-900);
+}
+
+/* Social Platforms Grid */
+.conecta-social-grid {
+  margin-bottom: var(--space-16);
+}
+
+.conecta-platforms {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.conecta-platform-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-xl);
+  transition: all var(--duration-base) var(--ease-out);
+  text-decoration: none;
+  color: var(--gray-900);
+  position: relative;
+  overflow: hidden;
+}
+
+.conecta-platform-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.conecta-platform-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.conecta-platform-card:hover::before {
+  opacity: 0.05;
+}
+
+.conecta-platform-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  color: white;
+  position: relative;
+  z-index: 1;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.conecta-platform-card:hover .conecta-platform-icon {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.conecta-platform-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.conecta-platform-info {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.conecta-platform-name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-1);
+  color: var(--gray-900);
+}
+
+.conecta-platform-handle {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin: 0;
+  font-family: var(--font-mono, monospace);
+}
+
+.conecta-platform-arrow {
+  flex-shrink: 0;
+  color: var(--gray-500);
+  transition: all var(--duration-base) var(--ease-out);
+  position: relative;
+  z-index: 1;
+}
+
+.conecta-platform-card:hover .conecta-platform-arrow {
+  transform: translateX(4px);
+  color: var(--primary);
+}
+
+/* Music Platforms */
+.conecta-music-section {
+  margin-bottom: var(--space-16);
+}
+
+.conecta-music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-4);
+}
+
+.conecta-music-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: var(--gray-900);
+  transition: all var(--duration-base) var(--ease-out);
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.conecta-music-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.conecta-music-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.conecta-music-card:hover::before {
+  opacity: 0.08;
+}
+
+.conecta-music-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.conecta-music-card:hover .conecta-music-icon {
+  transform: scale(1.15);
+}
+
+.conecta-music-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.conecta-music-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Newsletter CTA */
+.conecta-newsletter-cta {
+  margin-top: var(--space-16);
+}
+
+.conecta-newsletter-cta .card {
+  text-align: center;
+  padding: var(--space-10);
+  background: linear-gradient(135deg,
+    #DC26260D 0%,
+    #F973160D 100%);
+  border: 2px solid var(--gray-200);
+}
+
+.conecta-newsletter-cta h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin: 0 0 var(--space-3);
+  color: var(--gray-900);
+}
+
+.conecta-newsletter-cta p {
+  font-size: var(--text-lg);
+  color: var(--gray-600);
+  margin: 0 0 var(--space-6);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.conecta-newsletter-cta .button {
+  margin-top: var(--space-2);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .conecta-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+[data-theme="dark"] .conecta-section-title,
+[data-theme="dark"] .conecta-platform-name,
+[data-theme="dark"] .conecta-newsletter-cta h2 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .conecta-platform-handle,
+[data-theme="dark"] .conecta-newsletter-cta p {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .conecta-platform-card,
+[data-theme="dark"] .conecta-music-card {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+}
+
+[data-theme="dark"] .conecta-platform-card:hover,
+[data-theme="dark"] .conecta-music-card:hover {
+  border-color: var(--primary);
+  background: var(--gray-900);
+}
+
+[data-theme="dark"] .conecta-newsletter-cta .card {
+  background: linear-gradient(135deg,
+    #DC262619 0%,
+    #F9731619 100%);
+  border-color: var(--gray-700);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .conecta-hero {
+    padding: var(--space-16) 0 var(--space-12);
+  }
+
+  .conecta-title {
+    font-size: var(--text-4xl);
+  }
+
+  .conecta-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  .conecta-primary-action {
+    margin-top: calc(var(--space-12) * -1);
+  }
+
+  .conecta-email-button {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-base);
+  }
+
+  .conecta-section-title {
+    font-size: var(--text-2xl);
+  }
+
+  .conecta-platform-card {
+    padding: var(--space-4);
+  }
+
+  .conecta-platform-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .conecta-platform-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .conecta-music-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .conecta-music-card {
+    padding: var(--space-4);
+  }
+
+  .conecta-newsletter-cta .card {
+    padding: var(--space-8);
+  }
+
+  .conecta-newsletter-cta h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .conecta-newsletter-cta p {
+    font-size: var(--text-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .conecta-music-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
