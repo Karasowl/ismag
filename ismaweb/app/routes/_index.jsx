@@ -178,7 +178,7 @@ export const meta = ({ data, location }) => {
           "https://www.instagram.com/ismaguimarais/",
           "https://www.tiktok.com/@ismaguimarais",
           "https://www.threads.net/@ismaguimarais",
-          "https://www.facebook.com/ismaguimarais"
+          "https://www.facebook.com/ismaguimarais/"
         ]
       }
     },

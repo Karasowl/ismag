@@ -115,7 +115,7 @@ export default function ContentGrid({ latestVideo, youtubeStats }) {
               </a>
 
               <a
-                href="https://facebook.com/IsmaelGuimarais"
+                href="https://www.facebook.com/ismaguimarais/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-button facebook"

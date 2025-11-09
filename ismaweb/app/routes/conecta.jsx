@@ -72,8 +72,8 @@ export default function Conecta() {
     {
       name: "Facebook",
       icon: "facebook",
-      handle: "Ismael Guimarais",
-      url: "https://www.facebook.com/profile.php?id=61566206863056",
+      handle: "ismaguimarais",
+      url: "https://www.facebook.com/ismaguimarais/",
       color: "#1877F2"
     }
   ];

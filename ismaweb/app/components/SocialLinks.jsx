@@ -32,8 +32,8 @@ const links = [
   {
     id: "facebook",
     label: "Facebook",
-    handle: "IsmaGuimarais",
-    href: "https://www.facebook.com/ismaguimarais"
+    handle: "ismaguimarais",
+    href: "https://www.facebook.com/ismaguimarais/"
   }
 ];
 
