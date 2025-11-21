@@ -59,7 +59,7 @@ export default function LaSoledad() {
       url: "https://music.amazon.es/albums/B0G1TZ18L6?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_86sLzfkheGHW1DdqFaFqAwbim",
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3.333 14.235c0-3.897 1.955-6.948 5.53-6.948 2.289 0 3.491 1.357 3.491 1.357V1.191h3.874v15.52c0 .464.189.68.681.68h.244v3.298c-.464.042-.927.085-1.347.127-1.37.127-2.027-.34-2.448-1.399 0 0-1.283 1.655-4.226 1.655C5.415 21.072 3.333 18.9 3.333 14.234zm8.979-.042V11.32c0-.636-.464-1.103-1.103-1.103-1.582 0-2.575 1.442-2.575 4.06 0 2.703.993 4.06 2.575 4.06 1.158 0 1.103-1.358 1.103-1.91v-2.233zm9.282 4.86c-.888 1.358-2.065 2.234-3.787 2.234-2.277 0-3.32-1.442-3.32-3.617V7.356h3.916v9.915c0 .764.255 1.018.764 1.018.721 0 1.485-.721 1.485-1.23V7.356h3.916v10.102c0 .467.127.683.676.683h.296v3.319c-.508.04-.97.085-1.4.127-.845.08-1.59-.178-2.107-1.23l-.439-.628z"/>
+          <path d="M2.25 13.99c3.28 2.43 7.61 3.89 12.19 3.89 4.06 0 7.77-1.14 10.97-3.06.21-.13.46-.13.67 0 .21.13.29.37.21.59-.89 2.43-3.28 4.19-6.08 4.19-2.67 0-5.01-1.52-6.16-3.76-.13-.25-.42-.37-.67-.25-1.52.75-3.28 1.14-5.13 1.14-2.8 0-5.51-.88-7.73-2.43-.25-.17-.29-.5-.13-.75.17-.25.5-.29.75-.13zm19.5-6.5c-.21-.13-.46-.13-.67 0-3.2 1.92-6.91 3.06-10.97 3.06-4.58 0-8.91-1.46-12.19-3.89-.25-.17-.58-.13-.75.13-.17.25-.13.58.13.75 2.22 1.55 4.93 2.43 7.73 2.43 1.85 0 3.61-.39 5.13-1.14.25-.13.54 0 .67.25 1.15 2.24 3.49 3.76 6.16 3.76 2.8 0 5.19-1.76 6.08-4.19.08-.22 0-.46-.21-.59zm-9.5-5.24c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5z"/>
         </svg>
       ),
       className: "amazon-music"
@@ -131,7 +131,6 @@ export default function LaSoledad() {
           <h2 className="lyrics-title">Letra</h2>
           <div className="lyrics-content">
             <div className="lyrics-verse">
-              <p className="lyrics-label">[Verse 1]</p>
               <p>La soledad es una iglesia sin espíritu</p>
               <p>Una casa sin familia, una máscara, un disfraz</p>
               <p>La soledad es una bomba en el ombligo</p>
@@ -139,15 +138,13 @@ export default function LaSoledad() {
             </div>
 
             <div className="lyrics-verse">
-              <p className="lyrics-label">[Verse 2]</p>
               <p>La soledad es una fuerza que te hunde en la más negra de las nubes</p>
               <p>Cuando paras de soñar</p>
               <p>La soledad es un ateo socorrido por algún que otro partido</p>
-              <p>Y un diploma que suena</p>
+              <p>Y un diploma en su arsenal</p>
             </div>
 
             <div className="lyrics-verse">
-              <p className="lyrics-label">[Chorus]</p>
               <p>Solo en la multitud</p>
               <p>Está el mundo, estás tú</p>
               <p>Solo en la multitud</p>
@@ -163,7 +160,6 @@ export default function LaSoledad() {
             </div>
 
             <div className="lyrics-verse">
-              <p className="lyrics-label">[Verse 3]</p>
               <p>La soledad es una chica en minifalda que todos quieren mirarla</p>
               <p>Y nadie la quiere amar</p>
               <p>La soledad roba bolsillos en los trenes</p>
@@ -171,7 +167,6 @@ export default function LaSoledad() {
             </div>
 
             <div className="lyrics-verse">
-              <p className="lyrics-label">[Chorus]</p>
               <p>Solo en la multitud</p>
               <p>Está el mundo, estás tú</p>
               <p>Solo en la multitud</p>

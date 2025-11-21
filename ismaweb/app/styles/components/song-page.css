@@ -8,7 +8,8 @@
 .song-container {
   max-width: 900px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-4);
+  padding: var(--space-8) var(--space-6);
+  width: 100%;
 }
 
 /* Header */
@@ -304,16 +305,30 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .song-page {
+    padding: 0;
+  }
+
   .song-container {
-    padding: var(--space-6) var(--space-3);
+    padding: var(--space-4) var(--space-4);
+    max-width: 100%;
+  }
+
+  .song-header {
+    padding: var(--space-4) 0;
+    margin-bottom: var(--space-8);
   }
 
   .song-cover {
-    max-width: 300px;
+    max-width: 280px;
   }
 
   .song-title {
     font-size: 2rem;
+  }
+
+  .platforms-title {
+    font-size: var(--text-xl);
   }
 
   .song-platform-button {
@@ -327,6 +342,26 @@
 
   .song-platform-name {
     font-size: var(--text-base);
+  }
+
+  .song-lyrics-section {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .lyrics-content {
+    max-width: 100%;
+  }
+
+  .lyrics-verse p:not(.lyrics-label) {
+    font-size: var(--text-base);
+  }
+
+  .song-cta-section {
+    margin-bottom: var(--space-6);
+  }
+
+  .song-cta-card {
+    padding: var(--space-6) var(--space-4);
   }
 
   .song-cta-buttons {
