@@ -1,31 +1,39 @@
-/* Song Page Styles */
+/* Song Page Styles - MOBILE FIRST */
 
+/* Base Mobile Styles (Default) */
 .song-page {
   min-height: 100vh;
-  background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+  width: 100%;
+  background: var(--bg-primary);
+  padding: 0;
+  margin: 0;
 }
 
 .song-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: var(--space-8) var(--space-6);
   width: 100%;
+  max-width: 100%;
+  padding: var(--space-4) var(--space-3);
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* Header */
 .song-header {
   text-align: center;
-  margin-bottom: var(--space-12);
-  padding: var(--space-8) 0;
+  margin-bottom: var(--space-8);
+  padding: var(--space-4) 0;
+  width: 100%;
 }
 
 .song-cover-wrapper {
   display: inline-block;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 90vw;
 }
 
 .song-cover-wrapper:hover {
@@ -34,67 +42,72 @@
 
 .song-cover {
   width: 100%;
-  max-width: 400px;
   height: auto;
   display: block;
 }
 
 .song-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 8vw, 3rem);
   font-weight: 800;
   margin-bottom: var(--space-2);
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
 }
 
 .song-artist {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   color: var(--gray-700);
   margin-bottom: var(--space-1);
   font-weight: 600;
 }
 
 .song-release {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   color: var(--gray-600);
 }
 
 /* Platforms Section */
 .song-platforms-section {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-10);
+  width: 100%;
 }
 
 .platforms-title {
   text-align: center;
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 700;
   margin-bottom: var(--space-6);
   color: var(--text-primary);
+  padding: 0;
 }
 
 .song-platforms-grid {
   display: grid;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  gap: var(--space-3);
+  width: 100%;
 }
 
 .song-platform-button {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-6);
+  gap: var(--space-3);
+  padding: var(--space-4);
   background: var(--bg-card);
   border: 2px solid var(--border-color);
   border-radius: var(--radius-lg);
   text-decoration: none;
   color: var(--text-primary);
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-height: 60px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .song-platform-button::before {
@@ -119,8 +132,8 @@
 }
 
 .song-platform-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -135,11 +148,12 @@
 .song-platform-name {
   flex: 1;
   text-align: left;
+  font-size: var(--text-base);
 }
 
 .song-platform-arrow {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   opacity: 0.5;
   transition: all 0.3s ease;
@@ -203,28 +217,31 @@
 
 /* Lyrics Section */
 .song-lyrics-section {
-  margin-bottom: var(--space-12);
-  padding: var(--space-8);
+  margin-bottom: var(--space-10);
+  padding: var(--space-6) var(--space-4);
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .lyrics-title {
   text-align: center;
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 700;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
   color: var(--text-primary);
 }
 
 .lyrics-content {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 .lyrics-verse {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
+  width: 100%;
 }
 
 .lyrics-verse:last-child {
@@ -241,8 +258,8 @@
 }
 
 .lyrics-verse p:not(.lyrics-label) {
-  font-size: var(--text-lg);
-  line-height: 1.8;
+  font-size: var(--text-base);
+  line-height: 1.7;
   color: var(--text-primary);
   margin-bottom: var(--space-2);
 }
@@ -250,34 +267,43 @@
 /* CTA Section */
 .song-cta-section {
   margin-bottom: var(--space-8);
+  width: 100%;
 }
 
 .song-cta-card {
   text-align: center;
-  padding: var(--space-8);
+  padding: var(--space-6) var(--space-4);
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .song-cta-card h2 {
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 700;
   margin-bottom: var(--space-3);
   color: var(--text-primary);
 }
 
 .song-cta-card p {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--text-secondary);
   margin-bottom: var(--space-6);
 }
 
 .song-cta-buttons {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-3);
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+}
+
+.song-cta-buttons .button {
+  width: 100%;
+  min-height: 48px;
 }
 
 /* Footer */
@@ -303,145 +329,113 @@
   text-decoration: underline;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .song-page {
-    padding: 0;
-    background: var(--bg-primary);
-  }
-
+/* Tablet and up (768px+) */
+@media (min-width: 768px) {
   .song-container {
-    padding: var(--space-6) var(--space-3);
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
+    padding: var(--space-8) var(--space-6);
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .song-header {
-    padding: var(--space-2) 0;
-    margin-bottom: var(--space-6);
+    padding: var(--space-8) 0;
+    margin-bottom: var(--space-12);
   }
 
   .song-cover-wrapper {
-    margin-bottom: var(--space-4);
-  }
-
-  .song-cover {
-    max-width: 90vw;
-    width: 100%;
+    max-width: 400px;
+    margin-bottom: var(--space-6);
   }
 
   .song-title {
-    font-size: clamp(2rem, 8vw, 2.5rem);
-    margin-bottom: var(--space-2);
+    font-size: clamp(2.5rem, 5vw, 4rem);
   }
 
   .song-artist {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
   }
 
   .song-release {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
   }
 
   .platforms-title {
-    font-size: var(--text-xl);
-    padding: 0;
-    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
   }
 
   .song-platforms-grid {
-    gap: var(--space-3);
+    gap: var(--space-4);
   }
 
   .song-platform-button {
-    padding: var(--space-4);
-    font-size: var(--text-base);
-    min-height: 60px;
-    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-lg);
+    min-height: auto;
   }
 
   .song-platform-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .song-platform-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .song-platform-name {
-    font-size: var(--text-base);
-    font-weight: 600;
+    width: 32px;
+    height: 32px;
   }
 
   .song-platform-arrow {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 
   .song-lyrics-section {
-    padding: var(--space-6) var(--space-4);
-    margin-bottom: var(--space-8);
+    padding: var(--space-8);
+    margin-bottom: var(--space-12);
   }
 
   .lyrics-title {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-6);
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-8);
   }
 
   .lyrics-content {
-    max-width: 100%;
-    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .lyrics-verse {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
   }
 
   .lyrics-verse p:not(.lyrics-label) {
-    font-size: var(--text-base);
-    line-height: 1.7;
-  }
-
-  .song-cta-section {
-    margin-bottom: var(--space-6);
+    font-size: var(--text-lg);
+    line-height: 1.8;
   }
 
   .song-cta-card {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-8);
   }
 
   .song-cta-card h2 {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
   }
 
   .song-cta-card p {
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
   }
 
   .song-cta-buttons {
-    flex-direction: column;
-    gap: var(--space-3);
+    flex-direction: row;
+    gap: var(--space-4);
   }
 
   .song-cta-buttons .button {
-    width: 100%;
-    min-height: 48px;
+    width: auto;
   }
 }
 
-@media (max-width: 375px) {
+/* Very small screens */
+@media (max-width: 360px) {
   .song-container {
-    padding: var(--space-4) var(--space-2);
+    padding: var(--space-3) var(--space-2);
   }
 
-  .song-header {
-    padding: var(--space-1) 0;
-  }
-
-  .song-cover {
+  .song-cover-wrapper {
     max-width: 95vw;
   }
 
@@ -456,20 +450,11 @@
     height: 24px;
   }
 
-  .song-platform-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-
   .song-lyrics-section {
-    padding: var(--space-5) var(--space-3);
+    padding: var(--space-4) var(--space-3);
   }
 
   .lyrics-verse p:not(.lyrics-label) {
     font-size: var(--text-sm);
-  }
-
-  .song-cta-card {
-    padding: var(--space-5) var(--space-3);
   }
 }
