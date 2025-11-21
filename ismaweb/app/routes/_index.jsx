@@ -19,13 +19,13 @@ const NAV_LINKS = [
 
 const FEATURED_ITEMS = [
   {
-    badge: "Nuevo",
+    badge: "Nuevo Single",
     badgeTone: "new-badge",
-    title: "Muy Civilizado",
-    meta: "La canción del mes",
-    href: "https://youtu.be/eJ4tCKzUQ6I",
-    thumbnail: "https://i.ytimg.com/vi/eJ4tCKzUQ6I/maxresdefault.jpg",
-    analytics: "featured_latest_song"
+    title: "La Soledad",
+    meta: "Disponible en todas las plataformas",
+    href: "/la-soledad",
+    thumbnail: "/la-soledad-cover.jpg",
+    analytics: "featured_la_soledad"
   },
   {
     badge: "Blog",

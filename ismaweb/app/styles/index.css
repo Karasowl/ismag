@@ -21,6 +21,7 @@
 @import "./components/blog.css";
 @import "./components/newsletter.css";
 @import "./components/conecta.css";
+@import "./components/song-page.css";
 
 /* Themes */
 @import "./themes/dark-mode.css";
