@@ -4,7 +4,9 @@ import { isbot } from "isbot";
 import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import { useState, useEffect } from "react";
+import { Sun, Moon, X, Menu, ArrowRight } from "lucide-react";
 import { json } from "@remix-run/node";
+import { SiSpotify, SiApplemusic, SiAmazonmusic, SiYoutubemusic } from "react-icons/si";
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return new Promise((resolve, reject) => {
     let didError = false;
@@ -42,7 +44,7 @@ const entryServer = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineP
   __proto__: null,
   default: handleRequest
 }, Symbol.toStringTag, { value: "Module" }));
-const styles = "/assets/index-Dz0t88e7.css";
+const styles = "/assets/index-Dlz0tZTq.css";
 function ThemeToggle({ className = "" }) {
   const [theme, setTheme] = useState("dark");
   useEffect(() => {
@@ -68,7 +70,6 @@ function ThemeToggle({ className = "" }) {
     setTheme(next);
   };
   const isDark = theme === "dark";
-  const icon = isDark ? "☀️" : "🌙";
   const label = isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
   return /* @__PURE__ */ jsx(
     "button",
@@ -77,7 +78,7 @@ function ThemeToggle({ className = "" }) {
       "aria-label": label,
       onClick: toggle,
       className: `theme-toggle ${className}`,
-      children: icon
+      children: isDark ? /* @__PURE__ */ jsx(Sun, { size: 20 }) : /* @__PURE__ */ jsx(Moon, { size: 20 })
     }
   );
 }
@@ -86,6 +87,7 @@ const NAV_LINKS = [
   { label: "Sobre mí", href: "/sobre" },
   { label: "Música", href: "/music" },
   { label: "Blog", href: "/blog" },
+  { label: "Conecta", href: "/conecta" },
   { label: "Videos", href: "https://www.youtube.com/@IsmaelGuimarais", external: true }
 ];
 function Navigation() {
@@ -93,17 +95,13 @@ function Navigation() {
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(ThemeToggle, {}),
     /* @__PURE__ */ jsxs("nav", { className: `mobile-nav ${menuOpen ? "mobile-nav--open" : ""}`, children: [
-      /* @__PURE__ */ jsxs(
+      /* @__PURE__ */ jsx(
         "button",
         {
           className: "mobile-nav__toggle",
           onClick: () => setMenuOpen((open) => !open),
-          "aria-label": "Abrir menú",
-          children: [
-            /* @__PURE__ */ jsx("span", {}),
-            /* @__PURE__ */ jsx("span", {}),
-            /* @__PURE__ */ jsx("span", {})
-          ]
+          "aria-label": menuOpen ? "Cerrar menú" : "Abrir menú",
+          children: menuOpen ? /* @__PURE__ */ jsx(X, { size: 24 }) : /* @__PURE__ */ jsx(Menu, { size: 24 })
         }
       ),
       menuOpen && /* @__PURE__ */ jsx("div", { className: "mobile-nav__menu", children: NAV_LINKS.map(({ label, href, external }) => external ? /* @__PURE__ */ jsx(
@@ -129,6 +127,7 @@ function Navigation() {
   ] });
 }
 const links = () => [
+  { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
   {
@@ -137,9 +136,9 @@ const links = () => [
   },
   { rel: "stylesheet", href: styles }
 ];
-const meta$8 = () => [
+const meta$a = () => [
   { charSet: "utf-8" },
-  { name: "viewport", content: "width=device-width,initial-scale=1" }
+  { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" }
 ];
 function App() {
   return /* @__PURE__ */ jsxs("html", { lang: "es", children: [
@@ -194,21 +193,21 @@ const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   ErrorBoundary,
   default: App,
   links,
-  meta: meta$8
+  meta: meta$a
 }, Symbol.toStringTag, { value: "Module" }));
-const DEFAULT_SITE$4 = "https://ismaelguimarais.com";
-const DEFAULT_OG_IMAGE$4 = `${DEFAULT_SITE$4}/og-default.jpg`;
-const loader$a = () => {
-  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$4;
+const DEFAULT_SITE$6 = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE$6 = `${DEFAULT_SITE$6}/og-default.jpg`;
+const loader$c = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$6;
   const ogImage = `${site}/og-default.jpg`;
   return json({ site, ogImage });
 };
-const meta$7 = ({ data, location }) => {
-  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$4;
+const meta$9 = ({ data, location }) => {
+  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$6;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Blog - Artículos y reflexiones | Ismael Guimarais";
   const description = "Artículos profundos sobre cultura, fe, política y filosofía. Un espacio para pensar despacio y reflexionar sobre las ideas que importan.";
-  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$4;
+  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$6;
   return [
     { title },
     { name: "description", content: description },
@@ -333,13 +332,13 @@ function Blog() {
 const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Blog,
-  loader: loader$a,
-  meta: meta$7
+  loader: loader$c,
+  meta: meta$9
 }, Symbol.toStringTag, { value: "Module" }));
 const SITE$2 = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
 const OG_IMAGE$2 = `${SITE$2}/og-default.jpg`;
-const loader$9 = () => json({ site: SITE$2, ogImage: OG_IMAGE$2 });
-const meta$6 = ({ data, location }) => {
+const loader$b = () => json({ site: SITE$2, ogImage: OG_IMAGE$2 });
+const meta$8 = ({ data, location }) => {
   const site = (data == null ? void 0 : data.site) ?? SITE$2;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Suscripción confirmada";
@@ -380,13 +379,13 @@ function NewsletterConfirmacion() {
 const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NewsletterConfirmacion,
-  loader: loader$9,
-  meta: meta$6
+  loader: loader$b,
+  meta: meta$8
 }, Symbol.toStringTag, { value: "Module" }));
 const SITE$1 = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
 const OG_IMAGE$1 = `${SITE$1}/og-default.jpg`;
-const loader$8 = () => json({ site: SITE$1, ogImage: OG_IMAGE$1 });
-const meta$5 = ({ data, location }) => {
+const loader$a = () => json({ site: SITE$1, ogImage: OG_IMAGE$1 });
+const meta$7 = ({ data, location }) => {
   const site = (data == null ? void 0 : data.site) ?? SITE$1;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Gracias por suscribirte";
@@ -435,8 +434,8 @@ function NewsletterGracias() {
 const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NewsletterGracias,
-  loader: loader$8,
-  meta: meta$5
+  loader: loader$a,
+  meta: meta$7
 }, Symbol.toStringTag, { value: "Module" }));
 async function action({ request }) {
   const form = await request.formData();
@@ -480,13 +479,13 @@ async function action({ request }) {
   console.log("Newsletter signup (no provider configured):", email);
   return json({ ok: true, provider: "none" });
 }
-function loader$7() {
+function loader$9() {
   return json({ ok: true });
 }
 const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action,
-  loader: loader$7
+  loader: loader$9
 }, Symbol.toStringTag, { value: "Module" }));
 const routes$1 = [
   "/",
@@ -495,7 +494,7 @@ const routes$1 = [
   "/newsletter/confirmacion",
   "/newsletter/gracias"
 ];
-const loader$6 = () => {
+const loader$8 = () => {
   const host = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
   const items = routes$1.map((path) => `<url><loc>${host}${path}</loc><changefreq>weekly</changefreq><priority>${path === "/" ? "1.0" : "0.8"}</priority></url>`).join("");
   const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${items}</urlset>`;
@@ -508,9 +507,9 @@ const loader$6 = () => {
 };
 const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$6
+  loader: loader$8
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$5 = () => {
+const loader$7 = () => {
   const site = process.env.PUBLIC_SITE_URL ?? "https://ismaelguimarais.com";
   const body = `User-agent: *
 Allow: /
@@ -525,10 +524,10 @@ Sitemap: ${site}/sitemap.xml
 };
 const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$5
+  loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
-const DEFAULT_SITE$3 = "https://ismaelguimarais.com";
-const DEFAULT_OG_IMAGE$3 = `${DEFAULT_SITE$3}/og-default.jpg`;
+const DEFAULT_SITE$5 = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE$5 = `${DEFAULT_SITE$5}/og-default.jpg`;
 const BLOG_POSTS = [
   {
     slug: "el-mensaje-de-jesus",
@@ -541,17 +540,17 @@ const BLOG_POSTS = [
   }
   // Add more blog posts here as they are created
 ];
-const loader$4 = () => {
-  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$3;
+const loader$6 = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$5;
   const ogImage = `${site}/og-default.jpg`;
   return json({ site, ogImage, posts: BLOG_POSTS });
 };
-const meta$4 = ({ data, location }) => {
-  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$3;
+const meta$6 = ({ data, location }) => {
+  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$5;
   const url = new URL(location.pathname + location.search, site).toString();
   const title = "Blog - Artículos y reflexiones | Ismael Guimarais";
   const description = "Artículos profundos sobre cultura, fe, política y filosofía. Un espacio para pensar despacio y reflexionar sobre las ideas que importan.";
-  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$3;
+  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$5;
   return [
     { title },
     { name: "description", content: description },
@@ -595,6 +594,366 @@ function BlogIndex() {
 const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: BlogIndex,
+  loader: loader$6,
+  meta: meta$6
+}, Symbol.toStringTag, { value: "Module" }));
+const DEFAULT_SITE$4 = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE$4 = `${DEFAULT_SITE$4}/la-soledad-cover.jpg`;
+const loader$5 = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$4;
+  const ogImage = `${site}/la-soledad-cover.jpg`;
+  return json({ site, ogImage });
+};
+const meta$5 = ({ data, location }) => {
+  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$4;
+  const url = new URL(location.pathname + location.search, site).toString();
+  const title = "La Soledad - Ismael Guimarais";
+  const description = "Escucha 'La Soledad', el nuevo single de Ismael Guimarais. Disponible en todas las plataformas digitales.";
+  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$4;
+  return [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:type", content: "music.song" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+    { tagName: "link", rel: "canonical", href: url }
+  ];
+};
+function LaSoledad() {
+  const musicPlatforms = [
+    {
+      name: "Spotify",
+      url: "https://open.spotify.com/intl-es/album/5gAOQdp4eLDVJrIBBReF39",
+      icon: /* @__PURE__ */ jsx(SiSpotify, {}),
+      className: "spotify"
+    },
+    {
+      name: "Apple Music",
+      url: "https://music.apple.com/mx/album/la-soledad-single/1852310177",
+      icon: /* @__PURE__ */ jsx(SiApplemusic, {}),
+      className: "apple-music"
+    },
+    {
+      name: "Amazon Music",
+      url: "https://music.amazon.es/albums/B0G1TZ18L6?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_86sLzfkheGHW1DdqFaFqAwbim",
+      icon: /* @__PURE__ */ jsx(SiAmazonmusic, {}),
+      className: "amazon-music"
+    },
+    {
+      name: "YouTube Music",
+      url: "https://music.youtube.com/watch?v=dVOdtN5Y_Tw&si=SgmMuv0v2YuXRg_J",
+      icon: /* @__PURE__ */ jsx(SiYoutubemusic, {}),
+      className: "youtube-music"
+    },
+    {
+      name: "Deezer",
+      url: "https://link.deezer.com/s/31Ft6t3yz0M38lbMV6o85",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M18.81 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM12.14 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM5.47 4.16v3.03h5.19V4.16H5.47zm0 4.75v3.03h5.19V8.91H5.47zm0 4.75v3.03h5.19v-3.03H5.47zm0 4.75v3.03h5.19v-3.03H5.47zM0 8.91v3.03h4.09V8.91H0zm0 4.75v3.03h4.09v-3.03H0zm0 4.75v3.03h4.09v-3.03H0z" }) }),
+      className: "deezer"
+    }
+  ];
+  return /* @__PURE__ */ jsx("main", { className: "song-page", children: /* @__PURE__ */ jsxs("div", { className: "song-container", children: [
+    /* @__PURE__ */ jsxs("div", { className: "song-header", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("div", { className: "song-cover-wrapper", children: /* @__PURE__ */ jsx(
+        "img",
+        {
+          src: "/la-soledad-cover.jpg",
+          alt: "Portada de La Soledad",
+          className: "song-cover"
+        }
+      ) }),
+      /* @__PURE__ */ jsx("h1", { className: "song-title", children: "La Soledad" }),
+      /* @__PURE__ */ jsx("p", { className: "song-artist", children: "Ismael Guimarais" }),
+      /* @__PURE__ */ jsx("p", { className: "song-release", children: "Single · 2025" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "song-platforms-section", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("h2", { className: "platforms-title", children: "Escucha ahora en tu plataforma favorita" }),
+      /* @__PURE__ */ jsx("div", { className: "song-platforms-grid", children: musicPlatforms.map((platform) => /* @__PURE__ */ jsxs(
+        "a",
+        {
+          href: platform.url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: `song-platform-button song-platform-button--${platform.className}`,
+          "data-analytics": `song-${platform.className}`,
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "song-platform-icon", children: platform.icon }),
+            /* @__PURE__ */ jsx("span", { className: "song-platform-name", children: platform.name }),
+            /* @__PURE__ */ jsx(ArrowRight, { className: "song-platform-arrow", size: 24 })
+          ]
+        },
+        platform.name
+      )) })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "song-lyrics-section", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("h2", { className: "lyrics-title", children: "Letra" }),
+      /* @__PURE__ */ jsxs("div", { className: "lyrics-content", children: [
+        /* @__PURE__ */ jsxs("div", { className: "lyrics-verse", children: [
+          /* @__PURE__ */ jsx("p", { children: "La soledad es una iglesia sin espíritu" }),
+          /* @__PURE__ */ jsx("p", { children: "Una casa sin familia, una máscara, un disfraz" }),
+          /* @__PURE__ */ jsx("p", { children: "La soledad es una bomba en el ombligo" }),
+          /* @__PURE__ */ jsx("p", { children: "Es tener muchos amigos y nadie con quien llorar" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "lyrics-verse", children: [
+          /* @__PURE__ */ jsx("p", { children: "La soledad es una fuerza que te hunde en la más negra de las nubes" }),
+          /* @__PURE__ */ jsx("p", { children: "Cuando paras de soñar" }),
+          /* @__PURE__ */ jsx("p", { children: "La soledad es un ateo socorrido por algún que otro partido" }),
+          /* @__PURE__ */ jsx("p", { children: "Y un diploma en su arsenal" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "lyrics-verse", children: [
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Está el mundo, estás tú" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Todo se detiene y piensas" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Todos ríen menos tú" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Levanta tu rostro y ve al azul" }),
+          /* @__PURE__ */ jsx("p", { children: "De aquel cielo" }),
+          /* @__PURE__ */ jsx("p", { children: "Escucha la historia del buen carpintero" }),
+          /* @__PURE__ */ jsx("p", { children: "Que murió en la cruz" }),
+          /* @__PURE__ */ jsx("p", { children: "Azotado y solo entre la multitud" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "lyrics-verse", children: [
+          /* @__PURE__ */ jsx("p", { children: "La soledad es una chica en minifalda que todos quieren mirarla" }),
+          /* @__PURE__ */ jsx("p", { children: "Y nadie la quiere amar" }),
+          /* @__PURE__ */ jsx("p", { children: "La soledad roba bolsillos en los trenes" }),
+          /* @__PURE__ */ jsx("p", { children: "Asesina en los cuarteles y trafica en alta mar" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "lyrics-verse", children: [
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Está el mundo, estás tú" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Todo se detiene y piensas" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Está el mundo, estás tú" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Todo se detiene y piensas" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Todos ríen menos tú" }),
+          /* @__PURE__ */ jsx("p", { children: "Solo en la multitud" }),
+          /* @__PURE__ */ jsx("p", { children: "Levanta tu rostro y ve al azul" }),
+          /* @__PURE__ */ jsx("p", { children: "De aquel cielo" }),
+          /* @__PURE__ */ jsx("p", { children: "Escucha la historia del buen carpintero" }),
+          /* @__PURE__ */ jsx("p", { children: "Que murió en la cruz" }),
+          /* @__PURE__ */ jsx("p", { children: "Azotado y solo (azotado y solo) entre la multitud" })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "song-cta-section", "data-reveal": true, children: /* @__PURE__ */ jsxs("div", { className: "song-cta-card", children: [
+      /* @__PURE__ */ jsx("h2", { children: "Más música de Ismael Guimarais" }),
+      /* @__PURE__ */ jsx("p", { children: "Descubre todas mis canciones y sígueme en tus plataformas favoritas" }),
+      /* @__PURE__ */ jsxs("div", { className: "song-cta-buttons", children: [
+        /* @__PURE__ */ jsx("a", { href: "/music", className: "button button--primary", children: "Ver toda mi música" }),
+        /* @__PURE__ */ jsx("a", { href: "/conecta", className: "button button--secondary", children: "Conecta conmigo" })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxs("footer", { className: "song-footer", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("p", { children: "© 2025 Ismael Guimarais · Todos los derechos reservados" }),
+      /* @__PURE__ */ jsx("p", { children: /* @__PURE__ */ jsx("a", { href: "/", children: "Volver al inicio" }) })
+    ] })
+  ] }) });
+}
+const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: LaSoledad,
+  loader: loader$5,
+  meta: meta$5
+}, Symbol.toStringTag, { value: "Module" }));
+const DEFAULT_SITE$3 = "https://ismaelguimarais.com";
+const DEFAULT_OG_IMAGE$3 = `${DEFAULT_SITE$3}/og-default.jpg`;
+const loader$4 = () => {
+  const site = process.env.PUBLIC_SITE_URL ?? DEFAULT_SITE$3;
+  const ogImage = `${site}/og-default.jpg`;
+  return json({ site, ogImage });
+};
+const meta$4 = ({ data, location }) => {
+  const site = (data == null ? void 0 : data.site) ?? DEFAULT_SITE$3;
+  const url = new URL(location.pathname + location.search, site).toString();
+  const title = "Conecta - Ismael Guimarais";
+  const description = "Todas las formas de conectar con Ismael Guimarais: redes sociales, música, newsletter y más.";
+  const ogImage = (data == null ? void 0 : data.ogImage) ?? DEFAULT_OG_IMAGE$3;
+  return [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+    { tagName: "link", rel: "canonical", href: url }
+  ];
+};
+function Conecta() {
+  const socialLinks = [
+    {
+      name: "YouTube",
+      handle: "@IsmaelGuimarais",
+      url: "https://www.youtube.com/@IsmaelGuimarais",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" }) }),
+      className: "youtube"
+    },
+    {
+      name: "Instagram",
+      handle: "@ismaguimarais",
+      url: "https://www.instagram.com/ismaguimarais/",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" }) }),
+      className: "instagram"
+    },
+    {
+      name: "X (Twitter)",
+      handle: "@IsmaGuimarais",
+      url: "https://x.com/IsmaGuimarais",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" }) }),
+      className: "x"
+    },
+    {
+      name: "TikTok",
+      handle: "@ismaguimarais",
+      url: "https://www.tiktok.com/@ismaguimarais",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" }) }),
+      className: "tiktok"
+    },
+    {
+      name: "Threads",
+      handle: "@ismaguimarais",
+      url: "https://www.threads.net/@ismaguimarais",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.018-5.06.869-6.395 2.53-1.388 1.728-2.094 4.227-2.1 7.428.006 3.199.713 5.7 2.1 7.427 1.335 1.661 3.486 2.512 6.395 2.53 2.557-.017 4.484-.563 5.73-1.623.987-.844 1.569-1.956 1.729-3.309-.208-.076-.42-.156-.635-.24-1.78-.693-3.326-1.638-4.6-2.812-1.515-1.398-2.288-3.04-2.296-4.876-.005-1.578.503-2.967 1.51-4.133 1.208-1.396 2.966-2.164 5.084-2.222 2.289-.064 4.216.705 5.73 2.288 1.296 1.356 2.023 3.21 2.161 5.517l.003.052v.024c0 1.928-.37 3.59-1.101 4.942-.758 1.404-1.86 2.48-3.277 3.197-1.657.836-3.694 1.263-6.054 1.267zm5.654-11.281c-.01-.87-.24-1.653-.689-2.329-.636-.956-1.639-1.46-2.982-1.497-1.156.037-2.064.498-2.698 1.37-.477.652-.713 1.432-.705 2.319.01 1.36.537 2.512 1.567 3.426 1.05.933 2.374 1.653 3.938 2.14.417.131.835.247 1.252.35.076-1.13.059-2.328-.683-3.779z" }) }),
+      className: "threads"
+    },
+    {
+      name: "Facebook",
+      handle: "Ismael Guimarais",
+      url: "https://www.facebook.com/ismaguimarais/",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" }) }),
+      className: "facebook"
+    }
+  ];
+  const musicPlatforms = [
+    {
+      name: "Spotify",
+      url: "https://open.spotify.com/artist/5t7JJmMzqEp6j39T0tzsSV",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" }) }),
+      className: "spotify-btn"
+    },
+    {
+      name: "Apple Music",
+      url: "https://music.apple.com/us/artist/ismael-guimarais/1764726835",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043C21.003.517 20.373.285 19.7.164c-.517-.093-1.038-.135-1.564-.15-.04-.003-.083-.01-.124-.013H5.988c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.055 1.114.091 1.673.1h11.717c.2-.007.4-.01.597-.02.772-.035 1.537-.106 2.265-.34 1.452-.468 2.52-1.4 3.118-2.854.192-.469.286-.96.335-1.457.048-.5.077-1.003.077-1.507.002-4.168 0-8.336 0-12.504zm-4.653 6.457l-.003 4.29c0 1.474-1.057 2.642-2.495 2.76-1.017.083-1.956-.328-2.37-1.19-.374-.78-.148-1.507.528-2.095.497-.432 1.097-.635 1.738-.69.15-.013.302-.015.453-.013.208 0 .414.01.623.026v-3.912l-5.968 1.222v5.207c0 1.483-1.053 2.655-2.5 2.776-1.02.086-1.965-.324-2.382-1.187-.374-.774-.148-1.498.526-2.083.495-.43 1.093-.632 1.732-.687.15-.013.3-.015.45-.013.21 0 .418.01.628.026v-7.108l10.04-2.053v4.524z" }) }),
+      className: "apple-music-btn"
+    },
+    {
+      name: "Amazon Music",
+      url: "https://music.amazon.com/artists/B0DM4NY4VZ/ismael-guimarais",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M3.333 14.235c0-3.897 1.955-6.948 5.53-6.948 2.289 0 3.491 1.357 3.491 1.357V1.191h3.874v15.52c0 .464.189.68.681.68h.244v3.298c-.464.042-.927.085-1.347.127-1.37.127-2.027-.34-2.448-1.399 0 0-1.283 1.655-4.226 1.655C5.415 21.072 3.333 18.9 3.333 14.234zm8.979-.042V11.32c0-.636-.464-1.103-1.103-1.103-1.582 0-2.575 1.442-2.575 4.06 0 2.703.993 4.06 2.575 4.06 1.158 0 1.103-1.358 1.103-1.91v-2.233zm9.282 4.86c-.888 1.358-2.065 2.234-3.787 2.234-2.277 0-3.32-1.442-3.32-3.617V7.356h3.916v9.915c0 .764.255 1.018.764 1.018.721 0 1.485-.721 1.485-1.23V7.356h3.916v10.102c0 .467.127.683.676.683h.296v3.319c-.508.04-.97.085-1.4.127-.845.08-1.59-.178-2.107-1.23l-.439-.628z" }) }),
+      className: "amazon-music-btn"
+    },
+    {
+      name: "YouTube Music",
+      url: "https://music.youtube.com/channel/UCOxCzNODE1o-tqtZRKYYa6g",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z" }) }),
+      className: "youtube-music-btn"
+    },
+    {
+      name: "Deezer",
+      url: "https://www.deezer.com/artist/280355925",
+      icon: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M18.81 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM12.14 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM5.47 4.16v3.03h5.19V4.16H5.47zm0 4.75v3.03h5.19V8.91H5.47zm0 4.75v3.03h5.19v-3.03H5.47zm0 4.75v3.03h5.19v-3.03H5.47zM0 8.91v3.03h4.09V8.91H0zm0 4.75v3.03h4.09v-3.03H0zm0 4.75v3.03h4.09v-3.03H0z" }) }),
+      className: "deezer-btn"
+    }
+  ];
+  return /* @__PURE__ */ jsx("main", { className: "conecta-page", children: /* @__PURE__ */ jsxs("div", { className: "conecta-container", children: [
+    /* @__PURE__ */ jsxs("div", { className: "conecta-profile-header", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx(
+        "img",
+        {
+          src: "/ismael-professional.jpg",
+          alt: "Ismael Guimarais",
+          className: "conecta-profile-image"
+        }
+      ),
+      /* @__PURE__ */ jsx("h1", { className: "conecta-profile-name", children: "Ismael Guimarais" }),
+      /* @__PURE__ */ jsx("p", { className: "conecta-profile-bio", children: "Creador de contenido, músico y analista cultural" }),
+      /* @__PURE__ */ jsx("p", { className: "conecta-profile-description", children: "Hacks del buen vivir a través de música, filosofía e historia" })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "conecta-email-section", "data-reveal": true, children: /* @__PURE__ */ jsxs(
+      "a",
+      {
+        href: "mailto:hola@ismaelguimarais.com",
+        className: "conecta-email-button",
+        "data-analytics": "conecta-email",
+        children: [
+          /* @__PURE__ */ jsxs("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [
+            /* @__PURE__ */ jsx("path", { d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" }),
+            /* @__PURE__ */ jsx("polyline", { points: "22,6 12,13 2,6" })
+          ] }),
+          "Enviar un Correo"
+        ]
+      }
+    ) }),
+    /* @__PURE__ */ jsxs("div", { className: "conecta-links-section", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("h2", { className: "conecta-section-title", children: "Redes Sociales" }),
+      /* @__PURE__ */ jsx("div", { className: "conecta-social-buttons", children: socialLinks.map((link) => /* @__PURE__ */ jsxs(
+        "a",
+        {
+          href: link.url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: `conecta-social-link conecta-social-link--${link.className}`,
+          "data-analytics": `conecta-social-${link.className}`,
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "conecta-social-icon", children: link.icon }),
+            /* @__PURE__ */ jsxs("span", { className: "conecta-social-text", children: [
+              /* @__PURE__ */ jsx("span", { className: "conecta-social-name", children: link.name }),
+              /* @__PURE__ */ jsx("span", { className: "conecta-social-handle", children: link.handle })
+            ] })
+          ]
+        },
+        link.name
+      )) })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "conecta-music-section", "data-reveal": true, children: [
+      /* @__PURE__ */ jsx("h2", { className: "conecta-section-title", children: "Escucha Mi Música" }),
+      /* @__PURE__ */ jsx("div", { className: "conecta-music-buttons", children: musicPlatforms.map((platform) => /* @__PURE__ */ jsxs(
+        "a",
+        {
+          href: platform.url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: `conecta-music-link conecta-music-link--${platform.className}`,
+          "data-analytics": `conecta-music-${platform.className}`,
+          children: [
+            /* @__PURE__ */ jsx("span", { className: "conecta-music-icon", children: platform.icon }),
+            /* @__PURE__ */ jsx("span", { children: platform.name })
+          ]
+        },
+        platform.name
+      )) })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "conecta-newsletter-section", "data-reveal": true, children: /* @__PURE__ */ jsxs("div", { className: "conecta-newsletter-card", children: [
+      /* @__PURE__ */ jsx("h2", { children: "Newsletter Semanal" }),
+      /* @__PURE__ */ jsx("p", { children: "Recibe reflexiones profundas, análisis culturales y contenido exclusivo directo en tu inbox cada semana." }),
+      /* @__PURE__ */ jsx("a", { href: "/#newsletter", className: "button button--primary", children: "Suscribirme al Newsletter" })
+    ] }) }),
+    /* @__PURE__ */ jsx("footer", { className: "conecta-footer", "data-reveal": true, children: /* @__PURE__ */ jsxs("p", { children: [
+      "Hecho con ❤️ · ",
+      /* @__PURE__ */ jsx("a", { href: "/", children: "ismaelguimarais.com" })
+    ] }) })
+  ] }) });
+}
+const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: Conecta,
   loader: loader$4,
   meta: meta$4
 }, Symbol.toStringTag, { value: "Module" }));
@@ -826,13 +1185,13 @@ const DEFAULT_OG_IMAGE$2 = `${DEFAULT_SITE$2}/og-default.jpg`;
 const NUMBER_FORMATTER = new Intl.NumberFormat("es-ES");
 const FEATURED_ITEMS = [
   {
-    badge: "Nuevo",
+    badge: "Nuevo Single",
     badgeTone: "new-badge",
-    title: "Muy Civilizado",
-    meta: "La canción del mes",
-    href: "https://youtu.be/eJ4tCKzUQ6I",
-    thumbnail: "https://i.ytimg.com/vi/eJ4tCKzUQ6I/maxresdefault.jpg",
-    analytics: "featured_latest_song"
+    title: "La Soledad",
+    meta: "Disponible en todas las plataformas",
+    href: "/la-soledad",
+    thumbnail: "/la-soledad-cover.jpg",
+    analytics: "featured_la_soledad"
   },
   {
     badge: "Blog",
@@ -962,7 +1321,7 @@ const meta$3 = ({ data, location }) => {
           "https://www.youtube.com/@IsmaelGuimarais",
           "https://x.com/IsmaGuimarais",
           "https://www.instagram.com/ismaguimarais/",
-          "https://www.tiktok.com/@ismaelguimarais",
+          "https://www.tiktok.com/@ismaguimarais",
           "https://www.threads.net/@ismaguimarais",
           "https://www.facebook.com/ismaguimarais"
         ]
@@ -1248,7 +1607,7 @@ function NewsletterForm() {
     status === "success" ? /* @__PURE__ */ jsx("div", { className: "success-message", role: "status", "aria-live": "polite", children: "¡Gracias! Revisa tu bandeja para confirmar la suscripción." }) : null
   ] });
 }
-const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index,
   loader: loader$3,
@@ -1390,7 +1749,7 @@ function Music() {
     ] })
   ] });
 }
-const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Music,
   loader: loader$2,
@@ -1474,7 +1833,7 @@ function Sobre() {
     ] })
   ] });
 }
-const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Sobre,
   loader: loader$1,
@@ -1520,13 +1879,13 @@ function NotFound() {
     ] })
   ] });
 }
-const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NotFound,
   loader,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-DCfK9kC_.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js", "/assets/components-w74mFi6J.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-Cb7vrPZV.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js", "/assets/components-w74mFi6J.js"], "css": [] }, "routes/blog.el-mensaje-de-jesus": { "id": "routes/blog.el-mensaje-de-jesus", "parentId": "root", "path": "blog/el-mensaje-de-jesus", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/blog.el-mensaje-de-jesus-C0k9K8YX.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] }, "routes/newsletter.confirmacion": { "id": "routes/newsletter.confirmacion", "parentId": "root", "path": "newsletter/confirmacion", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/newsletter.confirmacion-CNjTt5r-.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] }, "routes/newsletter.gracias": { "id": "routes/newsletter.gracias", "parentId": "root", "path": "newsletter/gracias", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/newsletter.gracias-C1wsR2Cu.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] }, "routes/api.newsletter": { "id": "routes/api.newsletter", "parentId": "root", "path": "api/newsletter", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/api.newsletter-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/sitemap[.]xml": { "id": "routes/sitemap[.]xml", "parentId": "root", "path": "sitemap.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap_._xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/robots[.]txt": { "id": "routes/robots[.]txt", "parentId": "root", "path": "robots.txt", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/robots_._txt-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/blog._index": { "id": "routes/blog._index", "parentId": "root", "path": "blog", "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/blog._index-D7nXpNQm.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js", "/assets/components-w74mFi6J.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-CYHBG3gJ.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js", "/assets/components-w74mFi6J.js"], "css": [] }, "routes/music": { "id": "routes/music", "parentId": "root", "path": "music", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/music-GGkCp4_y.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] }, "routes/sobre": { "id": "routes/sobre", "parentId": "root", "path": "sobre", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sobre-CpzwQ39P.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] }, "routes/404": { "id": "routes/404", "parentId": "root", "path": "404", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/404-BsTbPS1E.js", "imports": ["/assets/jsx-runtime-BlSqMCxk.js"], "css": [] } }, "url": "/assets/manifest-567b11b4.js", "version": "567b11b4" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-DOWKz9oc.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js", "/assets/components-BecE-BSL.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-BnfbXRaG.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js", "/assets/components-BecE-BSL.js", "/assets/createLucideIcon-CtW4PRxQ.js"], "css": [] }, "routes/blog.el-mensaje-de-jesus": { "id": "routes/blog.el-mensaje-de-jesus", "parentId": "root", "path": "blog/el-mensaje-de-jesus", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/blog.el-mensaje-de-jesus-ByinMaKF.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/newsletter.confirmacion": { "id": "routes/newsletter.confirmacion", "parentId": "root", "path": "newsletter/confirmacion", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/newsletter.confirmacion-qXODh4wG.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/newsletter.gracias": { "id": "routes/newsletter.gracias", "parentId": "root", "path": "newsletter/gracias", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/newsletter.gracias-B_tAkrat.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/api.newsletter": { "id": "routes/api.newsletter", "parentId": "root", "path": "api/newsletter", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/api.newsletter-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/sitemap[.]xml": { "id": "routes/sitemap[.]xml", "parentId": "root", "path": "sitemap.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap_._xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/robots[.]txt": { "id": "routes/robots[.]txt", "parentId": "root", "path": "robots.txt", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/robots_._txt-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/blog._index": { "id": "routes/blog._index", "parentId": "root", "path": "blog", "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/blog._index-BjhHzajY.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js", "/assets/components-BecE-BSL.js"], "css": [] }, "routes/la-soledad": { "id": "routes/la-soledad", "parentId": "root", "path": "la-soledad", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/la-soledad-DzmL1XB_.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js", "/assets/createLucideIcon-CtW4PRxQ.js"], "css": [] }, "routes/conecta": { "id": "routes/conecta", "parentId": "root", "path": "conecta", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/conecta-DILHPL36.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-C267JlWa.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js", "/assets/components-BecE-BSL.js"], "css": [] }, "routes/music": { "id": "routes/music", "parentId": "root", "path": "music", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/music-BagQUQZu.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/sobre": { "id": "routes/sobre", "parentId": "root", "path": "sobre", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sobre-D0qKyUDz.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] }, "routes/404": { "id": "routes/404", "parentId": "root", "path": "404", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/404-R6RDYBwT.js", "imports": ["/assets/jsx-runtime-BfF-YriY.js"], "css": [] } }, "url": "/assets/manifest-91559213.js", "version": "91559213" };
 const mode = "production";
 const assetsBuildDirectory = "build\\client";
 const basename = "/";
@@ -1599,13 +1958,29 @@ const routes = {
     caseSensitive: void 0,
     module: route7
   },
+  "routes/la-soledad": {
+    id: "routes/la-soledad",
+    parentId: "root",
+    path: "la-soledad",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route8
+  },
+  "routes/conecta": {
+    id: "routes/conecta",
+    parentId: "root",
+    path: "conecta",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route9
+  },
   "routes/_index": {
     id: "routes/_index",
     parentId: "root",
     path: void 0,
     index: true,
     caseSensitive: void 0,
-    module: route8
+    module: route10
   },
   "routes/music": {
     id: "routes/music",
@@ -1613,7 +1988,7 @@ const routes = {
     path: "music",
     index: void 0,
     caseSensitive: void 0,
-    module: route9
+    module: route11
   },
   "routes/sobre": {
     id: "routes/sobre",
@@ -1621,7 +1996,7 @@ const routes = {
     path: "sobre",
     index: void 0,
     caseSensitive: void 0,
-    module: route10
+    module: route12
   },
   "routes/404": {
     id: "routes/404",
@@ -1629,7 +2004,7 @@ const routes = {
     path: "404",
     index: void 0,
     caseSensitive: void 0,
-    module: route11
+    module: route13
   }
 };
 export {
