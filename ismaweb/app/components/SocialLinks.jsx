@@ -20,8 +20,8 @@ const links = [
   {
     id: "tiktok",
     label: "TikTok",
-    handle: "@ismaelguimarais",
-    href: "https://www.tiktok.com/@ismaelguimarais"
+    handle: "@ismaguimarais",
+    href: "https://www.tiktok.com/@ismaguimarais"
   },
   {
     id: "threads",
