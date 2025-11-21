@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "@remix-run/react";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
@@ -22,11 +23,9 @@ export default function Navigation() {
         <button
           className="mobile-nav__toggle"
           onClick={() => setMenuOpen((open) => !open)}
-          aria-label="Abrir menú"
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
         >
-          <span />
-          <span />
-          <span />
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         {menuOpen && (
           <div className="mobile-nav__menu">

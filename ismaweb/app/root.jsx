@@ -16,7 +16,7 @@ export const links = () => [
 
 export const meta = () => [
   { charSet: "utf-8" },
-  { name: "viewport", content: "width=device-width,initial-scale=1" },
+  { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" },
 ];
 
 export default function App() {
