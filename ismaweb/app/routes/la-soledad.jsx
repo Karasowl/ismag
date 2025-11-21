@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { SiSpotify, SiApplemusic, SiAmazonmusic, SiYoutubemusic, SiDeezer } from "react-icons/si";
+import { SiSpotify, SiApplemusic, SiAmazonmusic, SiYoutubemusic } from "react-icons/si";
 import { ArrowRight } from "lucide-react";
 
 const DEFAULT_SITE = "https://ismaelguimarais.com";
@@ -63,7 +63,11 @@ export default function LaSoledad() {
     {
       name: "Deezer",
       url: "https://link.deezer.com/s/31Ft6t3yz0M38lbMV6o85",
-      icon: <SiDeezer />,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.81 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM12.14 4.16v3.03h5.19V4.16h-5.19zm0 4.75v3.03h5.19V8.91h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zm0 4.75v3.03h5.19v-3.03h-5.19zM5.47 4.16v3.03h5.19V4.16H5.47zm0 4.75v3.03h5.19V8.91H5.47zm0 4.75v3.03h5.19v-3.03H5.47zm0 4.75v3.03h5.19v-3.03H5.47zM0 8.91v3.03h4.09V8.91H0zm0 4.75v3.03h4.09v-3.03H0zm0 4.75v3.03h4.09v-3.03H0z"/>
+        </svg>
+      ),
       className: "deezer"
     }
   ];
