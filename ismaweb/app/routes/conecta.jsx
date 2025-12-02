@@ -14,8 +14,8 @@ export const loader = () => {
 export const meta = ({ data, location }) => {
   const site = data?.site ?? DEFAULT_SITE;
   const url = new URL(location.pathname + location.search, site).toString();
-  const title = "Conecta - Ismael Guimarais";
-  const description = "Todas las formas de conectar con Ismael Guimarais: redes sociales, música, newsletter y más.";
+  const title = "Conecta con Ismael Guimarais | Redes sociales y música";
+  const description = "Sígueme en YouTube, Instagram, TikTok y X. Escucha mi música en Spotify y Apple Music. Únete al newsletter semanal con reflexiones sobre fe, cultura y propósito.";
   const ogImage = data?.ogImage ?? DEFAULT_OG_IMAGE;
 
   return [
@@ -122,11 +122,17 @@ export default function Conecta() {
       <div className="conecta-container">
         {/* Profile Header */}
         <div className="conecta-profile-header" data-reveal>
-          <img
-            src="/ismael-professional.jpg"
-            alt="Ismael Guimarais"
-            className="conecta-profile-image"
-          />
+          <picture>
+            <source srcSet="/ismael-professional.webp" type="image/webp" />
+            <img
+              src="/ismael-professional.jpg"
+              alt="Ismael Guimarais"
+              className="conecta-profile-image"
+              width="150"
+              height="150"
+              loading="eager"
+            />
+          </picture>
           <h1 className="conecta-profile-name">Ismael Guimarais</h1>
           <p className="conecta-profile-bio">
             Creador de contenido, músico y analista cultural
@@ -189,6 +195,25 @@ export default function Conecta() {
               </a>
             ))}
           </div>
+        </div>
+
+        {/* Donation Section */}
+        <div className="donation-section" data-reveal>
+          <h3 className="donation-section__title">Apoya mi trabajo</h3>
+          <p className="donation-section__description">
+            Todo mi contenido es gratuito. Si te aporta valor, considera apoyarme con un pequeño gesto.
+          </p>
+          <a
+            href="https://www.paypal.com/paypalme/miguelitoism"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="donation-badge donation-badge--paypal"
+            data-analytics="donation_conecta"
+            title="Apoyar mi trabajo con PayPal"
+          >
+            <span className="donation-badge__emoji">❤️</span>
+            <span className="donation-badge__text">Donar via PayPal</span>
+          </a>
         </div>
 
         {/* Newsletter CTA */}

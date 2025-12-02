@@ -26,11 +26,53 @@ export const meta = ({ data, location }) => {
     { property: "og:url", content: url },
     { property: "og:image", content: ogImage },
     { property: "og:type", content: "music.song" },
+    { property: "music:musician", content: site },
+    { property: "music:release_date", content: "2025-11-21" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: ogImage },
-    { tagName: "link", rel: "canonical", href: url }
+    { tagName: "link", rel: "canonical", href: url },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "MusicRecording",
+        "name": "La Soledad",
+        "url": url,
+        "image": ogImage,
+        "datePublished": "2025-11-21",
+        "duration": "PT4M",
+        "byArtist": {
+          "@type": "Person",
+          "name": "Ismael Guimarais",
+          "url": site
+        },
+        "inAlbum": {
+          "@type": "MusicAlbum",
+          "name": "La Soledad - Single",
+          "albumReleaseType": "https://schema.org/SingleRelease"
+        },
+        "genre": ["Cristiana Contemporánea", "Reflexiva", "Folk"],
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://open.spotify.com/intl-es/album/5gAOQdp4eLDVJrIBBReF39",
+            "name": "Spotify",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "url": "https://music.apple.com/mx/album/la-soledad-single/1852310177",
+            "name": "Apple Music",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    }
   ];
 };
 
@@ -78,11 +120,17 @@ export default function LaSoledad() {
         {/* Header con portada */}
         <div className="song-header" data-reveal>
           <div className="song-cover-wrapper">
-            <img
-              src="/la-soledad-cover.jpg"
-              alt="Portada de La Soledad"
-              className="song-cover"
-            />
+            <picture>
+              <source srcSet="/la-soledad-cover.webp" type="image/webp" />
+              <img
+                src="/la-soledad-cover.jpg"
+                alt="Portada de La Soledad"
+                className="song-cover"
+                width="400"
+                height="400"
+                loading="eager"
+              />
+            </picture>
           </div>
           <h1 className="song-title">La Soledad</h1>
           <p className="song-artist">Ismael Guimarais</p>
@@ -178,7 +226,7 @@ export default function LaSoledad() {
             <h2>Más música de Ismael Guimarais</h2>
             <p>Descubre todas mis canciones y sígueme en tus plataformas favoritas</p>
             <div className="song-cta-buttons">
-              <a href="/music" className="button button--primary">
+              <a href="/musica" className="button button--primary">
                 Ver toda mi música
               </a>
               <a href="/conecta" className="button button--secondary">

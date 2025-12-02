@@ -12,8 +12,8 @@ export const loader = () => {
 export const meta = ({ data, location }) => {
   const site = data?.site ?? DEFAULT_SITE;
   const url = new URL(location.pathname + location.search, site).toString();
-  const title = "Sobre Ismael Guimarais";
-  const description = "Biografía, convicciones y recorrido artístico de Ismael Guimarais.";
+  const title = "Sobre Ismael Guimarais | Analista cultural y músico cubano en México";
+  const description = "Conozca a Ismael Guimarais: analista cultural cubano en México. Creador de videoensayos sobre fe, política y cultura. Músico cristiano con visión reflexiva y contemporánea.";
   const ogImage = data?.ogImage ?? DEFAULT_OG_IMAGE;
 
   return [
@@ -56,11 +56,17 @@ export default function Sobre() {
 
       <div className="sobre-content card">
         <div className="sobre-image-section">
-          <img
-            src="/ismael-professional.jpg"
-            alt="Ismael Guimarais"
-            className="sobre-image"
-          />
+          <picture>
+            <source srcSet="/ismael-professional.webp" type="image/webp" />
+            <img
+              src="/ismael-professional.jpg"
+              alt="Ismael Guimarais"
+              className="sobre-image"
+              width="600"
+              height="600"
+              loading="lazy"
+            />
+          </picture>
         </div>
 
         <div className="sobre-text-section">
@@ -88,6 +94,24 @@ export default function Sobre() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Donation Section */}
+      <div className="donation-section">
+        <p className="donation-section__description">
+          Mi contenido es gratuito y siempre lo será. Si quieres apoyar este proyecto, te lo agradezco de corazón.
+        </p>
+        <a
+          href="https://www.paypal.com/paypalme/miguelitoism"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="donation-badge donation-badge--paypal"
+          data-analytics="donation_sobre"
+          title="Apoyar mi trabajo con PayPal"
+        >
+          <span className="donation-badge__emoji">☕</span>
+          <span className="donation-badge__text">Apoya mi trabajo</span>
+        </a>
       </div>
     </main>
   );

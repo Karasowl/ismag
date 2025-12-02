@@ -7,9 +7,13 @@ export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
   {
+    rel: "preload",
+    as: "style",
+    href: "https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700;800&display=swap",
+  },
+  {
     rel: "stylesheet",
-    href:
-      "https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700;800&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700;800&display=swap",
   },
   { rel: "stylesheet", href: styles },
 ];
@@ -35,8 +39,11 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <a href="#main-content" className="skip-link">Saltar al contenido principal</a>
         <Navigation />
-        <Outlet />
+        <div id="main-content">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>

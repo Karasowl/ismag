@@ -37,7 +37,7 @@ export default function NotFound() {
           <span>Ir al inicio</span>
           <span>Inicio</span>
         </a>
-        <a className="social-link" href="/music">
+        <a className="social-link" href="/musica">
           <span>Explorar música</span>
           <span>Descubrir</span>
         </a>

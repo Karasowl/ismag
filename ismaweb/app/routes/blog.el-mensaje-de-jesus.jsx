@@ -12,9 +12,9 @@ export const loader = () => {
 export const meta = ({ data, location }) => {
   const site = data?.site ?? DEFAULT_SITE;
   const url = new URL(location.pathname + location.search, site).toString();
-  const title = "Blog - Artículos y reflexiones | Ismael Guimarais";
-  const description = "Artículos profundos sobre cultura, fe, política y filosofía. Un espacio para pensar despacio y reflexionar sobre las ideas que importan.";
-  const ogImage = data?.ogImage ?? DEFAULT_OG_IMAGE;
+  const title = "El Mensaje de Jesús - Cómo Juan resumió 3 años de ministerio | Ismael Guimarais";
+  const description = "Análisis de 1 Juan 1:5: El mensaje central de Jesucristo sobre la luz, las tinieblas y el verdadero carácter de Dios revelado en el amor.";
+  const ogImage = `${site}/blog-mensaje-jesus.png`;
 
   return [
     { title },
@@ -23,12 +23,46 @@ export const meta = ({ data, location }) => {
     { property: "og:description", content: description },
     { property: "og:url", content: url },
     { property: "og:image", content: ogImage },
-    { property: "og:type", content: "website" },
+    { property: "og:type", content: "article" },
+    { property: "article:published_time", content: "2024-01-15T00:00:00Z" },
+    { property: "article:author", content: "Ismael Guimarais" },
+    { property: "article:section", content: "Fe y Teología" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: ogImage },
-    { tagName: "link", rel: "canonical", href: url }
+    { tagName: "link", rel: "canonical", href: url },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": description,
+        "image": ogImage,
+        "datePublished": "2024-01-15T00:00:00Z",
+        "dateModified": "2024-01-15T00:00:00Z",
+        "author": {
+          "@type": "Person",
+          "name": "Ismael Guimarais",
+          "url": site
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Ismael Guimarais",
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${site}/ismael-professional.jpg`
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": url
+        },
+        "keywords": "1 Juan 1:5, mensaje de Jesús, luz y tinieblas, santidad, evangelio, carácter de Dios",
+        "articleSection": "Fe y Teología",
+        "wordCount": 1800
+      }
+    }
   ];
 };
 
@@ -37,11 +71,17 @@ export default function Blog() {
     <main className="section">
       <article className="blog-article">
         <header className="blog-header">
-          <img
-            src="/blog-mensaje-jesus.png"
-            alt="El Mensaje de Jesús - 1 Juan 1:5"
-            className="blog-featured-image"
-          />
+          <picture>
+            <source srcSet="/blog-mensaje-jesus.webp" type="image/webp" />
+            <img
+              src="/blog-mensaje-jesus.png"
+              alt="El Mensaje de Jesús - 1 Juan 1:5"
+              className="blog-featured-image"
+              width="1080"
+              height="1080"
+              loading="eager"
+            />
+          </picture>
           <div className="blog-meta">
             <time>2024</time>
             <span className="blog-category">Fe y Teología</span>

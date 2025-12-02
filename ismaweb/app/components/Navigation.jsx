@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Sobre mí", href: "/sobre" },
-  { label: "Música", href: "/music" },
+  { label: "Música", href: "/musica" },
   { label: "Blog", href: "/blog" },
   { label: "Conecta", href: "/conecta" },
   { label: "Videos", href: "https://www.youtube.com/@IsmaelGuimarais", external: true }

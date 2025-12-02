@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(\"C:\\Users\\adven\\ffmpeg\\ffmpeg-8.0-essentials_build\\bin\\ffmpeg.exe\" -i \"E:\\dev-projects\\ismag\\ismaweb\\public\\hero-background.mp4\" -c:v libvpx-vp9 -crf 30 -b:v 0 -an \"E:\\dev-projects\\ismag\\ismaweb\\public\\hero-background.webm\" -y)",
+      "Bash(\"C:\\Users\\adven\\ffmpeg\\ffmpeg-8.0-essentials_build\\bin\\ffmpeg.exe\" -i \"E:\\dev-projects\\ismag\\ismaweb\\public\\og-default.jpg\" -quality 85 \"E:\\dev-projects\\ismag\\ismaweb\\public\\og-default.webp\" -y)",
+      "Bash(\"C:\\Users\\adven\\ffmpeg\\ffmpeg-8.0-essentials_build\\bin\\ffmpeg.exe\" -i \"E:\\dev-projects\\ismag\\ismaweb\\public\\ismael-professional.jpg\" -quality 85 \"E:\\dev-projects\\ismag\\ismaweb\\public\\ismael-professional.webp\" -y)",
+      "Bash(\"C:\\Users\\adven\\ffmpeg\\ffmpeg-8.0-essentials_build\\bin\\ffmpeg.exe\" -i \"E:\\dev-projects\\ismag\\ismaweb\\public\\blog-mensaje-jesus.png\" -quality 85 \"E:\\dev-projects\\ismag\\ismaweb\\public\\blog-mensaje-jesus.webp\" -y)",
+      "Bash(npm run dev:*)",
+      "Bash(git -C \"E:\\dev-projects\\ismag\" status)",
+      "Bash(cat:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -12,7 +12,7 @@ const NUMBER_FORMATTER = new Intl.NumberFormat("es-ES");
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Sobre mí", href: "/sobre" },
-  { label: "Música", href: "/music" },
+  { label: "Música", href: "/musica" },
   { label: "Videos", href: "https://www.youtube.com/@IsmaelGuimarais", external: true },
   { label: "Newsletter", href: "#newsletter" }
 ];
@@ -190,6 +190,38 @@ export const meta = ({ data, location }) => {
         "url": site,
         "publisher": { "@type": "Person", "name": "Ismael Guimarais" }
       }
+    },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cada cuánto publica Ismael Guimarais?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Publico videoensayos semanales en YouTube, música mensual en todas las plataformas digitales (Spotify, Apple Music, etc.) y un newsletter semanal con reflexiones profundas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde puedo ver todo el contenido de Ismael Guimarais?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "YouTube para videoensayos y análisis cultural, Spotify/Apple Music/YouTube Music para mi música, y el newsletter semanal para reflexiones exclusivas y contenido anticipado."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo puedo apoyar el trabajo de Ismael Guimarais?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Comparte el contenido que resuene contigo. Las mejores ideas merecen ser discutidas. También puedes suscribirte al newsletter, seguirme en redes sociales o unirte como miembro de YouTube/Patreon."
+            }
+          }
+        ]
+      }
     }
   ];
 };
@@ -264,20 +296,22 @@ export default function Index() {
       <section className="hero" aria-labelledby="hero-heading">
         <video
           className="hero__video"
-          aria-hidden
+          aria-hidden="true"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/og-default.jpg"
+          fetchpriority="high"
         >
+          <source src="/hero-background.webm" type="video/webm" />
           <source src="/hero-background.mp4" type="video/mp4" />
         </video>
         <div className="hero__overlay" aria-hidden />
         <div className="hero__content">
           <h1 id="hero-heading" className="hero__title">
-            Contenido gratuito para pensar mejor
+            Ismael Guimarais: Contenido gratuito para pensar mejor
           </h1>
           <p className="hero__subtitle">
             Videoensayos, música y reflexiones. Sígueme en redes y únete a la conversación.
@@ -342,7 +376,10 @@ export default function Index() {
             </p>
           </div>
           <div>
-            <img src="/ismael-professional.jpg" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" />
+            <picture>
+              <source srcSet="/ismael-professional.webp" type="image/webp" />
+              <img src="/ismael-professional.jpg" alt="Retrato de Ismael Guimarais" className="intro-image" loading="lazy" width="600" height="600" />
+            </picture>
           </div>
         </div>
       </section>
@@ -403,7 +440,7 @@ export default function Index() {
                 </a>
               </div>
             </div>
-            <a className="link-arrow" href="/music" data-analytics="cta_escuchar_mas">
+            <a className="link-arrow" href="/musica" data-analytics="cta_escuchar_mas">
               Escuchar en todas las plataformas
             </a>
           </article>
@@ -463,6 +500,22 @@ export default function Index() {
       <section className="section" aria-label="Redes y footer">
         <footer>
           <p>"El camino angosto sigue siendo el correcto."<br />— Ismael Guimarais</p>
+
+          <div className="donation-inline">
+            <span className="donation-inline__text">Si este contenido te ha sido útil:</span>
+            <a
+              href="https://www.paypal.com/paypalme/miguelitoism"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="donation-badge donation-badge--paypal"
+              data-analytics="donation_footer"
+              title="Apoyar mi trabajo con PayPal"
+            >
+              <span className="donation-badge__emoji">☕</span>
+              <span className="donation-badge__text">Invítame un café</span>
+            </a>
+          </div>
+
           <p>&copy; {new Date().getFullYear()} Ismael Guimarais · Cuba 🇨🇺 → México 🇲🇽</p>
         </footer>
       </section>
