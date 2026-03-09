@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articulos', ({ data }) => !data.draft);
+const sortedArticles = allArticles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Inicio">
+  <!-- Hero -->
+  <section class="relative min-h-[85vh] flex items-center">
+    <!-- Background: nubismo collage -->
+    <div class="absolute inset-0 grid grid-cols-2 grid-rows-2 opacity-[0.07]">
+      <img src="/images/ismael/marketing.png" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/fe.png" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/politic.png" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/music.png" alt="" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="relative z-10 max-w-narrow mx-auto px-6 py-20 md:py-32">
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+        <!-- Photo -->
+        <div class="shrink-0 animate-fade-in">
+          <img
+            src="/images/ismael/fondo_rojo_serio.jpg"
+            alt="Ismael Guimarais"
+            class="w-44 h-44 md:w-52 md:h-52 rounded-full object-cover object-top shadow-2xl ring-4 ring-warm-dark"
+          />
+        </div>
+        <!-- Text -->
+        <div class="text-center md:text-left">
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-primary leading-tight mb-6 animate-fade-in">
+            Me complico la vida pensando en marketing, cultura, política, música y Dios.
+          </h1>
+          <p class="text-xl text-muted font-serif animate-fade-in animate-delay-1">
+            Acá están mis trabajos y conclusiones.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections Grid -->
+  <section class="max-w-content mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Marketing & IA -->
+      <a href="/marketing-ia" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-1">
+        <img src="/images/ismael/marketing.png" alt="Marketing & IA" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-blue-300 mb-2 block">Marketing & IA</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">Análisis prácticos. Sin hype, con resultados.</p>
+        </div>
+      </a>
+
+      <!-- Fe -->
+      <a href="/fe" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-2">
+        <img src="/images/ismael/fe.png" alt="Fe" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-amber-300 mb-2 block">Fe</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">Hermenéutica honesta. Preguntas difíciles.</p>
+        </div>
+      </a>
+
+      <!-- Política -->
+      <a href="/politica-cultura" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-3">
+        <img src="/images/ismael/politic.png" alt="Política y Cultura" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-red-300 mb-2 block">Política y Cultura</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">Desde la experiencia del socialismo real.</p>
+        </div>
+      </a>
+
+      <!-- Música -->
+      <a href="/musica" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-4">
+        <img src="/images/ismael/music.png" alt="Música" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-purple-300 mb-2 block">Música</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">Canciones que son crónicas honestas.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Latest Articles -->
+  {sortedArticles.length > 0 && (
+    <section class="max-w-content mx-auto px-6 py-16">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <h2 class="font-display text-3xl">Lo más reciente</h2>
+          <div class="divider mt-4"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedArticles.slice(0, 6).map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            date={article.data.date}
+            category={article.data.category}
+            slug={article.id}
+            image={article.data.image}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- About Teaser -->
+  <section class="bg-warm">
+    <div class="max-w-content mx-auto px-6 py-20">
+      <div class="max-w-narrow mx-auto flex flex-col md:flex-row items-center gap-10">
+        <img
+          src="/images/ismael/amigable_camisa_blanca_2.jpg"
+          alt="Ismael Guimarais"
+          class="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover object-top shadow-lg shrink-0"
+        />
+        <div>
+          <h2 class="font-display text-2xl md:text-3xl mb-4">Sobre mí</h2>
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            Soy publicista y creo en el poder de las ideas para cambiar el mundo.
+            Hago canciones, amo pensar en política, cultura, y sobre todas las cosas, en Dios.
+            Cubano en México, con un portafolio que abarca fintech, domótica, dental, y seguridad privada.
+          </p>
+          <a href="/sobre" class="btn btn-outline text-sm hover:no-underline">Leer más →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Teaser -->
+  <section class="max-w-content mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl">Portafolio profesional</h2>
+      <p class="text-muted mt-3 font-sans text-base">19 proyectos. Cuba → Suiza → Florida → Texas → México.</p>
+      <div class="divider mx-auto mt-4"></div>
+    </div>
+    <div class="text-center">
+      <a href="/portafolio" class="btn btn-primary">Ver proyectos →</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  image: string;
+  accentColor?: string;
+}
+
+const { title, subtitle, image, accentColor = 'text-white/70' } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <img src={image} alt="" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.25) saturate(0.7);" />
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
+  <div class="relative z-10 max-w-content mx-auto px-6 py-20 md:py-28">
+    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">{title}</h1>
+    <p class={`text-lg md:text-xl max-w-2xl font-serif ${accentColor}`}>{subtitle}</p>
+    <div class="w-16 h-0.5 bg-white/30 mt-6"></div>
+  </div>
+</section>

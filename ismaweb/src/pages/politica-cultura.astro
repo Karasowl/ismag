@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHero from '../components/SectionHero.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articulos', ({ data }) => !data.draft && data.category === 'politica-cultura'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base
+  title="Política y Cultura"
+  description="Análisis político y cultural desde la experiencia de un cubano que vivió el socialismo real."
+>
+  <SectionHero
+    title="Política y Cultura"
+    subtitle="Análisis, opinión y videoensayos. Desde la experiencia de quien vivió el socialismo real."
+    image="/images/ismael/politic.png"
+  />
+
+  <section class="max-w-content mx-auto px-6 py-16">
+    {articles.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {articles.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            date={article.data.date}
+            category={article.data.category}
+            slug={article.id}
+            image={article.data.image}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20">
+        <p class="text-muted text-xl font-display italic">Artículos próximamente.</p>
+      </div>
+    )}
+  </section>
+</Base>

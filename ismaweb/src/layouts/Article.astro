@@ -1,0 +1,59 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  image?: string;
+  tags?: string[];
+}
+
+const { title, description, date, category, image, tags = [] } = Astro.props;
+
+const categoryMap: Record<string, { label: string; class: string; href: string }> = {
+  'marketing-ia': { label: 'Marketing & IA', class: 'tag-marketing', href: '/marketing-ia' },
+  'fe': { label: 'Fe', class: 'tag-fe', href: '/fe' },
+  'politica-cultura': { label: 'Política y Cultura', class: 'tag-politica', href: '/politica-cultura' },
+  'musica': { label: 'Música', class: 'tag-musica', href: '/musica' },
+};
+
+const cat = categoryMap[category] || { label: category, class: 'tag-marketing', href: '/' };
+const formattedDate = date.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base title={title} description={description} image={image} type="article">
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <a href={cat.href} class={`tag ${cat.class} hover:no-underline`}>{cat.label}</a>
+        <time datetime={date.toISOString()} class="text-sm text-muted">{formattedDate}</time>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">{title}</h1>
+      <p class="text-lg text-muted">{description}</p>
+    </header>
+
+    {image && (
+      <img src={image} alt={title} class="w-full rounded-xl mb-10" loading="lazy" />
+    )}
+
+    <div class="prose-article">
+      <slot />
+    </div>
+
+    {tags.length > 0 && (
+      <div class="mt-10 pt-6 border-t border-gray-100">
+        <div class="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{tag}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="mt-10 pt-6 border-t border-gray-100">
+      <a href={cat.href} class="text-accent hover:underline">&larr; Volver a {cat.label}</a>
+    </div>
+  </article>
+</Base>

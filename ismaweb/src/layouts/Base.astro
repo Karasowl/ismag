@@ -1,0 +1,147 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  description = 'Me complico la vida pensando en marketing, cultura, política, música y Dios. Acá están mis trabajos y conclusiones.',
+  image = '/og-default.jpg',
+  type = 'website',
+  canonical,
+} = Astro.props;
+
+const siteUrl = 'https://www.guimarais.com';
+const fullTitle = title === 'Inicio' ? 'Ismael Guimarais' : `${title} — Ismael Guimarais`;
+const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Ismael Guimarais" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:site" content="@IsmaGuimarais" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-primary/5">
+      <nav class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="/" class="font-display text-2xl font-bold text-primary hover:no-underline">
+            Ismael Guimarais
+          </a>
+
+          <div class="hidden lg:flex items-center gap-1">
+            <a href="/marketing-ia" class:list={["nav-link", currentPath.startsWith('/marketing-ia') && "!text-primary font-semibold"]}>Marketing & IA</a>
+            <a href="/fe" class:list={["nav-link", currentPath.startsWith('/fe') && "!text-primary font-semibold"]}>Fe</a>
+            <a href="/politica-cultura" class:list={["nav-link", currentPath.startsWith('/politica-cultura') && "!text-primary font-semibold"]}>Política</a>
+            <a href="/musica" class:list={["nav-link", currentPath.startsWith('/musica') && "!text-primary font-semibold"]}>Música</a>
+            <a href="/portafolio" class:list={["nav-link", currentPath.startsWith('/portafolio') && "!text-primary font-semibold"]}>Portafolio</a>
+            <a href="/sobre" class:list={["nav-link", currentPath.startsWith('/sobre') && "!text-primary font-semibold"]}>Sobre mí</a>
+          </div>
+
+          <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-500 hover:text-primary" aria-label="Menú">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden pb-4">
+          <div class="flex flex-col gap-0.5 pt-2 border-t border-primary/5">
+            <a href="/marketing-ia" class="nav-link-mobile">Marketing & IA</a>
+            <a href="/fe" class="nav-link-mobile">Fe</a>
+            <a href="/politica-cultura" class="nav-link-mobile">Política y Cultura</a>
+            <a href="/musica" class="nav-link-mobile">Música</a>
+            <a href="/portafolio" class="nav-link-mobile">Portafolio</a>
+            <a href="/sobre" class="nav-link-mobile">Sobre mí</a>
+            <a href="/contacto" class="nav-link-mobile">Contacto</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white/70 mt-20">
+      <div class="max-w-content mx-auto px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <!-- Brand -->
+          <div class="md:col-span-5">
+            <p class="font-display text-2xl font-bold text-white mb-3">Ismael Guimarais</p>
+            <p class="text-base leading-relaxed text-white/50 max-w-sm">
+              Me complico la vida pensando en marketing, cultura, política, música y Dios.
+            </p>
+          </div>
+          <!-- Sections -->
+          <div class="md:col-span-3">
+            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">Secciones</p>
+            <div class="flex flex-col gap-2 text-sm font-sans">
+              <a href="/marketing-ia" class="text-white/60 hover:text-white hover:no-underline">Marketing & IA</a>
+              <a href="/fe" class="text-white/60 hover:text-white hover:no-underline">Fe</a>
+              <a href="/politica-cultura" class="text-white/60 hover:text-white hover:no-underline">Política y Cultura</a>
+              <a href="/musica" class="text-white/60 hover:text-white hover:no-underline">Música</a>
+              <a href="/portafolio" class="text-white/60 hover:text-white hover:no-underline">Portafolio</a>
+            </div>
+          </div>
+          <!-- Social -->
+          <div class="md:col-span-4">
+            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">Redes</p>
+            <div class="flex flex-col gap-2 text-sm font-sans">
+              <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">YouTube</a>
+              <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">X / Twitter</a>
+              <a href="https://www.instagram.com/ismaguimarais/" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">Instagram</a>
+              <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">Spotify</a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm font-sans text-white/30">
+          <p>&copy; {new Date().getFullYear()} Ismael Guimarais</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', () => {
+        menu?.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

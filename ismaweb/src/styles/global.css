@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream text-gray-800 font-serif leading-relaxed text-lg;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-primary;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold; }
+  h2 { @apply text-2xl md:text-3xl font-bold; }
+  h3 { @apply text-xl md:text-2xl font-semibold; }
+
+  a {
+    @apply text-accent hover:text-accent-light transition-colors;
+  }
+
+  ::selection {
+    @apply bg-accent/15 text-primary;
+  }
+}
+
+@layer components {
+  /* Section hero with nubismo background */
+  .section-hero {
+    @apply relative overflow-hidden;
+  }
+  .section-hero-bg {
+    @apply absolute inset-0 w-full h-full object-cover;
+    filter: brightness(0.3) saturate(0.8);
+  }
+  .section-hero-content {
+    @apply relative z-10 max-w-content mx-auto px-6 py-20 md:py-28;
+  }
+  .section-hero h1,
+  .section-hero p {
+    @apply text-white;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-lg overflow-hidden transition-all duration-300;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Tags */
+  .tag {
+    @apply inline-block text-xs font-sans font-semibold uppercase tracking-widest px-3 py-1;
+  }
+  .tag-marketing { @apply text-section-marketing border-b-2 border-section-marketing/30; }
+  .tag-fe { @apply text-section-fe border-b-2 border-section-fe/30; }
+  .tag-politica { @apply text-section-politica border-b-2 border-section-politica/30; }
+  .tag-musica { @apply text-section-musica border-b-2 border-section-musica/30; }
+  .tag-portafolio { @apply text-emerald-700 border-b-2 border-emerald-700/30; }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-md font-sans font-medium text-base transition-all duration-200;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/85 hover:no-underline;
+  }
+  .btn-outline {
+    @apply border border-primary/30 text-primary hover:bg-primary hover:text-white hover:no-underline;
+  }
+  .btn-light {
+    @apply bg-white/15 text-white border border-white/30 hover:bg-white/25 hover:no-underline backdrop-blur-sm;
+  }
+
+  /* Divider */
+  .divider {
+    @apply w-16 h-0.5 bg-accent/40 my-8;
+  }
+
+  /* Article prose */
+  .prose-article {
+    @apply max-w-prose mx-auto font-serif;
+  }
+  .prose-article p {
+    @apply mb-5 text-gray-700 leading-relaxed text-lg;
+  }
+  .prose-article h2 {
+    @apply text-2xl md:text-3xl font-display mt-12 mb-5;
+  }
+  .prose-article h3 {
+    @apply text-xl font-display mt-8 mb-4;
+  }
+  .prose-article blockquote {
+    @apply border-l-4 border-accent/40 pl-6 italic text-gray-600 my-8 text-xl font-display;
+  }
+  .prose-article ul, .prose-article ol {
+    @apply pl-6 mb-5 space-y-2;
+  }
+  .prose-article ul { @apply list-disc; }
+  .prose-article ol { @apply list-decimal; }
+  .prose-article img {
+    @apply rounded-lg my-8;
+  }
+  .prose-article a {
+    @apply text-accent underline decoration-accent/30 hover:decoration-accent;
+  }
+
+  /* Nav */
+  .nav-link {
+    @apply px-3 py-2 text-sm font-sans font-medium text-gray-500 hover:text-primary transition-colors hover:no-underline;
+  }
+  .nav-link-mobile {
+    @apply px-3 py-3 text-base font-sans font-medium text-gray-600 hover:text-primary hover:bg-warm rounded-lg transition-colors hover:no-underline block;
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
