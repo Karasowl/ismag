@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-gray-900 font-sans leading-relaxed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold tracking-tight text-primary;
+  }
+
+  a {
+    @apply text-accent hover:underline transition-colors;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-primary;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-muted text-lg mb-8;
+  }
+
+  .card {
+    @apply bg-white border border-gray-100 rounded-xl p-6 hover:shadow-md transition-shadow duration-300;
+  }
+
+  .tag {
+    @apply inline-block text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full;
+  }
+
+  .tag-marketing { @apply bg-blue-50 text-blue-700; }
+  .tag-fe { @apply bg-amber-50 text-amber-700; }
+  .tag-politica { @apply bg-red-50 text-red-700; }
+  .tag-musica { @apply bg-purple-50 text-purple-700; }
+  .tag-portafolio { @apply bg-emerald-50 text-emerald-700; }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/90 hover:no-underline;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white hover:no-underline;
+  }
+
+  /* Article prose */
+  .prose-article {
+    @apply max-w-prose mx-auto;
+  }
+
+  .prose-article p {
+    @apply mb-4 text-gray-700 leading-relaxed;
+  }
+
+  .prose-article h2 {
+    @apply text-2xl font-bold mt-10 mb-4;
+  }
+
+  .prose-article h3 {
+    @apply text-xl font-semibold mt-8 mb-3;
+  }
+
+  .prose-article blockquote {
+    @apply border-l-4 border-accent pl-4 italic text-gray-600 my-6;
+  }
+
+  .prose-article ul, .prose-article ol {
+    @apply pl-6 mb-4 space-y-1;
+  }
+
+  .prose-article ul { @apply list-disc; }
+  .prose-article ol { @apply list-decimal; }
+
+  .prose-article img {
+    @apply rounded-lg my-6;
+  }
+
+  .prose-article a {
+    @apply text-accent underline;
+  }
+}

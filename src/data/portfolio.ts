@@ -1,0 +1,181 @@
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  slug: string;
+  categories: string[];
+  video?: string;
+  link?: string;
+}
+
+export const portfolioData: PortfolioItem[] = [
+  {
+    id: 'apolo',
+    title: 'Apolo Insurance',
+    description: 'Apolo Insurance necesitaba conectar con la comunidad inmigrante hispanohablante en Florida, transmitiendo confianza en un sector donde este valor es clave.',
+    image: '/images/portfolio/proyectos/apolo1.png',
+    slug: 'apolo',
+    categories: ['Video', 'Branding', 'Consultoría'],
+    video: '/videos/apolo1-opt.mp4',
+  },
+  {
+    id: 'autism',
+    title: 'Autism 911',
+    description: 'Diseñamos la app y comunicación visual de Autism 911, equilibrando empatía y confianza para conectar familias con especialistas en autismo.',
+    image: '/images/portfolio/services/Autism.png',
+    slug: 'autism',
+    categories: ['App', 'Video'],
+    video: '/videos/autism1-opt.mp4',
+  },
+  {
+    id: 'gyb',
+    title: 'GYB Connect',
+    description: 'Diseñamos la identidad y sitio web de GYB Connect, una plataforma fintech que necesitaba destacar frente a grandes competidores como Stripe y CardConnect.',
+    image: '/images/portfolio/services/gyb1.png',
+    slug: 'gyb-connect',
+    categories: ['Web', 'Branding'],
+  },
+  {
+    id: 'engadi',
+    title: 'Engadi / Heromatic',
+    description: 'Modernizamos una plataforma agrícola obsoleta con una suite digital intuitiva (Heromatic) que mejora la productividad en invernaderos.',
+    image: '/images/portfolio/services/engadi.png',
+    slug: 'engadi',
+    categories: ['App', 'UX/UI'],
+  },
+  {
+    id: 'heromatic',
+    title: 'Heromatic',
+    description: 'Creamos Heromatic desde el nombre hasta su presencia digital, posicionándola como una marca experta en automatización con identidad clara y poderosa.',
+    image: '/images/portfolio/proyectos/heromatic3.png',
+    slug: 'heromatic',
+    categories: ['Branding', 'Consultoría'],
+  },
+  {
+    id: 'evemundo',
+    title: 'Evemundo',
+    description: 'Desarrollamos branding, sitios web y contenido audiovisual para Evemundo, creando una presencia digital sólida en Suiza para dos servicios interconectados.',
+    image: '/images/portfolio/proyectos/evem1.png',
+    slug: 'evemundo',
+    categories: ['Branding', 'Consultoría'],
+  },
+  {
+    id: 'digital',
+    title: 'Digital Lifestyle Designs',
+    description: 'Digital Lifestyle Designs necesitaba una web que comunicara su liderazgo en domótica. Creamos una experiencia digital moderna que refleja sofisticación y tecnología.',
+    image: '/images/portfolio/proyectos/digital1.png',
+    slug: 'digital',
+    categories: ['Web', 'Consultoría'],
+  },
+  {
+    id: 'redentor',
+    title: 'El Redentor',
+    description: 'Redentor confió en nosotros para modernizar su presencia digital y comunicar confianza en servicios de salud para la comunidad hispana.',
+    image: '/images/portfolio/proyectos/redentor1.png',
+    slug: 'redentor',
+    categories: ['Branding', 'Consultoría'],
+  },
+  {
+    id: 'milenio',
+    title: 'Milenio Smile',
+    description: 'Milenio Smile quería destacar entre su audiencia cubana en Miami. Aprovechamos un jingle espontáneo para crear anuncios auténticos y memorables.',
+    image: '/images/portfolio/proyectos/milenio1.png',
+    slug: 'milenio',
+    categories: ['Video'],
+    video: '/videos/milenio1-opt.mp4',
+  },
+  {
+    id: 'pool',
+    title: 'Pool Quality Solutions',
+    description: 'Rediseñamos la presencia digital de Pool Quality Solutions con un sitio moderno y claro, transmitiendo confianza y profesionalismo.',
+    image: '/images/portfolio/services/pool.png',
+    slug: 'pool',
+    categories: ['Web'],
+    link: 'https://poolqualitysolutions.com/',
+  },
+  {
+    id: 'smart',
+    title: 'Smart Power Electric',
+    description: 'Renovamos la imagen y sitio web de Smart Power Electric para destacar su experiencia y claridad en instalaciones eléctricas.',
+    image: '/images/portfolio/services/smart.png',
+    slug: 'smart',
+    categories: ['Web', 'Branding'],
+  },
+  {
+    id: 'dew',
+    title: 'DEW Marketing',
+    description: 'DEW Marketing necesitaba una identidad visual que comunicara renovación y crecimiento. Tradujimos su concepto abstracto en una marca minimalista y poderosa.',
+    image: '/images/portfolio/services/dew.png',
+    slug: 'dew',
+    categories: ['Branding'],
+  },
+  {
+    id: 'cuatrocaminos',
+    title: 'Cuatro Caminos',
+    description: 'Impulsamos la presencia digital de 4 CAMINOS, destacando su calidad audiovisual con una estrategia visual coherente, profesional y adaptada al contexto cubano.',
+    image: '/images/portfolio/proyectos/4caminos1.png',
+    slug: 'cuatro-caminos',
+    categories: ['Redes Sociales'],
+  },
+  {
+    id: 'drivers',
+    title: 'Drivers Collision Center',
+    description: 'Para Drivers Collision Center creamos una comunicación visual fuerte y dinámica, enfocada en acción y confianza tras un accidente.',
+    image: '/images/portfolio/services/driver.png',
+    slug: 'drivers',
+    categories: ['Redes Sociales'],
+  },
+  {
+    id: 'hai',
+    title: 'El HAI',
+    description: 'EL HAI necesitaba una estrategia de redes sociales que comunicara su filosofía de marca artesanal, no solo mostrara sus productos.',
+    image: '/images/portfolio/proyectos/hai2.png',
+    slug: 'hai',
+    categories: ['Branding', 'Consultoría'],
+  },
+  {
+    id: 'incometax',
+    title: 'NA Incometax',
+    description: 'NA Incometax necesitaba una comunicación visual impecable en redes sociales para transmitir confianza y seriedad.',
+    image: '/images/portfolio/proyectos/incometax1.png',
+    slug: 'incometax',
+    categories: ['Consultoría'],
+  },
+  {
+    id: 'star',
+    title: 'Star Chihuas',
+    description: 'Creamos la imagen y comunicación visual de Star Chihuas, una marca de pizzas que combina tradición mexicana con sabores urbanos.',
+    image: '/images/portfolio/proyectos/star1.png',
+    slug: 'star',
+    categories: ['Branding', 'Consultoría'],
+  },
+  {
+    id: 'seo-tsc',
+    title: 'SEO TSC',
+    description: 'TSC necesitaba mejorar su visibilidad orgánica para atraer clientes desde Google sin depender únicamente de publicidad pagada.',
+    image: '/images/portfolio/services/smart1.png',
+    slug: 'seo-tsc',
+    categories: ['SEO'],
+  },
+  {
+    id: 'ppc-tsc',
+    title: 'Publicidad Pagada TSC',
+    description: 'Diseñamos e implementamos una campaña PPC de lanzamiento, maximizando conversiones con un ROI del 120%.',
+    image: '/images/portfolio/services/pp.png',
+    slug: 'ppc-tsc',
+    categories: ['PPC'],
+  },
+];
+
+export const categoryLabels: Record<string, string> = {
+  'Video': 'Producción Audiovisual',
+  'Branding': 'Identidad de Marca',
+  'Web': 'Desarrollo Web',
+  'App': 'Desarrollo de Apps',
+  'UX/UI': 'Diseño UX/UI',
+  'Consultoría': 'Consultoría Digital',
+  'Redes Sociales': 'Redes Sociales',
+  'SEO': 'SEO & Contenidos',
+  'PPC': 'Publicidad Pagada',
+};

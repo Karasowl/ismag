@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PortfolioCard from '../components/PortfolioCard.astro';
+import { portfolioData } from '../data/portfolio';
+
+const categories = [...new Set(portfolioData.flatMap(p => p.categories))].sort();
+---
+
+<Base
+  title="Portafolio & Servicios"
+  description="Portafolio profesional de Ismael Guimarais. Proyectos de branding, web, video y consultoría digital en Cuba, Suiza, Florida, Texas y México."
+>
+  <section class="max-w-content mx-auto px-4 sm:px-6 py-12">
+    <SectionHeader
+      title="Portafolio"
+      subtitle="Proyectos reales. De Cuba a Suiza, de Florida a México. Branding, web, video y consultoría digital."
+    />
+
+    <!-- Category filters (static, CSS-based) -->
+    <div class="flex flex-wrap gap-2 mb-8" id="portfolio-filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      {categories.map(cat => (
+        <button class="filter-btn" data-filter={cat}>{cat}</button>
+      ))}
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+      {portfolioData.map((item) => (
+        <div class="portfolio-item" data-categories={item.categories.join(',')}>
+          <PortfolioCard
+            title={item.title}
+            description={item.description}
+            image={item.image}
+            categories={item.categories}
+            video={item.video}
+            link={item.link}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Services CTA -->
+    <div class="mt-16 bg-primary rounded-2xl p-8 md:p-12 text-white text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white">¿Necesitas algo así?</h2>
+      <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+        Trabajo con marcas y negocios que necesitan branding, sitios web, video o estrategia digital.
+        Si te gusta lo que ves, hablemos.
+      </p>
+      <a href="/contacto" class="btn bg-white text-primary hover:bg-gray-100 hover:no-underline">
+        Contáctame
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .filter-btn {
+      @apply px-4 py-2 text-sm font-medium rounded-full border border-gray-200 text-gray-600 hover:border-primary hover:text-primary transition-colors cursor-pointer bg-white;
+    }
+    .filter-btn.active {
+      @apply bg-primary text-white border-primary;
+    }
+  </style>
+
+  <script>
+    const filters = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
+
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(f => f.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        items.forEach(item => {
+          if (filter === 'all') {
+            (item as HTMLElement).style.display = '';
+          } else {
+            const cats = item.getAttribute('data-categories') || '';
+            (item as HTMLElement).style.display = cats.includes(filter!) ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</Base>

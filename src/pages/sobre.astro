@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Sobre mí"
+  description="Soy publicista y creo en el poder de las ideas para cambiar el mundo. Hago canciones, amo pensar en política, cultura, y sobre todas las cosas, en Dios."
+  type="profile"
+>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Photo + Intro -->
+    <div class="flex flex-col md:flex-row gap-8 items-start mb-12">
+      <picture class="shrink-0">
+        <source srcset="/ismael-professional.webp" type="image/webp" />
+        <img
+          src="/ismael-professional.jpg"
+          alt="Ismael Guimarais"
+          class="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover shadow-lg"
+          width="224"
+          height="224"
+          loading="eager"
+        />
+      </picture>
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">Ismael Guimarais</h1>
+        <p class="text-lg text-muted leading-relaxed mb-4">
+          Soy publicista y creo en el poder de las ideas para cambiar el mundo.
+          Hago canciones, amo pensar en política, cultura, y sobre todas las cosas, en Dios.
+        </p>
+        <p class="text-muted">Cubano en México. Publicista, músico, pensador.</p>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="prose-article">
+      <h2>La historia corta</h2>
+      <p>
+        Nací en Cuba y crecí entre libros, música y conversaciones interminables sobre el sentido de la vida.
+        Estudié artes y me dediqué a la publicidad — primero en la isla, después en el mundo.
+      </p>
+      <p>
+        He trabajado con marcas en Cuba, Suiza, Florida, Texas y México. Desde startups fintech hasta
+        consultorios dentales. Desde plataformas de domótica hasta productoras de cine. El hilo común:
+        <strong>las ideas bien ejecutadas cambian realidades</strong>.
+      </p>
+
+      <h2>Lo que hago aquí</h2>
+      <p>
+        Este sitio reúne todo lo que produzco y pienso. Artículos sobre marketing e inteligencia artificial.
+        Reflexiones teológicas que no le tienen miedo a las preguntas incómodas. Análisis político y cultural
+        desde la experiencia de quien vivió el socialismo real. Canciones que son crónicas honestas.
+        Y un portafolio de proyectos profesionales que cuentan mejor que yo lo que sé hacer.
+      </p>
+
+      <h2>YouTube</h2>
+      <p>
+        En mi <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener">canal de YouTube</a>
+        analizo música, filosofía, historia y cultura. Lo que empezó como reacciones a Canserbero
+        se está transformando en un espacio de análisis cultural con trasfondo cristiano.
+        +4,700 suscriptores y creciendo.
+      </p>
+
+      <h2>Fe</h2>
+      <p>
+        Cristiano. No del tipo que evita preguntas difíciles — del tipo que las busca. Llevo años
+        estudiando teología por cuenta propia con un principio simple: seguir la evidencia textual
+        donde lleve, aunque destruya mi posición actual.
+      </p>
+
+      <h2>Lo que creo</h2>
+      <blockquote>
+        "Solo importa lo conocible y lo evaluable. Si algo es imposible de conocer por ninguna vía
+        — empírica, lógica, inferencial — la pregunta carece de utilidad práctica."
+      </blockquote>
+    </div>
+
+    <!-- Social Links -->
+    <div class="mt-12 pt-8 border-t border-gray-100">
+      <h3 class="text-lg font-semibold mb-4">Encuéntrame</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">
+          YouTube
+        </a>
+        <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">
+          X / Twitter
+        </a>
+        <a href="https://www.instagram.com/ismaguimarais/" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">
+          Instagram
+        </a>
+        <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">
+          Spotify
+        </a>
+      </div>
+    </div>
+
+    <!-- Donation -->
+    <div class="mt-12 bg-warm rounded-2xl p-8 text-center">
+      <p class="text-muted mb-4">
+        Mi contenido es gratuito y siempre lo será. Si quieres apoyar este proyecto:
+      </p>
+      <a
+        href="https://www.paypal.com/paypalme/miguelitoism"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-primary"
+      >
+        ☕ Apoya mi trabajo
+      </a>
+    </div>
+  </section>
+</Base>
