@@ -56,7 +56,7 @@ const categories = [...new Set(portfolioData.flatMap(p => p.categories))].sort()
 
   <style>
     .filter-btn {
-      @apply px-4 py-2 text-sm font-medium rounded-full border border-gray-200 text-gray-600 hover:border-primary hover:text-primary transition-colors cursor-pointer bg-white;
+      @apply px-4 py-2 text-sm font-medium rounded-full border border-gray-200 text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary transition-colors cursor-pointer bg-white;
     }
     .filter-btn.active {
       @apply bg-primary text-white border-primary;

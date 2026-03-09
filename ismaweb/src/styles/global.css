@@ -13,10 +13,11 @@
 
   body {
     @apply bg-cream text-gray-800 font-serif leading-relaxed text-lg;
+    @apply dark:bg-[#121218] dark:text-gray-200;
   }
 
   h1, h2, h3, h4 {
-    @apply font-display tracking-tight text-primary;
+    @apply font-display tracking-tight text-primary dark:text-gray-100;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold; }
@@ -51,7 +52,7 @@
 
   /* Card */
   .card {
-    @apply bg-white rounded-lg overflow-hidden transition-all duration-300;
+    @apply bg-white dark:bg-[#1a1a24] rounded-lg overflow-hidden transition-all duration-300;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .card:hover {
@@ -93,7 +94,7 @@
     @apply max-w-prose mx-auto font-serif;
   }
   .prose-article p {
-    @apply mb-5 text-gray-700 leading-relaxed text-lg;
+    @apply mb-5 text-gray-700 dark:text-gray-300 leading-relaxed text-lg;
   }
   .prose-article h2 {
     @apply text-2xl md:text-3xl font-display mt-12 mb-5;
@@ -118,10 +119,10 @@
 
   /* Nav */
   .nav-link {
-    @apply px-3 py-2 text-sm font-sans font-medium text-gray-500 hover:text-primary transition-colors hover:no-underline;
+    @apply px-3 py-2 text-sm font-sans font-medium text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors hover:no-underline;
   }
   .nav-link-mobile {
-    @apply px-3 py-3 text-base font-sans font-medium text-gray-600 hover:text-primary hover:bg-warm rounded-lg transition-colors hover:no-underline block;
+    @apply px-3 py-3 text-base font-sans font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-warm dark:hover:bg-white/5 rounded-lg transition-colors hover:no-underline block;
   }
 }
 

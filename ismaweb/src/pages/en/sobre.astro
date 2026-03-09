@@ -7,13 +7,13 @@ const i = t(locale);
 ---
 
 <Base title={i.about.title} locale={locale} type="profile">
-  <section class="bg-warm">
+  <section class="bg-warm dark:bg-[#16161e]">
     <div class="max-w-narrow mx-auto px-6 py-16 md:py-24">
       <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
         <img src="/images/ismael/amigable_camisa_blanca_2.webp" alt="Ismael Guimarais" class="w-52 h-52 md:w-64 md:h-64 rounded-2xl object-cover object-top shadow-xl shrink-0" loading="eager" />
         <div>
           <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-primary mb-5">Ismael Guimarais</h1>
-          <p class="text-xl text-gray-600 leading-relaxed mb-4">{i.about.bio}</p>
+          <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-4">{i.about.bio}</p>
           <p class="text-muted font-sans text-base">{i.about.role}</p>
         </div>
       </div>
@@ -55,7 +55,7 @@ const i = t(locale);
           <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline justify-center">Spotify</a>
         </div>
       </div>
-      <div class="bg-warm rounded-2xl p-8 text-center flex flex-col justify-center">
+      <div class="bg-warm dark:bg-[#16161e] rounded-2xl p-8 text-center flex flex-col justify-center">
         <p class="text-muted mb-5">{i.about.support}</p>
         <a href="https://www.paypal.com/paypalme/miguelitoism" target="_blank" rel="noopener" class="btn btn-primary justify-center">{i.about.supportBtn}</a>
       </div>

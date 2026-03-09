@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { t, getLocalePath, type Locale } from '../i18n/translations';
+import SocialIcons from '../components/SocialIcons.astro';
 
 interface Props {
   title: string;
@@ -28,7 +29,6 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
 const currentPath = Astro.url.pathname;
 
-// Get the equivalent path in the other language
 function getAltPath(): string {
   if (locale === 'es') {
     return `/en${currentPath === '/' ? '' : currentPath}`;
@@ -48,7 +48,6 @@ function getAltPath(): string {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:title" content={fullTitle} />
@@ -70,37 +69,71 @@ function getAltPath(): string {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Dark mode: apply before render to prevent flash -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-primary/5">
+    <header class="sticky top-0 z-50 bg-cream/95 dark:bg-[#121218]/95 backdrop-blur-sm border-b border-primary/5 dark:border-white/5">
       <nav class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <a href={getLocalePath('/', locale)} class="font-display text-2xl font-bold text-primary hover:no-underline">
+          <a href={getLocalePath('/', locale)} class="font-display text-2xl font-bold text-primary dark:text-white hover:no-underline">
             Ismael Guimarais
           </a>
 
           <div class="hidden lg:flex items-center gap-1">
-            <a href={getLocalePath('/marketing-ia', locale)} class:list={["nav-link", currentPath.includes('marketing-ia') && "!text-primary font-semibold"]}>{i.nav.marketing}</a>
-            <a href={getLocalePath('/fe', locale)} class:list={["nav-link", currentPath.includes('/fe') && "!text-primary font-semibold"]}>{i.nav.fe}</a>
-            <a href={getLocalePath('/politica-cultura', locale)} class:list={["nav-link", currentPath.includes('politica-cultura') && "!text-primary font-semibold"]}>{i.nav.politica}</a>
-            <a href={getLocalePath('/musica', locale)} class:list={["nav-link", currentPath.includes('musica') && "!text-primary font-semibold"]}>{i.nav.musica}</a>
-            <a href={getLocalePath('/portafolio', locale)} class:list={["nav-link", currentPath.includes('portafolio') && "!text-primary font-semibold"]}>{i.nav.portafolio}</a>
-            <a href={getLocalePath('/sobre', locale)} class:list={["nav-link", currentPath.includes('sobre') && "!text-primary font-semibold"]}>{i.nav.sobre}</a>
-            <span class="mx-2 text-gray-200">|</span>
-            <a href={getAltPath()} class="nav-link font-semibold text-accent hover:text-accent-light">
+            <a href={getLocalePath('/marketing-ia', locale)} class:list={["nav-link", currentPath.includes('marketing-ia') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.marketing}</a>
+            <a href={getLocalePath('/fe', locale)} class:list={["nav-link", currentPath.includes('/fe') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.fe}</a>
+            <a href={getLocalePath('/politica-cultura', locale)} class:list={["nav-link", currentPath.includes('politica-cultura') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.politica}</a>
+            <a href={getLocalePath('/musica', locale)} class:list={["nav-link", currentPath.includes('musica') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.musica}</a>
+            <a href={getLocalePath('/portafolio', locale)} class:list={["nav-link", currentPath.includes('portafolio') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.portafolio}</a>
+            <a href={getLocalePath('/sobre', locale)} class:list={["nav-link", currentPath.includes('sobre') && "!text-primary dark:!text-white font-semibold"]}>{i.nav.sobre}</a>
+
+            <span class="mx-1.5 text-gray-200 dark:text-gray-700">|</span>
+            <a href={getAltPath()} class="nav-link font-semibold text-accent hover:text-accent-light" title={altLocale === 'en' ? 'English' : 'Español'}>
               {altLocale.toUpperCase()}
             </a>
+
+            <!-- Dark mode toggle -->
+            <button id="theme-toggle" class="ml-1 p-2 rounded-full text-gray-400 hover:text-primary dark:hover:text-white transition-colors" aria-label="Toggle dark mode">
+              <!-- Sun (visible in dark mode) -->
+              <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <!-- Moon (visible in light mode) -->
+              <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
           </div>
 
-          <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-500 hover:text-primary" aria-label="Menú">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          <div class="flex items-center gap-2 lg:hidden">
+            <!-- Dark mode toggle mobile -->
+            <button id="theme-toggle-mobile" class="p-2 rounded-full text-gray-400 hover:text-primary dark:hover:text-white transition-colors" aria-label="Toggle dark mode">
+              <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
+            <button id="mobile-menu-btn" class="p-2 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Menú">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div id="mobile-menu" class="hidden lg:hidden pb-4">
-          <div class="flex flex-col gap-0.5 pt-2 border-t border-primary/5">
+          <div class="flex flex-col gap-0.5 pt-2 border-t border-primary/5 dark:border-white/5">
             <a href={getLocalePath('/marketing-ia', locale)} class="nav-link-mobile">{i.nav.marketing}</a>
             <a href={getLocalePath('/fe', locale)} class="nav-link-mobile">{i.nav.fe}</a>
             <a href={getLocalePath('/politica-cultura', locale)} class="nav-link-mobile">{i.nav.politica}</a>
@@ -108,7 +141,7 @@ function getAltPath(): string {
             <a href={getLocalePath('/portafolio', locale)} class="nav-link-mobile">{i.nav.portafolio}</a>
             <a href={getLocalePath('/sobre', locale)} class="nav-link-mobile">{i.nav.sobre}</a>
             <a href={getLocalePath('/contacto', locale)} class="nav-link-mobile">{i.nav.contacto}</a>
-            <div class="mt-2 pt-2 border-t border-primary/5">
+            <div class="mt-2 pt-2 border-t border-primary/5 dark:border-white/5">
               <a href={getAltPath()} class="nav-link-mobile font-semibold text-accent">
                 🌐 {altLocale === 'en' ? 'English' : 'Español'}
               </a>
@@ -122,12 +155,13 @@ function getAltPath(): string {
       <slot />
     </main>
 
-    <footer class="bg-primary text-white/70 mt-20">
+    <footer class="bg-primary dark:bg-[#0a0a10] text-white/70 mt-20">
       <div class="max-w-content mx-auto px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div class="md:col-span-5">
             <p class="font-display text-2xl font-bold text-white mb-3">Ismael Guimarais</p>
-            <p class="text-base leading-relaxed text-white/50 max-w-sm">{i.footer.tagline}</p>
+            <p class="text-base leading-relaxed text-white/50 max-w-sm mb-6">{i.footer.tagline}</p>
+            <SocialIcons size="sm" />
           </div>
           <div class="md:col-span-3">
             <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">{i.footer.sections}</p>
@@ -140,12 +174,10 @@ function getAltPath(): string {
             </div>
           </div>
           <div class="md:col-span-4">
-            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">{i.footer.social}</p>
+            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">{i.footer.sections}</p>
             <div class="flex flex-col gap-2 text-sm font-sans">
-              <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">YouTube</a>
-              <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">X / Twitter</a>
-              <a href="https://www.instagram.com/ismaguimarais/" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">Instagram</a>
-              <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">Spotify</a>
+              <a href={getLocalePath('/sobre', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.sobre}</a>
+              <a href={getLocalePath('/contacto', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.contacto}</a>
             </div>
           </div>
         </div>
@@ -159,11 +191,22 @@ function getAltPath(): string {
     </footer>
 
     <script>
+      // Mobile menu
       const btn = document.getElementById('mobile-menu-btn');
       const menu = document.getElementById('mobile-menu');
       btn?.addEventListener('click', () => {
         menu?.classList.toggle('hidden');
       });
+
+      // Dark mode toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
     </script>
   </body>
 </html>
