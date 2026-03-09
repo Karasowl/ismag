@@ -11,13 +11,13 @@ interface Props {
 const { title, description, date, category, slug, image } = Astro.props;
 
 const categoryMap: Record<string, { label: string; class: string; nubismo: string }> = {
-  'marketing-ia': { label: 'Marketing & IA', class: 'tag-marketing', nubismo: '/images/ismael/marketing.png' },
-  'fe': { label: 'Fe', class: 'tag-fe', nubismo: '/images/ismael/fe.png' },
-  'politica-cultura': { label: 'Política y Cultura', class: 'tag-politica', nubismo: '/images/ismael/politic.png' },
-  'musica': { label: 'Música', class: 'tag-musica', nubismo: '/images/ismael/music.png' },
+  'marketing-ia': { label: 'Marketing & IA', class: 'tag-marketing', nubismo: '/images/ismael/marketing.webp' },
+  'fe': { label: 'Fe', class: 'tag-fe', nubismo: '/images/ismael/fe.webp' },
+  'politica-cultura': { label: 'Política y Cultura', class: 'tag-politica', nubismo: '/images/ismael/politic.webp' },
+  'musica': { label: 'Música', class: 'tag-musica', nubismo: '/images/ismael/music.webp' },
 };
 
-const cat = categoryMap[category] || { label: category, class: 'tag-marketing', nubismo: '/images/ismael/marketing.png' };
+const cat = categoryMap[category] || { label: category, class: 'tag-marketing', nubismo: '/images/ismael/marketing.webp' };
 const formattedDate = date.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
 const href = `/articulos/${slug}`;
 const cardImage = image || cat.nubismo;
