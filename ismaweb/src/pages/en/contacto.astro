@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/translations';
+
+const locale = 'en';
+const i = t(locale);
+---
+
+<Base title={i.nav.contacto} locale={locale}>
+  <section class="max-w-narrow mx-auto px-6 py-16 md:py-24">
+    <h1 class="font-display text-4xl md:text-5xl mb-4">{i.contact.title}</h1>
+    <p class="text-muted text-lg mb-10">{i.contact.subtitle}</p>
+    <div class="divider mb-10"></div>
+
+    <div class="prose-article">
+      <h2>Email</h2>
+      <p>
+        <a href="mailto:ismaelguimarais@gmail.com">ismaelguimarais@gmail.com</a>
+      </p>
+
+      <h2>Social</h2>
+      <div class="flex flex-wrap gap-3 not-prose">
+        <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">YouTube</a>
+        <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">X / Twitter</a>
+        <a href="https://www.instagram.com/ismaguimarais/" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">Instagram</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { t, getLocalePath, type Locale } from '../i18n/translations';
 
 interface Props {
   title: string;
@@ -7,6 +8,7 @@ interface Props {
   image?: string;
   type?: string;
   canonical?: string;
+  locale?: Locale;
 }
 
 const {
@@ -15,18 +17,29 @@ const {
   image = '/og-default.jpg',
   type = 'website',
   canonical,
+  locale = 'es',
 } = Astro.props;
 
+const i = t(locale);
+const altLocale = locale === 'es' ? 'en' : 'es';
 const siteUrl = 'https://www.guimarais.com';
-const fullTitle = title === 'Inicio' ? 'Ismael Guimarais' : `${title} — Ismael Guimarais`;
+const fullTitle = title === 'Inicio' || title === 'Home' ? 'Ismael Guimarais' : `${title} — Ismael Guimarais`;
 const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
-
 const currentPath = Astro.url.pathname;
+
+// Get the equivalent path in the other language
+function getAltPath(): string {
+  if (locale === 'es') {
+    return `/en${currentPath === '/' ? '' : currentPath}`;
+  } else {
+    return currentPath.replace(/^\/en/, '') || '/';
+  }
+}
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,6 +56,7 @@ const currentPath = Astro.url.pathname;
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_MX' : 'en_US'} />
     <meta property="og:site_name" content="Ismael Guimarais" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -51,43 +65,54 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:site" content="@IsmaGuimarais" />
 
+    <link rel="alternate" hreflang={altLocale} href={`${siteUrl}${getAltPath()}`} />
+    <link rel="alternate" hreflang={locale} href={canonicalUrl} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Header -->
     <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-primary/5">
       <nav class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <a href="/" class="font-display text-2xl font-bold text-primary hover:no-underline">
+          <a href={getLocalePath('/', locale)} class="font-display text-2xl font-bold text-primary hover:no-underline">
             Ismael Guimarais
           </a>
 
           <div class="hidden lg:flex items-center gap-1">
-            <a href="/marketing-ia" class:list={["nav-link", currentPath.startsWith('/marketing-ia') && "!text-primary font-semibold"]}>Marketing & IA</a>
-            <a href="/fe" class:list={["nav-link", currentPath.startsWith('/fe') && "!text-primary font-semibold"]}>Fe</a>
-            <a href="/politica-cultura" class:list={["nav-link", currentPath.startsWith('/politica-cultura') && "!text-primary font-semibold"]}>Política</a>
-            <a href="/musica" class:list={["nav-link", currentPath.startsWith('/musica') && "!text-primary font-semibold"]}>Música</a>
-            <a href="/portafolio" class:list={["nav-link", currentPath.startsWith('/portafolio') && "!text-primary font-semibold"]}>Portafolio</a>
-            <a href="/sobre" class:list={["nav-link", currentPath.startsWith('/sobre') && "!text-primary font-semibold"]}>Sobre mí</a>
+            <a href={getLocalePath('/marketing-ia', locale)} class:list={["nav-link", currentPath.includes('marketing-ia') && "!text-primary font-semibold"]}>{i.nav.marketing}</a>
+            <a href={getLocalePath('/fe', locale)} class:list={["nav-link", currentPath.includes('/fe') && "!text-primary font-semibold"]}>{i.nav.fe}</a>
+            <a href={getLocalePath('/politica-cultura', locale)} class:list={["nav-link", currentPath.includes('politica-cultura') && "!text-primary font-semibold"]}>{i.nav.politica}</a>
+            <a href={getLocalePath('/musica', locale)} class:list={["nav-link", currentPath.includes('musica') && "!text-primary font-semibold"]}>{i.nav.musica}</a>
+            <a href={getLocalePath('/portafolio', locale)} class:list={["nav-link", currentPath.includes('portafolio') && "!text-primary font-semibold"]}>{i.nav.portafolio}</a>
+            <a href={getLocalePath('/sobre', locale)} class:list={["nav-link", currentPath.includes('sobre') && "!text-primary font-semibold"]}>{i.nav.sobre}</a>
+            <span class="mx-2 text-gray-200">|</span>
+            <a href={getAltPath()} class="nav-link font-semibold text-accent hover:text-accent-light">
+              {altLocale.toUpperCase()}
+            </a>
           </div>
 
           <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-500 hover:text-primary" aria-label="Menú">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
 
         <div id="mobile-menu" class="hidden lg:hidden pb-4">
           <div class="flex flex-col gap-0.5 pt-2 border-t border-primary/5">
-            <a href="/marketing-ia" class="nav-link-mobile">Marketing & IA</a>
-            <a href="/fe" class="nav-link-mobile">Fe</a>
-            <a href="/politica-cultura" class="nav-link-mobile">Política y Cultura</a>
-            <a href="/musica" class="nav-link-mobile">Música</a>
-            <a href="/portafolio" class="nav-link-mobile">Portafolio</a>
-            <a href="/sobre" class="nav-link-mobile">Sobre mí</a>
-            <a href="/contacto" class="nav-link-mobile">Contacto</a>
+            <a href={getLocalePath('/marketing-ia', locale)} class="nav-link-mobile">{i.nav.marketing}</a>
+            <a href={getLocalePath('/fe', locale)} class="nav-link-mobile">{i.nav.fe}</a>
+            <a href={getLocalePath('/politica-cultura', locale)} class="nav-link-mobile">{i.nav.politica}</a>
+            <a href={getLocalePath('/musica', locale)} class="nav-link-mobile">{i.nav.musica}</a>
+            <a href={getLocalePath('/portafolio', locale)} class="nav-link-mobile">{i.nav.portafolio}</a>
+            <a href={getLocalePath('/sobre', locale)} class="nav-link-mobile">{i.nav.sobre}</a>
+            <a href={getLocalePath('/contacto', locale)} class="nav-link-mobile">{i.nav.contacto}</a>
+            <div class="mt-2 pt-2 border-t border-primary/5">
+              <a href={getAltPath()} class="nav-link-mobile font-semibold text-accent">
+                🌐 {altLocale === 'en' ? 'English' : 'Español'}
+              </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -97,31 +122,25 @@ const currentPath = Astro.url.pathname;
       <slot />
     </main>
 
-    <!-- Footer -->
     <footer class="bg-primary text-white/70 mt-20">
       <div class="max-w-content mx-auto px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-          <!-- Brand -->
           <div class="md:col-span-5">
             <p class="font-display text-2xl font-bold text-white mb-3">Ismael Guimarais</p>
-            <p class="text-base leading-relaxed text-white/50 max-w-sm">
-              Me complico la vida pensando en marketing, cultura, política, música y Dios.
-            </p>
+            <p class="text-base leading-relaxed text-white/50 max-w-sm">{i.footer.tagline}</p>
           </div>
-          <!-- Sections -->
           <div class="md:col-span-3">
-            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">Secciones</p>
+            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">{i.footer.sections}</p>
             <div class="flex flex-col gap-2 text-sm font-sans">
-              <a href="/marketing-ia" class="text-white/60 hover:text-white hover:no-underline">Marketing & IA</a>
-              <a href="/fe" class="text-white/60 hover:text-white hover:no-underline">Fe</a>
-              <a href="/politica-cultura" class="text-white/60 hover:text-white hover:no-underline">Política y Cultura</a>
-              <a href="/musica" class="text-white/60 hover:text-white hover:no-underline">Música</a>
-              <a href="/portafolio" class="text-white/60 hover:text-white hover:no-underline">Portafolio</a>
+              <a href={getLocalePath('/marketing-ia', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.marketing}</a>
+              <a href={getLocalePath('/fe', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.fe}</a>
+              <a href={getLocalePath('/politica-cultura', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.politica}</a>
+              <a href={getLocalePath('/musica', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.musica}</a>
+              <a href={getLocalePath('/portafolio', locale)} class="text-white/60 hover:text-white hover:no-underline">{i.nav.portafolio}</a>
             </div>
           </div>
-          <!-- Social -->
           <div class="md:col-span-4">
-            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">Redes</p>
+            <p class="font-sans text-xs uppercase tracking-widest text-white/40 mb-4">{i.footer.social}</p>
             <div class="flex flex-col gap-2 text-sm font-sans">
               <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">YouTube</a>
               <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="text-white/60 hover:text-white hover:no-underline">X / Twitter</a>
@@ -130,8 +149,11 @@ const currentPath = Astro.url.pathname;
             </div>
           </div>
         </div>
-        <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm font-sans text-white/30">
+        <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between text-sm font-sans text-white/30">
           <p>&copy; {new Date().getFullYear()} Ismael Guimarais</p>
+          <a href={getAltPath()} class="text-white/50 hover:text-white hover:no-underline">
+            {altLocale === 'en' ? '🌐 English' : '🌐 Español'}
+          </a>
         </div>
       </div>
     </footer>

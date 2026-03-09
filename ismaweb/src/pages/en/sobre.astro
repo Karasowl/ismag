@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/translations';
+
+const locale = 'en';
+const i = t(locale);
+---
+
+<Base title={i.about.title} locale={locale} type="profile">
+  <section class="bg-warm">
+    <div class="max-w-narrow mx-auto px-6 py-16 md:py-24">
+      <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
+        <img src="/images/ismael/amigable_camisa_blanca_2.webp" alt="Ismael Guimarais" class="w-52 h-52 md:w-64 md:h-64 rounded-2xl object-cover object-top shadow-xl shrink-0" loading="eager" />
+        <div>
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-primary mb-5">Ismael Guimarais</h1>
+          <p class="text-xl text-gray-600 leading-relaxed mb-4">{i.about.bio}</p>
+          <p class="text-muted font-sans text-base">{i.about.role}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-narrow mx-auto px-6 py-16">
+    <div class="prose-article">
+      <h2>{i.about.shortStory}</h2>
+      <p>{i.about.shortStoryP1}</p>
+      <p>{i.about.shortStoryP2} <strong>{i.about.shortStoryBold}</strong>.</p>
+
+      <h2>{i.about.whatIDo}</h2>
+      <p>{i.about.whatIDoP}</p>
+
+      <h2>{i.about.youtube}</h2>
+      <p>On my <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener">YouTube channel</a>, {i.about.youtubeP}</p>
+
+      <h2>{i.about.faith}</h2>
+      <p>{i.about.faithP}</p>
+
+      <h2>{i.about.belief}</h2>
+      <blockquote>"{i.about.beliefQuote}"</blockquote>
+    </div>
+  </section>
+
+  <section class="max-w-content mx-auto px-6">
+    <img src="/images/ismael/escribiendo_en_guitarra.webp" alt="Ismael with guitar" class="w-full max-h-96 object-cover object-center rounded-2xl shadow-lg" />
+  </section>
+
+  <section class="max-w-narrow mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <h3 class="font-display text-xl mb-5">{i.about.findMe}</h3>
+        <div class="flex flex-col gap-2">
+          <a href="https://youtube.com/@IsmaelGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline justify-center">YouTube</a>
+          <a href="https://x.com/IsmaGuimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline justify-center">X / Twitter</a>
+          <a href="https://www.instagram.com/ismaguimarais/" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline justify-center">Instagram</a>
+          <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline justify-center">Spotify</a>
+        </div>
+      </div>
+      <div class="bg-warm rounded-2xl p-8 text-center flex flex-col justify-center">
+        <p class="text-muted mb-5">{i.about.support}</p>
+        <a href="https://www.paypal.com/paypalme/miguelitoism" target="_blank" rel="noopener" class="btn btn-primary justify-center">{i.about.supportBtn}</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { t } from '../../i18n/translations';
+import { getCollection } from 'astro:content';
+
+const locale = 'en';
+const i = t(locale);
+const allArticles = await getCollection('articulos', ({ data }) => !data.draft);
+const sortedArticles = allArticles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Home" locale={locale}>
+  <!-- Hero -->
+  <section class="relative min-h-[85vh] flex items-center">
+    <div class="absolute inset-0 grid grid-cols-2 grid-rows-2 opacity-[0.07]">
+      <img src="/images/ismael/marketing.webp" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/fe.webp" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/politic.webp" alt="" class="w-full h-full object-cover" />
+      <img src="/images/ismael/music.webp" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 max-w-narrow mx-auto px-6 py-20 md:py-32">
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+        <div class="shrink-0 animate-fade-in">
+          <img src="/images/ismael/fondo_rojo_serio.webp" alt="Ismael Guimarais" class="w-44 h-44 md:w-52 md:h-52 rounded-full object-cover object-top shadow-2xl ring-4 ring-warm-dark" />
+        </div>
+        <div class="text-center md:text-left">
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-primary leading-tight mb-6 animate-fade-in">{i.hero.tagline}</h1>
+          <p class="text-xl text-muted font-serif animate-fade-in animate-delay-1">{i.hero.subtitle}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections Grid -->
+  <section class="max-w-content mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="/en/marketing-ia" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-1">
+        <img src="/images/ismael/marketing.webp" alt="Marketing & AI" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-blue-300 mb-2 block">{i.sections.marketing.title}</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">{i.sections.marketing.card}</p>
+        </div>
+      </a>
+      <a href="/en/fe" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-2">
+        <img src="/images/ismael/fe.webp" alt="Faith" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-amber-300 mb-2 block">{i.sections.fe.title}</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">{i.sections.fe.card}</p>
+        </div>
+      </a>
+      <a href="/en/politica-cultura" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-3">
+        <img src="/images/ismael/politic.webp" alt="Politics & Culture" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-red-300 mb-2 block">{i.sections.politica.title}</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">{i.sections.politica.card}</p>
+        </div>
+      </a>
+      <a href="/en/musica" class="group relative rounded-xl overflow-hidden aspect-[16/9] hover:no-underline animate-fade-in animate-delay-4">
+        <img src="/images/ismael/music.webp" alt="Music" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+          <span class="text-xs font-sans uppercase tracking-widest text-purple-300 mb-2 block">{i.sections.musica.title}</span>
+          <p class="text-white/80 text-sm md:text-base font-sans">{i.sections.musica.card}</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Latest -->
+  {sortedArticles.length > 0 && (
+    <section class="max-w-content mx-auto px-6 py-16">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <h2 class="font-display text-3xl">{i.latest}</h2>
+          <div class="divider mt-4"></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedArticles.slice(0, 6).map((article) => (
+          <ArticleCard title={article.data.title} description={article.data.description} date={article.data.date} category={article.data.category} slug={article.id} image={article.data.image} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- About Teaser -->
+  <section class="bg-warm">
+    <div class="max-w-content mx-auto px-6 py-20">
+      <div class="max-w-narrow mx-auto flex flex-col md:flex-row items-center gap-10">
+        <img src="/images/ismael/amigable_camisa_blanca_2.webp" alt="Ismael Guimarais" class="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover object-top shadow-lg shrink-0" />
+        <div>
+          <h2 class="font-display text-2xl md:text-3xl mb-4">{i.about.title}</h2>
+          <p class="text-gray-600 mb-6 leading-relaxed">{i.about.bio}</p>
+          <a href="/en/sobre" class="btn btn-outline text-sm hover:no-underline">{i.readMore}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Teaser -->
+  <section class="max-w-content mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl">{i.portfolio.title}</h2>
+      <p class="text-muted mt-3 font-sans text-base">{i.portfolio.subtitle}</p>
+      <div class="divider mx-auto mt-4"></div>
+    </div>
+    <div class="text-center">
+      <a href="/en/portafolio" class="btn btn-primary">{i.portfolio.viewProjects}</a>
+    </div>
+  </section>
+</Base>

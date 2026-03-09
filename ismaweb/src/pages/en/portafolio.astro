@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import { t } from '../../i18n/translations';
+import { portfolioData as portfolioProjects } from '../../data/portfolio';
+
+const locale = 'en';
+const i = t(locale);
+---
+
+<Base title={i.portfolio.title} locale={locale}>
+  <section class="max-w-content mx-auto px-6 py-16">
+    <div class="mb-12">
+      <h1 class="font-display text-4xl md:text-5xl mb-3">{i.portfolio.title}</h1>
+      <p class="text-muted text-lg font-sans">{i.portfolio.subtitle}</p>
+      <div class="divider mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {portfolioProjects.map((project) => (
+        <PortfolioCard
+          title={project.title}
+          description={project.description}
+          image={project.image}
+          categories={project.categories}
+          video={project.video}
+          link={project.link}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

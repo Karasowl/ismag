@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHero from '../../components/SectionHero.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { t } from '../../i18n/translations';
+import { getCollection } from 'astro:content';
+
+const locale = 'en';
+const i = t(locale);
+const articles = (await getCollection('articulos', ({ data }) => !data.draft && data.category === 'musica'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title={i.sections.musica.title} locale={locale}>
+  <SectionHero title={i.sections.musica.title} subtitle={i.sections.musica.subtitle} image="/images/ismael/music.webp" />
+
+  <section class="max-w-content mx-auto px-6 py-16">
+    <!-- Featured -->
+    <div class="mb-16 bg-warm rounded-2xl overflow-hidden">
+      <div class="flex flex-col md:flex-row">
+        <img src="/la-soledad-cover.webp" alt="La Soledad - Cover" class="w-full md:w-72 h-72 object-cover" />
+        <div class="p-8 md:p-10 flex flex-col justify-center">
+          <span class="tag tag-musica mb-3 self-start">{i.music.featured}</span>
+          <h2 class="font-display text-2xl md:text-3xl mb-3">{i.music.soledadTitle}</h2>
+          <p class="text-muted mb-6 max-w-lg">{i.music.soledadDesc}</p>
+          <a href="https://youtu.be/eJ4tCKzUQ6I" target="_blank" rel="noopener" class="btn btn-primary text-sm self-start">{i.music.listenYT}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo + Spotify -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-center">
+      <div>
+        <img src="/images/ismael/isma_micro_rode.webp" alt="Ismael recording" class="rounded-2xl shadow-lg w-full" />
+      </div>
+      <div>
+        <h2 class="font-display text-2xl mb-4">{i.music.listenSpotify}</h2>
+        <div class="rounded-xl overflow-hidden">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6FBiAmYUgClucZddGctkwd?utm_source=generator&theme=0" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platforms -->
+    <div class="mb-16 text-center">
+      <h2 class="font-display text-2xl mb-6">{i.music.allPlatforms}</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="https://open.spotify.com/intl-es/artist/6FBiAmYUgClucZddGctkwd" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">Spotify</a>
+        <a href="https://music.apple.com/us/album/amor-princesa/1673165177?i=1673165178" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">Apple Music</a>
+        <a href="https://music.youtube.com/channel/UCX-0vZliN8aUFGyr_WGxndA" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">YouTube Music</a>
+        <a href="https://www.deezer.com/search/Ismael%20Guimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">Deezer</a>
+        <a href="https://music.amazon.com/search/Ismael%20Guimarais" target="_blank" rel="noopener" class="btn btn-outline text-sm hover:no-underline">Amazon Music</a>
+      </div>
+    </div>
+
+    {articles.length > 0 && (
+      <div>
+        <h2 class="font-display text-2xl mb-8">{i.music.aboutMusic}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article) => (
+            <ArticleCard title={article.data.title} description={article.data.description} date={article.data.date} category={article.data.category} slug={article.id} image={article.data.image} />
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+</Base>

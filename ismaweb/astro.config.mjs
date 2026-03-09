@@ -11,4 +11,11 @@ export default defineConfig({
     tailwind(),
     sitemap(),
   ],
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });
